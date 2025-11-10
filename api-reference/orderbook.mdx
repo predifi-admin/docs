@@ -1,0 +1,723 @@
+---
+title: "Orderbook API"
+description: "Access real-time orderbook depth and liquidity across all venues"
+---
+
+## Overview
+
+The Orderbook API provides:
+- **Real-time orderbook depth** - Bid/ask levels with sizes
+- **Cross-venue aggregation** - Combined liquidity across Polymarket, Predifi CLOB, etc.
+- **Best bid/ask quotes** - Top of book prices
+- **Liquidity analysis** - Total available liquidity at each price level
+
+<Info>
+  Orderbooks are **aggregated across all venues** to show total available liquidity at each price point.
+</Info>
+
+---
+
+## Get Orderbook Depth
+
+Get full orderbook with all bid and ask levels.
+
+<ParamField path="GET" type="method">
+  /v1/orderbook/:venue/:id
+</ParamField>
+
+### Request
+
+<ParamField path="venue" type="string" required>
+  Venue identifier:
+  - `aggregated` - All venues combined (recommended)
+  - `polymarket` - Polymarket only
+  - `predifi_clob` - Predifi CLOB only
+  - `limitless` - Limitless only
+</ParamField>
+
+<ParamField path="id" type="string" required>
+  Market identifier (e.g., `BTC-15M-20250111-1430`)
+</ParamField>
+
+<ParamField query="outcomeId" type="number">
+  Outcome to query:
+  - `0` = YES
+  - `1` = NO
+  
+  Omit to get both outcomes
+</ParamField>
+
+<ParamField query="depth" type="number">
+  Number of price levels to return (default: 20, max: 100)
+</ParamField>
+
+### Response
+
+```json
+{
+  "ok": true,
+  "data": {
+    "marketId": "BTC-15M-20250111-1430",
+    "venue": "aggregated",
+    "timestamp": 1638360000000,
+    "outcomes": {
+      "YES": {
+        "outcomeId": 0,
+        "bids": [
+          {
+            "price": 0.6600,
+            "size": 1500.50,
+            "total": 990.33,
+            "orders": 12,
+            "venues": {
+              "polymarket": 890.30,
+              "predifi_clob": 610.20
+            }
+          },
+          {
+            "price": 0.6550,
+            "size": 2340.75,
+            "total": 1533.19,
+            "orders": 18,
+            "venues": {
+              "polymarket": 1240.50,
+              "predifi_clob": 1100.25
+            }
+          }
+          // ... more levels
+        ],
+        "asks": [
+          {
+            "price": 0.6650,
+            "size": 1200.00,
+            "total": 798.00,
+            "orders": 8,
+            "venues": {
+              "polymarket": 700.00,
+              "predifi_clob": 500.00
+            }
+          },
+          {
+            "price": 0.6700,
+            "size": 3450.25,
+            "total": 2311.67,
+            "orders": 22,
+            "venues": {
+              "polymarket": 2100.15,
+              "predifi_clob": 1350.10
+            }
+          }
+          // ... more levels
+        ],
+        "spread": 0.0050,
+        "spreadPercent": 0.76,
+        "midPrice": 0.6625,
+        "bestBid": 0.6600,
+        "bestAsk": 0.6650,
+        "totalBidLiquidity": 45678.90,
+        "totalAskLiquidity": 52341.23
+      },
+      "NO": {
+        "outcomeId": 1,
+        "bids": [
+          {
+            "price": 0.3400,
+            "size": 1800.00,
+            "total": 612.00,
+            "orders": 15,
+            "venues": {
+              "polymarket": 1200.00,
+              "predifi_clob": 600.00
+            }
+          }
+          // ... more levels
+        ],
+        "asks": [
+          {
+            "price": 0.3450,
+            "size": 2100.50,
+            "total": 724.67,
+            "orders": 19,
+            "venues": {
+              "polymarket": 1300.25,
+              "predifi_clob": 800.25
+            }
+          }
+          // ... more levels
+        ],
+        "spread": 0.0050,
+        "spreadPercent": 1.47,
+        "midPrice": 0.3425,
+        "bestBid": 0.3400,
+        "bestAsk": 0.3450,
+        "totalBidLiquidity": 38920.45,
+        "totalAskLiquidity": 41234.78
+      }
+    }
+  },
+  "timestamp": 1638360000000
+}
+```
+
+<ResponseField name="bids" type="array">
+  Buy orders (bids) in descending price order
+  
+  Traders willing to buy at these prices
+</ResponseField>
+
+<ResponseField name="asks" type="array">
+  Sell orders (asks) in ascending price order
+  
+  Traders willing to sell at these prices
+</ResponseField>
+
+<ResponseField name="bids[].price" type="number">
+  Bid price (0-1)
+</ResponseField>
+
+<ResponseField name="bids[].size" type="number">
+  Number of shares available at this price
+</ResponseField>
+
+<ResponseField name="bids[].total" type="number">
+  Total USDC value at this level
+  
+  Formula: `price × size`
+</ResponseField>
+
+<ResponseField name="bids[].orders" type="number">
+  Number of orders at this price level
+</ResponseField>
+
+<ResponseField name="bids[].venues" type="object">
+  Breakdown of liquidity by venue
+  
+  Shows which venues contribute to this level
+</ResponseField>
+
+<ResponseField name="spread" type="number">
+  Bid-ask spread (absolute)
+  
+  Formula: `bestAsk - bestBid`
+</ResponseField>
+
+<ResponseField name="spreadPercent" type="number">
+  Spread as percentage of mid price
+  
+  Formula: `spread / midPrice × 100`
+</ResponseField>
+
+<ResponseField name="midPrice" type="number">
+  Mid-market price
+  
+  Formula: `(bestBid + bestAsk) / 2`
+</ResponseField>
+
+<ResponseField name="totalBidLiquidity" type="number">
+  Total USDC available on bid side
+</ResponseField>
+
+<ResponseField name="totalAskLiquidity" type="number">
+  Total USDC available on ask side
+</ResponseField>
+
+### Example Request
+
+<CodeGroup>
+
+```bash cURL
+curl "https://api.predifi.com/v1/orderbook/aggregated/BTC-15M-20250111-1430?outcomeId=0&depth=10" \
+  -H "Authorization: Bearer YOUR_API_KEY"
+```
+
+```typescript TypeScript
+const orderbook = await api.get('/v1/orderbook/aggregated/BTC-15M-20250111-1430', {
+  params: {
+    outcomeId: 0,  // YES
+    depth: 10
+  }
+});
+
+const yes = orderbook.data.outcomes.YES;
+
+console.log('=== YES Outcome ===');
+console.log(`Mid Price: $${yes.midPrice}`);
+console.log(`Spread: ${yes.spreadPercent.toFixed(2)}%`);
+console.log(`Best Bid: $${yes.bestBid}`);
+console.log(`Best Ask: $${yes.bestAsk}`);
+
+console.log('\nTop 5 Bids:');
+yes.bids.slice(0, 5).forEach(bid => {
+  console.log(`  $${bid.price}: ${bid.size} shares ($${bid.total})`);
+});
+
+console.log('\nTop 5 Asks:');
+yes.asks.slice(0, 5).forEach(ask => {
+  console.log(`  $${ask.price}: ${ask.size} shares ($${ask.total})`);
+});
+
+console.log(`\nTotal Liquidity: $${yes.totalBidLiquidity + yes.totalAskLiquidity}`);
+```
+
+```python Python
+response = requests.get(
+    'https://api.predifi.com/v1/orderbook/aggregated/BTC-15M-20250111-1430',
+    headers={'Authorization': f'Bearer {api_key}'},
+    params={'outcomeId': 0, 'depth': 10}
+)
+
+yes = response.json()['data']['outcomes']['YES']
+
+print(f"Mid Price: ${yes['midPrice']}")
+print(f"Spread: {yes['spreadPercent']:.2f}%")
+print(f"Best Bid: ${yes['bestBid']}")
+print(f"Best Ask: ${yes['bestAsk']}")
+
+print("\nTop 5 Bids:")
+for bid in yes['bids'][:5]:
+    print(f"  ${bid['price']}: {bid['size']} shares (${bid['total']})")
+
+print("\nTop 5 Asks:")
+for ask in yes['asks'][:5]:
+    print(f"  ${ask['price']}: {ask['size']} shares (${ask['total']})")
+```
+
+</CodeGroup>
+
+---
+
+## Get Top of Book
+
+Get best bid/ask without full orderbook depth.
+
+<ParamField path="GET" type="method">
+  /v1/orderbook/:venue/:id/top
+</ParamField>
+
+### Request
+
+Same parameters as full orderbook, but returns only best bid/ask.
+
+### Response
+
+```json
+{
+  "ok": true,
+  "data": {
+    "marketId": "BTC-15M-20250111-1430",
+    "venue": "aggregated",
+    "timestamp": 1638360000000,
+    "outcomes": {
+      "YES": {
+        "outcomeId": 0,
+        "bestBid": {
+          "price": 0.6600,
+          "size": 1500.50,
+          "total": 990.33
+        },
+        "bestAsk": {
+          "price": 0.6650,
+          "size": 1200.00,
+          "total": 798.00
+        },
+        "midPrice": 0.6625,
+        "spread": 0.0050,
+        "spreadPercent": 0.76
+      },
+      "NO": {
+        "outcomeId": 1,
+        "bestBid": {
+          "price": 0.3400,
+          "size": 1800.00,
+          "total": 612.00
+        },
+        "bestAsk": {
+          "price": 0.3450,
+          "size": 2100.50,
+          "total": 724.67
+        },
+        "midPrice": 0.3425,
+        "spread": 0.0050,
+        "spreadPercent": 1.47
+      }
+    }
+  },
+  "timestamp": 1638360000000
+}
+```
+
+### Example Request
+
+<CodeGroup>
+
+```bash cURL
+curl "https://api.predifi.com/v1/orderbook/aggregated/BTC-15M-20250111-1430/top" \
+  -H "Authorization: Bearer YOUR_API_KEY"
+```
+
+```typescript TypeScript
+const top = await api.get('/v1/orderbook/aggregated/BTC-15M-20250111-1430/top');
+
+const yes = top.data.outcomes.YES;
+const no = top.data.outcomes.NO;
+
+console.log('YES:');
+console.log(`  Bid: $${yes.bestBid.price} (${yes.bestBid.size} shares)`);
+console.log(`  Ask: $${yes.bestAsk.price} (${yes.bestAsk.size} shares)`);
+console.log(`  Mid: $${yes.midPrice}`);
+
+console.log('\nNO:');
+console.log(`  Bid: $${no.bestBid.price} (${no.bestBid.size} shares)`);
+console.log(`  Ask: $${no.bestAsk.price} (${no.bestAsk.size} shares)`);
+console.log(`  Mid: $${no.midPrice}`);
+```
+
+```python Python
+response = requests.get(
+    'https://api.predifi.com/v1/orderbook/aggregated/BTC-15M-20250111-1430/top',
+    headers={'Authorization': f'Bearer {api_key}'}
+)
+
+data = response.json()['data']
+
+for outcome, prices in data['outcomes'].items():
+    print(f"{outcome}:")
+    print(f"  Bid: ${prices['bestBid']['price']} ({prices['bestBid']['size']} shares)")
+    print(f"  Ask: ${prices['bestAsk']['price']} ({prices['bestAsk']['size']} shares)")
+    print(f"  Mid: ${prices['midPrice']}\n")
+```
+
+</CodeGroup>
+
+---
+
+## Analyzing Liquidity
+
+### Calculate Slippage for Trade Size
+
+Estimate slippage for a given trade size:
+
+```typescript
+async function estimateSlippage(marketId: string, side: 'buy' | 'sell', size: number) {
+  const ob = await api.get(`/v1/orderbook/aggregated/${marketId}`, {
+    params: { outcomeId: 0, depth: 50 }
+  });
+  
+  const yes = ob.data.outcomes.YES;
+  const orders = side === 'buy' ? yes.asks : yes.bids;
+  
+  let remaining = size;
+  let totalCost = 0;
+  let sharesAcquired = 0;
+  
+  for (const level of orders) {
+    if (remaining <= 0) break;
+    
+    const sharesToTake = Math.min(remaining, level.size);
+    totalCost += sharesToTake * level.price;
+    sharesAcquired += sharesToTake;
+    remaining -= sharesToTake;
+  }
+  
+  if (remaining > 0) {
+    console.warn('Insufficient liquidity for full order');
+  }
+  
+  const avgPrice = totalCost / sharesAcquired;
+  const marketPrice = side === 'buy' ? yes.bestAsk : yes.bestBid;
+  const slippage = (avgPrice - marketPrice) / marketPrice;
+  
+  return {
+    avgPrice,
+    slippage,
+    slippagePercent: slippage * 100,
+    totalCost,
+    sharesAcquired
+  };
+}
+
+// Usage
+const result = await estimateSlippage('BTC-15M-20250111-1430', 'buy', 5000);
+console.log(`Avg Price: $${result.avgPrice.toFixed(4)}`);
+console.log(`Slippage: ${result.slippagePercent.toFixed(2)}%`);
+console.log(`Total Cost: $${result.totalCost.toFixed(2)}`);
+```
+
+### Find Optimal Trade Size
+
+Find the largest trade size within a slippage tolerance:
+
+```typescript
+async function findOptimalSize(
+  marketId: string,
+  side: 'buy' | 'sell',
+  maxSlippage: number  // e.g., 0.02 for 2%
+) {
+  const ob = await api.get(`/v1/orderbook/aggregated/${marketId}`, {
+    params: { outcomeId: 0, depth: 100 }
+  });
+  
+  const yes = ob.data.outcomes.YES;
+  const orders = side === 'buy' ? yes.asks : yes.bids;
+  const bestPrice = side === 'buy' ? yes.bestAsk : yes.bestBid;
+  
+  let cumSize = 0;
+  let cumCost = 0;
+  
+  for (const level of orders) {
+    const newCumSize = cumSize + level.size;
+    const newCumCost = cumCost + (level.size * level.price);
+    const avgPrice = newCumCost / newCumSize;
+    const slippage = (avgPrice - bestPrice) / bestPrice;
+    
+    if (slippage > maxSlippage) {
+      break;
+    }
+    
+    cumSize = newCumSize;
+    cumCost = newCumCost;
+  }
+  
+  return {
+    maxSize: cumSize,
+    totalCost: cumCost,
+    avgPrice: cumCost / cumSize
+  };
+}
+
+// Usage: Find max trade size within 2% slippage
+const result = await findOptimalSize('BTC-15M-20250111-1430', 'buy', 0.02);
+console.log(`Max size: ${result.maxSize} shares`);
+console.log(`Total cost: $${result.totalCost.toFixed(2)}`);
+console.log(`Avg price: $${result.avgPrice.toFixed(4)}`);
+```
+
+---
+
+## Orderbook Visualization
+
+### Depth Chart
+
+Plot cumulative liquidity:
+
+```typescript
+function plotDepthChart(orderbook: any) {
+  const yes = orderbook.outcomes.YES;
+  
+  console.log('Depth Chart (Cumulative):');
+  console.log('\nBids:');
+  
+  let cumBidSize = 0;
+  yes.bids.slice(0, 10).forEach(bid => {
+    cumBidSize += bid.size;
+    const bar = '█'.repeat(Math.floor(cumBidSize / 100));
+    console.log(`${bid.price.toFixed(4)}: ${bar} ${cumBidSize.toFixed(0)} shares`);
+  });
+  
+  console.log('\nAsks:');
+  
+  let cumAskSize = 0;
+  yes.asks.slice(0, 10).forEach(ask => {
+    cumAskSize += ask.size;
+    const bar = '█'.repeat(Math.floor(cumAskSize / 100));
+    console.log(`${ask.price.toFixed(4)}: ${bar} ${cumAskSize.toFixed(0)} shares`);
+  });
+}
+```
+
+Output:
+```
+Depth Chart (Cumulative):
+
+Bids:
+0.6600: ███████████████ 1500 shares
+0.6550: ████████████████████████████████████████ 3840 shares
+0.6500: ██████████████████████████████████████████████████████████ 5980 shares
+
+Asks:
+0.6650: ████████████ 1200 shares
+0.6700: ████████████████████████████████████████████ 4650 shares
+0.6750: ███████████████████████████████████████████████████████████████ 7820 shares
+```
+
+---
+
+## Understanding Orderbooks
+
+### Bid-Ask Spread
+
+The **spread** is the difference between best bid and best ask:
+
+```
+Best Bid: $0.6600 (buyers willing to pay)
+Best Ask: $0.6650 (sellers willing to accept)
+Spread:   $0.0050 (0.76%)
+```
+
+**Tighter spreads** = more liquid market = lower trading costs
+
+**Wider spreads** = less liquid market = higher trading costs
+
+### Market vs Limit Orders
+
+**Market Order** (instant execution):
+- Buys: Executes at best ask (or higher if order walks the book)
+- Sells: Executes at best bid (or lower if order walks the book)
+- Guaranteed execution, but may have slippage
+
+**Limit Order** (wait for price):
+- Buys: Only executes if price ≤ limit
+- Sells: Only executes if price ≥ limit
+- Guaranteed price, but may not execute
+
+### Liquidity Depth
+
+Check if there's enough liquidity for your trade:
+
+```typescript
+function checkLiquidity(orderbook: any, side: 'buy' | 'sell', targetSize: number) {
+  const yes = orderbook.outcomes.YES;
+  const orders = side === 'buy' ? yes.asks : yes.bids;
+  
+  let availableSize = 0;
+  for (const level of orders) {
+    availableSize += level.size;
+    if (availableSize >= targetSize) {
+      return {
+        sufficient: true,
+        availableSize,
+        message: `${availableSize} shares available (need ${targetSize})`
+      };
+    }
+  }
+  
+  return {
+    sufficient: false,
+    availableSize,
+    message: `Only ${availableSize} shares available (need ${targetSize})`
+  };
+}
+
+const result = checkLiquidity(orderbook, 'buy', 5000);
+console.log(result.message);
+```
+
+---
+
+## Best Practices
+
+<AccordionGroup>
+  <Accordion title="Use Aggregated Orderbooks" icon="layer-group">
+    Always use `venue=aggregated` to see total liquidity:
+    
+    ```typescript
+    // ✅ Good: See all available liquidity
+    const ob = await api.get('/v1/orderbook/aggregated/BTC-15M');
+    
+    // ❌ Bad: Only see one venue's liquidity
+    const ob = await api.get('/v1/orderbook/polymarket/BTC-15M');
+    ```
+  </Accordion>
+
+  <Accordion title="Check Spread Before Trading" icon="arrows-left-right">
+    Wide spreads indicate low liquidity:
+    
+    ```typescript
+    if (orderbook.outcomes.YES.spreadPercent > 5) {
+      console.warn('Wide spread - low liquidity market');
+      // Consider smaller trade size or limit order
+    }
+    ```
+  </Accordion>
+
+  <Accordion title="Estimate Slippage for Large Orders" icon="chart-line">
+    For trades > $1000, always estimate slippage first:
+    
+    ```typescript
+    if (tradeSize > 1000) {
+      const slippage = await estimateSlippage(marketId, 'buy', tradeSize);
+      
+      if (slippage.slippagePercent > 2) {
+        console.warn(`High slippage: ${slippage.slippagePercent}%`);
+        // Prompt user or split order
+      }
+    }
+    ```
+  </Accordion>
+
+  <Accordion title="Use WebSocket for Real-Time Updates" icon="bolt">
+    Orderbooks change constantly - use WebSocket:
+    
+    ```typescript
+    // ❌ Bad: Poll orderbook
+    setInterval(() => {
+      api.get('/v1/orderbook/aggregated/BTC-15M');
+    }, 1000);
+    
+    // ✅ Good: Subscribe to updates
+    ws.subscribe('orderbook', 'BTC-15M', (update) => {
+      console.log('Orderbook updated:', update);
+    });
+    ```
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Error Handling
+
+| Error Code | HTTP Status | Description |
+|------------|-------------|-------------|
+| `MARKET_NOT_FOUND` | 404 | Market doesn't exist |
+| `INVALID_VENUE` | 400 | Unknown venue identifier |
+| `INVALID_OUTCOME` | 400 | Invalid outcomeId |
+| `ORDERBOOK_EMPTY` | 404 | No orders in orderbook |
+| `VENUE_UNAVAILABLE` | 503 | Venue temporarily unavailable |
+
+---
+
+## Rate Limits
+
+| Endpoint | Rate Limit | Notes |
+|----------|------------|-------|
+| `GET /v1/orderbook/:venue/:id` | 60 req/min | Can cache for 5-10s |
+| `GET /v1/orderbook/:venue/:id/top` | 100 req/min | Faster, less data |
+
+<Tip>
+  Use WebSocket API for real-time orderbook updates instead of polling REST endpoints.
+</Tip>
+
+---
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card
+    title="Trading API"
+    icon="cart-shopping"
+    href="/api-reference/trading"
+  >
+    Execute trades based on orderbook data
+  </Card>
+  <Card
+    title="WebSocket API"
+    icon="bolt"
+    href="/api-reference/websockets"
+  >
+    Real-time orderbook updates
+  </Card>
+  <Card
+    title="Markets API"
+    icon="chart-line"
+    href="/api-reference/markets"
+  >
+    Browse available markets
+  </Card>
+  <Card
+    title="Portfolio API"
+    icon="wallet"
+    href="/api-reference/portfolio"
+  >
+    Track your positions
+  </Card>
+</CardGroup>

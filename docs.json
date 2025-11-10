@@ -1,68 +1,124 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "Mint Starter Kit",
+  "name": "Predifi",
   "colors": {
-    "primary": "#16A34A",
-    "light": "#07C983",
-    "dark": "#15803D"
+    "primary": "#3B82F6",
+    "light": "#60A5FA",
+    "dark": "#1E40AF"
   },
-  "favicon": "/favicon.svg",
+  "favicon": "/logo/favicon.ico",
   "navigation": {
     "tabs": [
       {
-        "tab": "Guides",
+        "tab": "Learn",
         "groups": [
           {
-            "group": "Getting started",
+            "group": "Overview",
             "pages": [
               "index",
-              "quickstart",
-              "development"
+              "about",
+              "how-it-works"
             ]
           },
           {
-            "group": "Customization",
+            "group": "Products",
             "pages": [
-              "essentials/settings",
-              "essentials/navigation"
+              "products/overview",
+              "products/clob-matching",
+              "products/aggregator",
+              "products/liquidity-vaults",
+              "products/portfolio-tracker"
             ]
           },
           {
-            "group": "Writing content",
+            "group": "Technology",
             "pages": [
-              "essentials/markdown",
-              "essentials/code",
-              "essentials/images",
-              "essentials/reusable-snippets"
+              "technology/chain-agnostic",
+              "technology/cross-chain-bridging",
+              "technology/oracles",
+              "technology/partners"
             ]
           },
           {
-            "group": "AI tools",
+            "group": "Markets",
             "pages": [
-              "ai-tools/cursor",
-              "ai-tools/claude-code",
-              "ai-tools/windsurf"
+              "markets"
+            ]
+          },
+          {
+            "group": "Getting Started",
+            "pages": [
+              "getting-started/onboarding",
+              "getting-started/funding",
+              "getting-started/quickstart",
+              "getting-started/trading-guide",
+              "getting-started/understanding-odds"
+            ]
+          },
+          {
+            "group": "For Traders",
+            "pages": [
+              "traders/managing-positions",
+              "traders/claiming-winnings",
+              "traders/risk-management"
+            ]
+          },
+          {
+            "group": "For Liquidity Providers",
+            "pages": [
+              "liquidity/overview",
+              "liquidity/how-to-provide",
+              "liquidity/returns-and-risks"
+            ]
+          },
+          {
+            "group": "Support",
+            "pages": [
+              "support/faq",
+              "support/security",
+              "support/contact"
             ]
           }
         ]
       },
       {
-        "tab": "API reference",
+        "tab": "Build on Predifi",
         "groups": [
           {
-            "group": "API documentation",
+            "group": "Developer Overview",
             "pages": [
-              "api-reference/introduction"
+              "developers/introduction",
+              "developers/why-build-on-predifi",
+              "developers/use-cases"
             ]
           },
           {
-            "group": "Endpoint examples",
+            "group": "API Reference",
             "pages": [
-              "api-reference/endpoint/get",
-              "api-reference/endpoint/create",
-              "api-reference/endpoint/delete",
-              "api-reference/endpoint/webhook"
+              "api-reference/getting-started",
+              "api-reference/markets",
+              "api-reference/trading",
+              "api-reference/portfolio",
+              "api-reference/orderbook",
+              "api-reference/websockets"
+            ]
+          },
+          {
+            "group": "Guides",
+            "pages": [
+              "developers/quickstart",
+              "developers/placing-trades",
+              "developers/portfolio-tracking",
+              "developers/market-data"
+            ]
+          },
+          {
+            "group": "Resources",
+            "pages": [
+              "developers/sdks",
+              "developers/code-examples",
+              "developers/rate-limits"
             ]
           }
         ]
@@ -71,33 +127,38 @@
     "global": {
       "anchors": [
         {
-          "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
-          "icon": "book-open-cover"
+          "anchor": "Website",
+          "href": "https://predifi.com",
+          "icon": "globe"
         },
         {
-          "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
-          "icon": "newspaper"
+          "anchor": "Community",
+          "href": "https://discord.gg/predifi",
+          "icon": "discord"
+        },
+        {
+          "anchor": "Twitter",
+          "href": "https://twitter.com/predifi_com",
+          "icon": "twitter"
         }
       ]
     }
   },
   "logo": {
-    "light": "/logo/light.svg",
-    "dark": "/logo/dark.svg"
+    "light": "/logo/logoIcon.png",
+    "dark": "/logo/logoIcon.png"
   },
   "navbar": {
     "links": [
       {
-        "label": "Support",
-        "href": "mailto:hi@mintlify.com"
+        "label": "Launch App",
+        "href": "https://app.predifi.com"
       }
     ],
     "primary": {
       "type": "button",
-      "label": "Dashboard",
-      "href": "https://dashboard.mintlify.com"
+      "label": "Start Trading",
+      "href": "https://app.predifi.com"
     }
   },
   "contextual": {
@@ -114,9 +175,9 @@
   },
   "footer": {
     "socials": {
-      "x": "https://x.com/mintlify",
-      "github": "https://github.com/mintlify",
-      "linkedin": "https://linkedin.com/company/mintlify"
+      "x": "https://x.com/predifi",
+      "github": "https://github.com/predifi-com",
+      "discord": "https://discord.gg/predifi"
     }
   }
 }

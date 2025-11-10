@@ -1,0 +1,1022 @@
+---
+title: "WebSocket API"
+description: "Real-time data streams for markets, orderbooks, trades, and user intents"
+---
+
+## Overview
+
+The WebSocket API provides real-time updates for:
+- **Market data** - Price, volume, and liquidity changes
+- **Orderbook updates** - Bid/ask level changes
+- **Trade feeds** - New trades across all venues
+- **User intents** - Your trading intent status updates
+- **Portfolio updates** - Position and balance changes
+
+<Info>
+  WebSockets are **much more efficient** than polling REST endpoints. Use them for real-time data.
+</Info>
+
+---
+
+## Connection
+
+### WebSocket URL
+
+```
+Production: wss://api.predifi.com/ws
+Testnet:    wss://testnet-api.predifi.com/ws
+```
+
+### Authentication
+
+Include API key in connection URL:
+
+```
+wss://api.predifi.com/ws?apiKey=YOUR_API_KEY
+```
+
+Or send after connection:
+
+```json
+{
+  "type": "auth",
+  "apiKey": "YOUR_API_KEY"
+}
+```
+
+### Connection Example
+
+<CodeGroup>
+
+```typescript TypeScript
+import WebSocket from 'ws';
+
+const ws = new WebSocket('wss://api.predifi.com/ws?apiKey=YOUR_API_KEY');
+
+ws.on('open', () => {
+  console.log('Connected to Predifi WebSocket');
+});
+
+ws.on('message', (data) => {
+  const message = JSON.parse(data.toString());
+  console.log('Received:', message);
+});
+
+ws.on('error', (error) => {
+  console.error('WebSocket error:', error);
+});
+
+ws.on('close', () => {
+  console.log('Disconnected');
+});
+```
+
+```python Python
+import websocket
+import json
+
+def on_open(ws):
+    print("Connected")
+    # Authenticate
+    ws.send(json.dumps({
+        'type': 'auth',
+        'apiKey': 'YOUR_API_KEY'
+    }))
+
+def on_message(ws, message):
+    data = json.loads(message)
+    print(f"Received: {data}")
+
+def on_error(ws, error):
+    print(f"Error: {error}")
+
+def on_close(ws):
+    print("Disconnected")
+
+ws = websocket.WebSocketApp(
+    'wss://api.predifi.com/ws',
+    on_open=on_open,
+    on_message=on_message,
+    on_error=on_error,
+    on_close=on_close
+)
+
+ws.run_forever()
+```
+
+```javascript JavaScript
+const ws = new WebSocket('wss://api.predifi.com/ws?apiKey=YOUR_API_KEY');
+
+ws.onopen = () => {
+  console.log('Connected');
+};
+
+ws.onmessage = (event) => {
+  const message = JSON.parse(event.data);
+  console.log('Received:', message);
+};
+
+ws.onerror = (error) => {
+  console.error('Error:', error);
+};
+
+ws.onclose = () => {
+  console.log('Disconnected');
+};
+```
+
+</CodeGroup>
+
+---
+
+## Subscriptions
+
+### Subscribe to Channels
+
+Send subscription message after connecting:
+
+```json
+{
+  "type": "subscribe",
+  "channel": "market",
+  "params": {
+    "marketId": "BTC-15M-20250111-1430"
+  }
+}
+```
+
+### Unsubscribe from Channels
+
+```json
+{
+  "type": "unsubscribe",
+  "channel": "market",
+  "params": {
+    "marketId": "BTC-15M-20250111-1430"
+  }
+}
+```
+
+### Subscription Confirmation
+
+Server responds with confirmation:
+
+```json
+{
+  "type": "subscribed",
+  "channel": "market",
+  "params": {
+    "marketId": "BTC-15M-20250111-1430"
+  },
+  "timestamp": 1638360000000
+}
+```
+
+---
+
+## Market Data Channel
+
+Subscribe to market price and volume updates.
+
+### Subscribe
+
+```json
+{
+  "type": "subscribe",
+  "channel": "market",
+  "params": {
+    "marketId": "BTC-15M-20250111-1430"
+  }
+}
+```
+
+### Updates
+
+```json
+{
+  "type": "market_update",
+  "channel": "market",
+  "data": {
+    "marketId": "BTC-15M-20250111-1430",
+    "currentPrice": {
+      "yes": 0.6543,
+      "no": 0.3457
+    },
+    "priceChange": {
+      "yes": 0.0123,
+      "no": -0.0123
+    },
+    "volume24h": 145678.90,
+    "liquidity": 234567.80,
+    "timeRemaining": 3600000,
+    "status": "active"
+  },
+  "timestamp": 1638360000000
+}
+```
+
+**Update frequency:** Every 1-5 seconds when price/volume changes
+
+### Example
+
+<CodeGroup>
+
+```typescript TypeScript
+// Subscribe to market
+ws.send(JSON.stringify({
+  type: 'subscribe',
+  channel: 'market',
+  params: {
+    marketId: 'BTC-15M-20250111-1430'
+  }
+}));
+
+// Handle updates
+ws.on('message', (data) => {
+  const msg = JSON.parse(data.toString());
+  
+  if (msg.type === 'market_update') {
+    const { marketId, currentPrice, volume24h, liquidity } = msg.data;
+    
+    console.log(`\n=== ${marketId} ===`);
+    console.log(`YES: ${(currentPrice.yes * 100).toFixed(1)}%`);
+    console.log(`NO: ${(currentPrice.no * 100).toFixed(1)}%`);
+    console.log(`Volume: $${volume24h.toLocaleString()}`);
+    console.log(`Liquidity: $${liquidity.toLocaleString()}`);
+  }
+});
+```
+
+```python Python
+# Subscribe to market
+ws.send(json.dumps({
+    'type': 'subscribe',
+    'channel': 'market',
+    'params': {
+        'marketId': 'BTC-15M-20250111-1430'
+    }
+}))
+
+# Handle updates in on_message
+def on_message(ws, message):
+    msg = json.loads(message)
+    
+    if msg['type'] == 'market_update':
+        data = msg['data']
+        print(f"\n{data['marketId']}")
+        print(f"YES: {data['currentPrice']['yes']*100:.1f}%")
+        print(f"NO: {data['currentPrice']['no']*100:.1f}%")
+        print(f"Volume: ${data['volume24h']:,.0f}")
+```
+
+</CodeGroup>
+
+---
+
+## Orderbook Channel
+
+Subscribe to orderbook depth changes.
+
+### Subscribe
+
+```json
+{
+  "type": "subscribe",
+  "channel": "orderbook",
+  "params": {
+    "marketId": "BTC-15M-20250111-1430",
+    "outcomeId": 0,
+    "venue": "aggregated"
+  }
+}
+```
+
+### Updates
+
+```json
+{
+  "type": "orderbook_update",
+  "channel": "orderbook",
+  "data": {
+    "marketId": "BTC-15M-20250111-1430",
+    "venue": "aggregated",
+    "outcomeId": 0,
+    "outcome": "YES",
+    "bids": [
+      {
+        "price": 0.6600,
+        "size": 1500.50,
+        "total": 990.33
+      },
+      {
+        "price": 0.6550,
+        "size": 2340.75,
+        "total": 1533.19
+      }
+    ],
+    "asks": [
+      {
+        "price": 0.6650,
+        "size": 1200.00,
+        "total": 798.00
+      },
+      {
+        "price": 0.6700,
+        "size": 3450.25,
+        "total": 2311.67
+      }
+    ],
+    "spread": 0.0050,
+    "midPrice": 0.6625,
+    "bestBid": 0.6600,
+    "bestAsk": 0.6650
+  },
+  "timestamp": 1638360000000
+}
+```
+
+**Update frequency:** Real-time when orderbook changes
+
+### Example
+
+```typescript
+// Subscribe to orderbook
+ws.send(JSON.stringify({
+  type: 'subscribe',
+  channel: 'orderbook',
+  params: {
+    marketId: 'BTC-15M-20250111-1430',
+    outcomeId: 0,
+    venue: 'aggregated'
+  }
+}));
+
+// Handle updates
+ws.on('message', (data) => {
+  const msg = JSON.parse(data.toString());
+  
+  if (msg.type === 'orderbook_update') {
+    const { outcome, bestBid, bestAsk, spread } = msg.data;
+    
+    console.log(`\n${outcome} Orderbook:`);
+    console.log(`Best Bid: $${bestBid}`);
+    console.log(`Best Ask: $${bestAsk}`);
+    console.log(`Spread: ${(spread * 100).toFixed(2)}%`);
+    
+    // Check if spread is tight
+    if (spread < 0.01) {
+      console.log('✅ Tight spread - good liquidity');
+    }
+  }
+});
+```
+
+---
+
+## Trades Channel
+
+Subscribe to new trade executions.
+
+### Subscribe
+
+```json
+{
+  "type": "subscribe",
+  "channel": "trades",
+  "params": {
+    "marketId": "BTC-15M-20250111-1430"
+  }
+}
+```
+
+You can also subscribe to **all trades** across all markets:
+
+```json
+{
+  "type": "subscribe",
+  "channel": "trades",
+  "params": {
+    "marketId": "*"
+  }
+}
+```
+
+### Updates
+
+```json
+{
+  "type": "trade",
+  "channel": "trades",
+  "data": {
+    "tradeId": "trade_123abc",
+    "marketId": "BTC-15M-20250111-1430",
+    "timestamp": 1638360000000,
+    "side": "buy",
+    "outcomeId": 0,
+    "outcome": "YES",
+    "shares": 150.75,
+    "price": 0.6633,
+    "cost": 100.00,
+    "venue": "polymarket",
+    "trader": "0x742d..."
+  },
+  "timestamp": 1638360000000
+}
+```
+
+**Update frequency:** Real-time when trades execute
+
+### Example
+
+```typescript
+// Subscribe to all trades
+ws.send(JSON.stringify({
+  type: 'subscribe',
+  channel: 'trades',
+  params: {
+    marketId: '*'
+  }
+}));
+
+// Track volume
+let totalVolume = 0;
+let tradeCount = 0;
+
+ws.on('message', (data) => {
+  const msg = JSON.parse(data.toString());
+  
+  if (msg.type === 'trade') {
+    const { marketId, side, outcome, shares, price, cost, venue } = msg.data;
+    
+    totalVolume += cost;
+    tradeCount++;
+    
+    console.log(`\n[${venue}] ${marketId}`);
+    console.log(`${side.toUpperCase()} ${shares.toFixed(2)} ${outcome} @ $${price.toFixed(4)}`);
+    console.log(`Cost: $${cost.toFixed(2)}`);
+    console.log(`Total volume today: $${totalVolume.toLocaleString()}`);
+    console.log(`Total trades: ${tradeCount}`);
+  }
+});
+```
+
+---
+
+## User Intent Channel
+
+Subscribe to your trading intent status updates.
+
+<Warning>
+  Requires **authentication** with API key that has trading permissions.
+</Warning>
+
+### Subscribe
+
+```json
+{
+  "type": "subscribe",
+  "channel": "user_intent",
+  "params": {
+    "userAddress": "0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb"
+  }
+}
+```
+
+Or subscribe to specific intent:
+
+```json
+{
+  "type": "subscribe",
+  "channel": "user_intent",
+  "params": {
+    "intentId": "0x123abc..."
+  }
+}
+```
+
+### Updates
+
+```json
+{
+  "type": "intent_update",
+  "channel": "user_intent",
+  "data": {
+    "intentId": "0x123abc...",
+    "status": "executing",
+    "marketId": "BTC-15M-20250111-1430",
+    "action": "buy",
+    "outcomeId": 0,
+    "requestedSize": 100.0,
+    "filledSize": 60.0,
+    "filledShares": 90.45,
+    "avgFillPrice": 0.6633,
+    "fills": [
+      {
+        "venue": "polymarket",
+        "shares": 90.45,
+        "price": 0.6600,
+        "cost": 59.70,
+        "txHash": "0xabc123...",
+        "timestamp": 1638360080000
+      }
+    ],
+    "estimatedCompletion": 30
+  },
+  "timestamp": 1638360080000
+}
+```
+
+**Update frequency:** Real-time as intent executes
+
+### Example
+
+```typescript
+// Subscribe to user's intents
+ws.send(JSON.stringify({
+  type: 'subscribe',
+  channel: 'user_intent',
+  params: {
+    userAddress: userWalletAddress
+  }
+}));
+
+// Track intent progress
+ws.on('message', (data) => {
+  const msg = JSON.parse(data.toString());
+  
+  if (msg.type === 'intent_update') {
+    const { intentId, status, filledSize, requestedSize, avgFillPrice, fills } = msg.data;
+    
+    const fillPercent = (filledSize / requestedSize * 100).toFixed(0);
+    
+    console.log(`\n🔄 Intent ${intentId}`);
+    console.log(`Status: ${status}`);
+    console.log(`Progress: ${fillPercent}% (${filledSize}/${requestedSize} USDC)`);
+    console.log(`Avg Price: $${avgFillPrice.toFixed(4)}`);
+    console.log(`Fills: ${fills.length} across venues`);
+    
+    if (status === 'completed') {
+      console.log('✅ Intent completed successfully!');
+    } else if (status === 'failed') {
+      console.log('❌ Intent failed');
+    }
+  }
+});
+```
+
+---
+
+## Portfolio Channel
+
+Subscribe to portfolio balance and position updates.
+
+<Warning>
+  Requires **authentication** with API key.
+</Warning>
+
+### Subscribe
+
+```json
+{
+  "type": "subscribe",
+  "channel": "portfolio",
+  "params": {
+    "userAddress": "0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb"
+  }
+}
+```
+
+### Updates
+
+```json
+{
+  "type": "portfolio_update",
+  "channel": "portfolio",
+  "data": {
+    "userAddress": "0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb",
+    "balanceChange": {
+      "usdc": -100.10,
+      "chain": "arbitrum"
+    },
+    "positionChange": {
+      "marketId": "BTC-15M-20250111-1430",
+      "outcomeId": 0,
+      "sharesChange": 150.75,
+      "newTotalShares": 150.75
+    },
+    "totalValue": 5234.56,
+    "totalPnL": 234.56
+  },
+  "timestamp": 1638360000000
+}
+```
+
+**Update frequency:** Real-time when balances or positions change
+
+### Example
+
+```typescript
+// Subscribe to portfolio
+ws.send(JSON.stringify({
+  type: 'subscribe',
+  channel: 'portfolio',
+  params: {
+    userAddress: userWalletAddress
+  }
+}));
+
+// Track changes
+ws.on('message', (data) => {
+  const msg = JSON.parse(data.toString());
+  
+  if (msg.type === 'portfolio_update') {
+    const { balanceChange, positionChange, totalValue, totalPnL } = msg.data;
+    
+    console.log('\n💰 Portfolio Updated');
+    
+    if (balanceChange) {
+      const emoji = balanceChange.usdc >= 0 ? '📈' : '📉';
+      console.log(`${emoji} USDC: ${balanceChange.usdc >= 0 ? '+' : ''}$${balanceChange.usdc.toFixed(2)} (${balanceChange.chain})`);
+    }
+    
+    if (positionChange) {
+      console.log(`🎯 Position: ${positionChange.marketId}`);
+      console.log(`   Shares: ${positionChange.sharesChange >= 0 ? '+' : ''}${positionChange.sharesChange.toFixed(2)}`);
+      console.log(`   Total: ${positionChange.newTotalShares.toFixed(2)} shares`);
+    }
+    
+    console.log(`\nTotal Value: $${totalValue.toLocaleString()}`);
+    console.log(`Total P&L: ${totalPnL >= 0 ? '+' : ''}$${totalPnL.toFixed(2)}`);
+  }
+});
+```
+
+---
+
+## Message Types
+
+### Subscription Management
+
+| Type | Direction | Description |
+|------|-----------|-------------|
+| `subscribe` | Client → Server | Subscribe to channel |
+| `unsubscribe` | Client → Server | Unsubscribe from channel |
+| `subscribed` | Server → Client | Subscription confirmed |
+| `unsubscribed` | Server → Client | Unsubscription confirmed |
+| `error` | Server → Client | Subscription/connection error |
+
+### Data Updates
+
+| Type | Channel | Description |
+|------|---------|-------------|
+| `market_update` | `market` | Market price/volume change |
+| `orderbook_update` | `orderbook` | Orderbook depth change |
+| `trade` | `trades` | New trade execution |
+| `intent_update` | `user_intent` | Trading intent status change |
+| `portfolio_update` | `portfolio` | Balance/position change |
+
+### Connection Management
+
+| Type | Direction | Description |
+|------|-----------|-------------|
+| `auth` | Client → Server | Authenticate connection |
+| `authenticated` | Server → Client | Authentication successful |
+| `ping` | Client → Server | Keep connection alive |
+| `pong` | Server → Client | Ping response |
+| `error` | Server → Client | Error message |
+
+---
+
+## Error Handling
+
+### Error Messages
+
+```json
+{
+  "type": "error",
+  "error": "SUBSCRIPTION_FAILED",
+  "message": "Failed to subscribe to channel: Invalid market ID",
+  "details": {
+    "channel": "market",
+    "params": {
+      "marketId": "INVALID-ID"
+    }
+  },
+  "timestamp": 1638360000000
+}
+```
+
+### Common Errors
+
+| Error Code | Description | Resolution |
+|------------|-------------|------------|
+| `AUTH_REQUIRED` | API key missing or invalid | Provide valid API key |
+| `INVALID_CHANNEL` | Unknown channel name | Check channel name |
+| `INVALID_PARAMS` | Invalid subscription params | Verify params |
+| `RATE_LIMIT` | Too many subscriptions | Reduce subscriptions |
+| `MARKET_NOT_FOUND` | Market doesn't exist | Check market ID |
+| `INSUFFICIENT_PERMISSIONS` | API key lacks permission | Update API key permissions |
+
+### Reconnection Logic
+
+```typescript
+class PredifiWebSocket {
+  private ws: WebSocket;
+  private subscriptions: Set<string> = new Set();
+  
+  connect() {
+    this.ws = new WebSocket('wss://api.predifi.com/ws?apiKey=YOUR_API_KEY');
+    
+    this.ws.on('open', () => {
+      console.log('Connected');
+      // Resubscribe to all channels
+      this.subscriptions.forEach(sub => {
+        this.ws.send(sub);
+      });
+    });
+    
+    this.ws.on('close', () => {
+      console.log('Disconnected - reconnecting in 5s...');
+      setTimeout(() => this.connect(), 5000);
+    });
+    
+    this.ws.on('error', (error) => {
+      console.error('WebSocket error:', error);
+    });
+  }
+  
+  subscribe(channel: string, params: any) {
+    const sub = JSON.stringify({ type: 'subscribe', channel, params });
+    this.subscriptions.add(sub);
+    
+    if (this.ws.readyState === WebSocket.OPEN) {
+      this.ws.send(sub);
+    }
+  }
+  
+  unsubscribe(channel: string, params: any) {
+    const sub = JSON.stringify({ type: 'subscribe', channel, params });
+    this.subscriptions.delete(sub);
+    
+    if (this.ws.readyState === WebSocket.OPEN) {
+      this.ws.send(JSON.stringify({ type: 'unsubscribe', channel, params }));
+    }
+  }
+}
+
+// Usage
+const predifi = new PredifiWebSocket();
+predifi.connect();
+predifi.subscribe('market', { marketId: 'BTC-15M-20250111-1430' });
+```
+
+---
+
+## Rate Limits
+
+| Limit Type | Value |
+|------------|-------|
+| **Connections per API key** | 5 concurrent |
+| **Subscriptions per connection** | 50 channels |
+| **Messages per second** | 100 messages/sec |
+
+If you exceed rate limits, you'll receive:
+
+```json
+{
+  "type": "error",
+  "error": "RATE_LIMIT",
+  "message": "Too many subscriptions. Maximum 50 per connection.",
+  "timestamp": 1638360000000
+}
+```
+
+---
+
+## Best Practices
+
+<AccordionGroup>
+  <Accordion title="Implement Reconnection Logic" icon="arrows-rotate">
+    WebSocket connections can drop - always implement automatic reconnection:
+    
+    ```typescript
+    function connect() {
+      const ws = new WebSocket('wss://api.predifi.com/ws?apiKey=KEY');
+      
+      ws.on('close', () => {
+        console.log('Reconnecting...');
+        setTimeout(connect, 5000);  // Reconnect after 5s
+      });
+    }
+    ```
+  </Accordion>
+
+  <Accordion title="Resubscribe After Reconnection" icon="rotate">
+    Keep track of subscriptions and resubscribe after reconnecting:
+    
+    ```typescript
+    const subscriptions = [];
+    
+    ws.on('open', () => {
+      subscriptions.forEach(sub => {
+        ws.send(JSON.stringify(sub));
+      });
+    });
+    ```
+  </Accordion>
+
+  <Accordion title="Use Heartbeat to Keep Connection Alive" icon="heart-pulse">
+    Send periodic pings to prevent timeout:
+    
+    ```typescript
+    setInterval(() => {
+      if (ws.readyState === WebSocket.OPEN) {
+        ws.send(JSON.stringify({ type: 'ping' }));
+      }
+    }, 30000);  // Every 30 seconds
+    ```
+  </Accordion>
+
+  <Accordion title="Subscribe to Specific Markets Only" icon="filter">
+    Don't subscribe to all markets - only what you need:
+    
+    ```typescript
+    // ❌ Bad: Subscribe to all trades
+    ws.send(JSON.stringify({
+      type: 'subscribe',
+      channel: 'trades',
+      params: { marketId: '*' }
+    }));
+    
+    // ✅ Good: Subscribe to specific markets
+    ['BTC-15M', 'ETH-30M'].forEach(marketId => {
+      ws.send(JSON.stringify({
+        type: 'subscribe',
+        channel: 'trades',
+        params: { marketId }
+      }));
+    });
+    ```
+  </Accordion>
+
+  <Accordion title="Handle Errors Gracefully" icon="triangle-exclamation">
+    Always handle error messages:
+    
+    ```typescript
+    ws.on('message', (data) => {
+      const msg = JSON.parse(data.toString());
+      
+      if (msg.type === 'error') {
+        console.error(`Error: ${msg.error} - ${msg.message}`);
+        
+        if (msg.error === 'MARKET_NOT_FOUND') {
+          // Remove invalid subscription
+        } else if (msg.error === 'RATE_LIMIT') {
+          // Reduce subscriptions
+        }
+      }
+    });
+    ```
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Complete Example
+
+Full WebSocket client with reconnection, subscriptions, and error handling:
+
+```typescript
+import WebSocket from 'ws';
+
+class PredifiClient {
+  private ws: WebSocket | null = null;
+  private subscriptions: Map<string, any> = new Map();
+  private reconnectTimeout: NodeJS.Timeout | null = null;
+  
+  constructor(private apiKey: string) {}
+  
+  connect() {
+    this.ws = new WebSocket(`wss://api.predifi.com/ws?apiKey=${this.apiKey}`);
+    
+    this.ws.on('open', () => {
+      console.log('✅ Connected to Predifi WebSocket');
+      this.resubscribe();
+    });
+    
+    this.ws.on('message', (data) => {
+      this.handleMessage(JSON.parse(data.toString()));
+    });
+    
+    this.ws.on('error', (error) => {
+      console.error('❌ WebSocket error:', error);
+    });
+    
+    this.ws.on('close', () => {
+      console.log('🔌 Disconnected - reconnecting in 5s...');
+      this.reconnectTimeout = setTimeout(() => this.connect(), 5000);
+    });
+  }
+  
+  disconnect() {
+    if (this.reconnectTimeout) {
+      clearTimeout(this.reconnectTimeout);
+    }
+    if (this.ws) {
+      this.ws.close();
+    }
+  }
+  
+  subscribe(channel: string, params: any, handler: (data: any) => void) {
+    const key = `${channel}:${JSON.stringify(params)}`;
+    this.subscriptions.set(key, { channel, params, handler });
+    
+    if (this.ws?.readyState === WebSocket.OPEN) {
+      this.ws.send(JSON.stringify({ type: 'subscribe', channel, params }));
+    }
+  }
+  
+  unsubscribe(channel: string, params: any) {
+    const key = `${channel}:${JSON.stringify(params)}`;
+    this.subscriptions.delete(key);
+    
+    if (this.ws?.readyState === WebSocket.OPEN) {
+      this.ws.send(JSON.stringify({ type: 'unsubscribe', channel, params }));
+    }
+  }
+  
+  private resubscribe() {
+    this.subscriptions.forEach(({ channel, params }) => {
+      this.ws!.send(JSON.stringify({ type: 'subscribe', channel, params }));
+    });
+  }
+  
+  private handleMessage(msg: any) {
+    const key = `${msg.channel}:${JSON.stringify(msg.data?.marketId || msg.data?.userAddress || {})}`;
+    const subscription = this.subscriptions.get(key);
+    
+    if (subscription) {
+      subscription.handler(msg.data);
+    }
+    
+    if (msg.type === 'error') {
+      console.error(`Error: ${msg.error} - ${msg.message}`);
+    }
+  }
+}
+
+// Usage
+const client = new PredifiClient('YOUR_API_KEY');
+client.connect();
+
+// Subscribe to market updates
+client.subscribe('market', { marketId: 'BTC-15M-20250111-1430' }, (data) => {
+  console.log(`BTC-15M: YES ${(data.currentPrice.yes * 100).toFixed(1)}%`);
+});
+
+// Subscribe to user intents
+client.subscribe('user_intent', { userAddress: '0x...' }, (data) => {
+  console.log(`Intent ${data.intentId}: ${data.status}`);
+});
+
+// Cleanup on exit
+process.on('SIGINT', () => {
+  client.disconnect();
+  process.exit();
+});
+```
+
+---
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card
+    title="Trading API"
+    icon="cart-shopping"
+    href="/api-reference/trading"
+  >
+    Submit intents tracked via WebSocket
+  </Card>
+  <Card
+    title="Markets API"
+    icon="chart-line"
+    href="/api-reference/markets"
+  >
+    Get market IDs for subscriptions
+  </Card>
+  <Card
+    title="Portfolio API"
+    icon="wallet"
+    href="/api-reference/portfolio"
+  >
+    Initial data for portfolio channel
+  </Card>
+  <Card
+    title="Getting Started"
+    icon="rocket"
+    href="/api-reference/getting-started"
+  >
+    API authentication and setup
+  </Card>
+</CardGroup>

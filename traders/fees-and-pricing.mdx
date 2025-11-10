@@ -1,0 +1,395 @@
+---
+title: "Fees & Pricing"
+description: "Complete breakdown of all fees on Predifi. Transparent, competitive, no hidden charges."
+---
+
+## Fee Philosophy
+
+At Predifi, we believe in **transparent, competitive pricing** with **no hidden fees**. Every cost is clearly disclosed before you trade.
+
+<Note>
+  **Core principle**: You should know exactly what you're paying before confirming any transaction.
+</Note>
+
+---
+
+## Fee Comparison: Aggregator vs Native CLOB
+
+| Product | Fee Type | Amount | When Charged |
+|---------|----------|--------|--------------|
+| **Aggregator** | Protocol Fee | 0.05% - 0.1% | At trade execution |
+| **Aggregator** | Bridge Gas | $1-3 | When crossing chains |
+| **Native CLOB** | Protocol Fee | 2% of winnings | When claiming payouts |
+| **Native CLOB** | Gas Fees | ~$0.50 | Per transaction |
+| **Both** | Network Gas | Varies | Each blockchain tx |
+
+---
+
+## Aggregator Fees (Detailed)
+
+### Protocol Fee: 0.05% - 0.1%
+
+**What it covers:**
+- Access to multiple venue liquidity
+- Smart order routing
+- Cross-chain bridging automation
+- Portfolio aggregation
+- Real-time data feeds
+
+**How it's calculated:**
+```
+Trade Amount: $1,000
+Protocol Fee: $1,000 × 0.1% = $1.00
+Total Cost: $1,001.00
+```
+
+**When you pay:**
+- At the time of trade execution
+- Automatically deducted from your trade amount
+- Shown clearly before you confirm
+
+<Tip>
+  The 0.1% fee is significantly lower than most traditional betting platforms (5-10%) and competitive with other crypto prediction markets.
+</Tip>
+
+### Bridge Gas Fees: $1-3
+
+**What it covers:**
+- Cross-chain USDC transfers via Circle CCTP
+- Destination chain transaction costs
+- Message relay fees
+
+**When it applies:**
+- Only when trading on markets on different chains
+- One-time per chain (not per trade)
+- Waived if already on the correct chain
+
+**Cost breakdown:**
+```
+Source chain transaction: ~$0.50
+Bridge relay: ~$1.00
+Destination chain: ~$0.50
+Total: ~$2.00 (varies by network congestion)
+```
+
+**How to minimize:**
+- Batch multiple trades on the same chain
+- Use Native CLOB for small trades (<$100)
+- Trade during low network congestion
+
+### Network Gas Fees
+
+**What it covers:**
+- Blockchain validator rewards
+- Transaction processing
+
+**Typical costs (Layer 2):**
+- Optimism: $0.10 - $0.50
+- Base: $0.05 - $0.30
+- Polygon: $0.01 - $0.10
+- Arbitrum: $0.10 - $0.40
+
+<Info>
+  Layer 2 networks are 10-100x cheaper than Ethereum mainnet. This is why Predifi is built on L2s.
+</Info>
+
+### Total Aggregator Cost Examples
+
+#### Example 1: Small Trade ($100)
+```
+Trade Amount: $100
+Protocol Fee (0.1%): $0.10
+Bridge Gas (if cross-chain): $2.00
+Network Gas: $0.50
+Total Fees: $2.60 (2.6% of trade)
+```
+
+#### Example 2: Medium Trade ($1,000)
+```
+Trade Amount: $1,000
+Protocol Fee (0.1%): $1.00
+Bridge Gas (if cross-chain): $2.00
+Network Gas: $0.50
+Total Fees: $3.50 (0.35% of trade)
+```
+
+#### Example 3: Large Trade ($10,000)
+```
+Trade Amount: $10,000
+Protocol Fee (0.1%): $10.00
+Bridge Gas (if cross-chain): $2.00
+Network Gas: $0.50
+Total Fees: $12.50 (0.125% of trade)
+```
+
+<Tip>
+  **Key insight**: Fixed costs (bridge gas) become negligible on larger trades. Trade size $500+ gets you the best effective fee rate.
+</Tip>
+
+---
+
+## Native CLOB Fees (Detailed)
+
+### Protocol Fee: 2% on Winnings
+
+**What makes it unique:**
+- **Only charged on WINNING trades**
+- Losers pay $0 protocol fee
+- Capped at maximum 5%
+- Paid when claiming, not when trading
+
+**How it's calculated:**
+```
+Winning Position: 1,000 shares
+Payout: 1,000 × $1.00 = $1,000
+Protocol Fee: $1,000 × 2% = $20
+Net Payout: $980
+```
+
+**Why this model?**
+- Aligns incentives (we only profit when you profit)
+- No fee on unsuccessful trades
+- Encourages frequent trading
+- Fair for all trade sizes
+
+### Trading Gas Fees
+
+**What you pay gas for:**
+- Placing market orders: ~$0.50
+- Limit orders: FREE (off-chain)
+- Canceling orders: FREE (off-chain)
+- Settling trades: ~$0.50 (batch settled)
+- Claiming winnings: ~$0.50
+
+<Note>
+  **Off-chain orders** are a huge advantage. Place and cancel limit orders as much as you want without paying gas!
+</Note>
+
+### Total Native CLOB Cost Examples
+
+#### Example 1: Winning Trade
+```
+Investment: $500 (at $0.65/share)
+Shares: 769 shares
+Market Resolves: YES wins
+Gross Payout: 769 × $1.00 = $769
+Protocol Fee (2%): $769 × 2% = $15.38
+Gas (trade + claim): $1.00
+Total Fees: $16.38
+Net Profit: $769 - $500 - $16.38 = $252.62
+Effective Fee Rate: 6.1% of profit
+```
+
+#### Example 2: Losing Trade
+```
+Investment: $500
+Market Resolves: Against you
+Payout: $0
+Protocol Fee: $0 (only charged on winners!)
+Gas Paid: $0.50 (just the initial trade)
+Total Loss: $500.50
+```
+
+<Info>
+  Notice: Losing trades have almost zero fees. The protocol fee model is winner-focused.
+</Info>
+
+---
+
+## Fee Comparison with Competitors
+
+### vs Traditional Sportsbooks
+
+| Platform | Fee/Margin | Model |
+|----------|------------|-------|
+| **Predifi** | 0.1% - 2% | Transparent fees |
+| DraftKings | 5% - 10% | Built into odds |
+| FanDuel | 5% - 10% | Built into odds |
+| BetMGM | 5% - 10% | Built into odds |
+
+Traditional sportsbooks hide fees in the odds (vigourish/vig). Predifi's transparent model is typically 5-10x cheaper.
+
+### vs Crypto Prediction Markets
+
+| Platform | Fee | When Charged |
+|----------|-----|--------------|
+| **Predifi Aggregator** | 0.05% - 0.1% | Per trade |
+| **Predifi Native** | 2% | On winnings only |
+| Polymarket | Free (gas only) | - |
+| Augur | ~1% + gas | Per trade |
+| Omen | 2% | Per trade |
+
+<Tip>
+  Predifi's Aggregator gives you access to Polymarket AND other venues with minimal markup. Native CLOB's "pay only when you win" is unique in the space.
+</Tip>
+
+---
+
+## No Hidden Fees
+
+### What Predifi NEVER Charges
+
+❌ **Deposit fees** - Free to deposit  
+❌ **Withdrawal fees** - Free to withdraw  
+❌ **Account fees** - No monthly or annual fees  
+❌ **Cancellation fees** - Cancel limit orders for free  
+❌ **Inactivity fees** - Use Predifi as much or little as you want  
+❌ **Data fees** - Real-time market data is free for all  
+❌ **Premium tiers** - No "pro" subscription required  
+
+### What You DO Pay
+
+✅ **Protocol fees** - 0.1% (Aggregator) or 2% on wins (Native)  
+✅ **Gas fees** - Blockchain transaction costs (~$0.50-$2)  
+✅ **Bridge fees** - Only for cross-chain trades ($1-3)  
+
+---
+
+## Fee Optimization Tips
+
+<AccordionGroup>
+  <Accordion title="Trade Larger Amounts" icon="arrow-trend-up">
+    Fixed costs (bridge gas) are diluted over larger trades. $500+ trades have the best effective rates.
+  </Accordion>
+
+  <Accordion title="Batch Your Trades" icon="layer-group">
+    If trading on the same chain/venue, batch multiple positions together to share fixed costs.
+  </Accordion>
+
+  <Accordion title="Use Native CLOB for Small Trades" icon="gauge-simple">
+    For trades under $100, avoid cross-chain bridge fees by using Native CLOB.
+  </Accordion>
+
+  <Accordion title="Trade During Off-Peak Hours" icon="clock">
+    Network gas fees are lower during low activity periods (nights, weekends in US/Europe).
+  </Accordion>
+
+  <Accordion title="Use Limit Orders (Native CLOB)" icon="bullseye">
+    Limit orders are FREE to place and cancel. Only pay gas when they execute.
+  </Accordion>
+
+  <Accordion title="Consider Fee Impact on Small Profits" icon="calculator">
+    A $20 trade with $3 in fees = 15% fee rate. Make sure expected profit justifies the cost.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Fee Transparency & Disclosures
+
+### Pre-Trade Disclosure
+
+Before every trade, Predifi shows:
+- Estimated protocol fee (in USDC and %)
+- Estimated gas costs
+- Total cost breakdown
+- Net amount after fees
+- Expected payout if you win
+
+### Trade Confirmation
+
+Your transaction receipt includes:
+- Exact fees paid
+- Transaction hash for verification
+- Timestamp
+- Price executed
+
+### Portfolio Tracking
+
+Your portfolio displays:
+- Fees paid per position
+- Cumulative fees paid (lifetime)
+- Effective fee rate
+- Comparison to expected fees
+
+<Info>
+  **Blockchain verification**: All fees are on-chain and verifiable. You can audit every transaction in block explorers.
+</Info>
+
+---
+
+## Future Fee Changes
+
+### Governance & Transparency
+
+Predifi reserves the right to adjust fees based on:
+- Market conditions
+- Operational costs
+- Competitive landscape
+- Community governance (future)
+
+**Our commitments:**
+- ✅ 30-day advance notice of fee increases
+- ✅ Grandfathering for existing positions
+- ✅ Community input via Discord/governance
+- ✅ Fees never exceed competitive market rates
+
+### Fee Caps
+
+**Protocol-enforced limits:**
+- Aggregator: Maximum 1% protocol fee
+- Native CLOB: Maximum 5% on winnings
+- Bridge fees: Actual cost only (no markup)
+
+These caps are hardcoded in smart contracts and cannot be changed without deploying new contracts (which requires governance approval).
+
+---
+
+## Frequently Asked Questions
+
+<AccordionGroup>
+  <Accordion title="Why does Aggregator charge fees on every trade but Native only on wins?">
+    Aggregator provides access to external venues and incurs costs per trade (routing, bridging, data). Native CLOB operates its own orderbook with lower per-trade costs, enabling the winner-focused model.
+  </Accordion>
+
+  <Accordion title="Can I see fees before confirming a trade?">
+    Yes! All fees are displayed clearly in the trade preview before you confirm. No surprises.
+  </Accordion>
+
+  <Accordion title="Do I pay fees if the market gets canceled?">
+    No. If a market is canceled, all positions are refunded at cost with no protocol fees charged.
+  </Accordion>
+
+  <Accordion title="Are there discounts for high-volume traders?">
+    Not currently, but volume-based fee tiers are planned for the future. Join our Discord for updates.
+  </Accordion>
+
+  <Accordion title="Can I pay fees in tokens other than USDC?">
+    Currently, fees must be paid in USDC (for Aggregator) or via claim deduction (Native). Multi-token support is under consideration.
+  </Accordion>
+
+  <Accordion title="What happens to collected fees?">
+    60% goes to liquidity providers, 30% to protocol treasury, 10% to insurance fund. Full breakdown in our docs.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Get Help with Fees
+
+Have questions about fees or see an unexpected charge?
+
+- **Support Email**: support@predifi.com
+- **Discord**: [discord.gg/predifi](https://discord.gg/predifi)
+- **Live Chat**: Available in-app during business hours
+
+We aim to respond within 24 hours.
+
+---
+
+## Related Pages
+
+<CardGroup cols={2}>
+  <Card title="Products Overview" icon="grid-2" href="/products/overview">
+    Compare Aggregator vs Native CLOB features
+  </Card>
+  <Card title="Trading Guide" icon="book" href="/getting-started/trading-guide">
+    Learn trading strategies
+  </Card>
+  <Card title="Liquidity Provider Guide" icon="hand-holding-dollar" href="/liquidity/overview">
+    Earn from protocol fees
+  </Card>
+  <Card title="FAQ" icon="circle-question" href="/support/faq">
+    More questions answered
+  </Card>
+</CardGroup>

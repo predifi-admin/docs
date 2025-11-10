@@ -1,0 +1,232 @@
+---
+title: "How Predifi Works"
+description: "Understand the mechanics behind prediction markets and how Predifi enables seamless trading"
+---
+
+## What Are Prediction Markets?
+
+Prediction markets (also called "information markets" or "event markets") let you trade on the outcome of future events.
+
+### The Concept
+
+Instead of betting against a bookmaker, you trade shares with other users. Each share represents a claim on a specific outcome:
+
+- **YES shares** pay $1 if the event happens
+- **NO shares** pay $1 if the event doesn't happen
+
+The **current price** reflects the market's collective belief about the probability of that outcome.
+
+<Note>
+  **Example**: If a YES share for "Will Bitcoin hit $100k in 2025?" trades at $0.65, the market estimates a 65% probability.
+</Note>
+
+### Why They're Powerful
+
+Prediction markets have proven to be remarkably accurate because:
+
+1. **Financial Incentives** - Traders profit from being correct, creating strong motivation for accuracy
+2. **Collective Intelligence** - Markets aggregate information from many participants
+3. **Price Discovery** - Continuous trading reveals real-time probability estimates
+4. **Self-Correcting** - Mispriced markets create arbitrage opportunities that push prices toward truth
+
+---
+
+## How Trading Works
+
+### Basic Trading Flow
+
+<Steps>
+  <Step title="Choose a Market">
+    Browse markets on politics, sports, crypto, entertainment, or other categories. Each market has a binary outcome (YES/NO).
+  </Step>
+  
+  <Step title="Analyze the Odds">
+    Review current prices, volume, liquidity, and historical charts. Consider whether the market is correctly priced.
+  </Step>
+  
+  <Step title="Take a Position">
+    If you think YES is underpriced, buy YES shares. If you think NO is underpriced, buy NO shares.
+  </Step>
+  
+  <Step title="Hold or Exit">
+    Hold your position until the market resolves, or sell early to lock in profits or cut losses.
+  </Step>
+  
+  <Step title="Settlement">
+    When the event resolves, winning shares pay out $1.00 per share. Losing shares expire worthless.
+  </Step>
+</Steps>
+
+### Understanding Prices
+
+Prices in prediction markets represent **implied probability**:
+
+| Price | Implied Probability | Meaning |
+|-------|---------------------|---------|
+| $0.90 | 90% | Market thinks outcome is very likely |
+| $0.65 | 65% | Market thinks outcome is somewhat likely |
+| $0.50 | 50% | Market is uncertain (50/50) |
+| $0.35 | 35% | Market thinks outcome is somewhat unlikely |
+| $0.10 | 10% | Market thinks outcome is very unlikely |
+
+<Tip>
+  **Trading Strategy**: If you believe the true probability is higher than the market price, buy YES. If you think it's lower, buy NO.
+</Tip>
+
+### Profit Examples
+
+#### Example 1: Simple YES Trade
+- You buy 100 YES shares at $0.60 each = **$60 invested**
+- Event resolves YES
+- You receive 100 × $1.00 = **$100 payout**
+- **Profit: $40** (67% return)
+
+#### Example 2: Early Exit
+- You buy 50 YES shares at $0.45 each = **$22.50 invested**
+- Price moves to $0.75 before resolution
+- You sell at $0.75 = **$37.50 received**
+- **Profit: $15** (67% return without waiting for resolution)
+
+#### Example 3: NO Trade
+- You buy 200 NO shares at $0.30 each = **$60 invested**
+- Event resolves NO
+- You receive 200 × $1.00 = **$200 payout**
+- **Profit: $140** (233% return)
+
+---
+
+## How Predifi Enhances Trading
+
+### 1. Aggregated Liquidity
+
+Traditional prediction markets suffer from **fragmented liquidity**. A market on Polymarket might have great liquidity while the same market on another venue is illiquid.
+
+**Predifi's Aggregator** pools liquidity from multiple sources, giving you:
+- ✅ Better prices (tighter spreads)
+- ✅ Larger trade sizes without slippage
+- ✅ More market options
+- ✅ Unified portfolio management
+
+### 2. Professional Trading Interface
+
+**Predifi's Native CLOB** provides a professional trading experience:
+- 📊 Full orderbook depth (Level 2 data)
+- 📈 Real-time charts and price history
+- 🎯 Limit orders and market orders
+- ⚡ Instant order matching
+- 💼 Portfolio analytics and P&L tracking
+
+### 3. Cross-Chain Trading
+
+Markets exist on different blockchains (Polygon for Polymarket, Base for Limitless, etc.). Predifi handles the complexity:
+- Bridge your funds automatically
+- Trade across chains from one interface
+- Settle back to your preferred chain
+- No manual bridging required
+
+### 4. Best Execution
+
+When you place a trade, Predifi's routing engine:
+1. Scans all available venues
+2. Compares prices including fees
+3. Routes to the best execution venue
+4. Handles all technical details
+
+You get the best price automatically without checking multiple platforms.
+
+---
+
+## Market Resolution
+
+### How Markets Resolve
+
+When the event concludes, markets must be **resolved** to determine winners:
+
+1. **Outcome Determination** - The real-world outcome is observed
+2. **Oracle Verification** - Decentralized oracles provide on-chain proof
+3. **Smart Contract Settlement** - Winners can claim their payouts
+4. **Payout Distribution** - $1.00 per winning share sent to claimants
+
+### Oracle System
+
+Predifi uses the **Stork Network** for tamper-proof market resolution:
+- ✅ Decentralized oracle network
+- ✅ Multiple data sources
+- ✅ Cryptographic proof of outcomes
+- ✅ Dispute resolution mechanism
+
+<Warning>
+  Markets only resolve when there's verifiable proof of the outcome. This ensures fairness and prevents manipulation.
+</Warning>
+
+### Claiming Winnings
+
+After a market resolves in your favor:
+
+1. Navigate to your **Positions** page
+2. Find the resolved market
+3. Click **Claim Winnings**
+4. Confirm the transaction in your wallet
+5. Receive USDC directly to your wallet
+
+Claiming is instant and requires only a small gas fee.
+
+---
+
+## Risk Management
+
+### Understanding Risk
+
+Prediction market trading involves risk:
+
+- **Market Risk** - Your prediction may be wrong
+- **Liquidity Risk** - You may not be able to exit at desired prices
+- **Event Risk** - Unexpected developments can move markets
+- **Smart Contract Risk** - Technical vulnerabilities (mitigated through audits)
+
+### Best Practices
+
+<AccordionGroup>
+  <Accordion title="Start Small" icon="seedling">
+    Begin with small positions to learn how markets work before committing significant capital.
+  </Accordion>
+
+  <Accordion title="Diversify" icon="chart-scatter">
+    Don't put all your funds in one market. Spread risk across multiple positions.
+  </Accordion>
+
+  <Accordion title="Set Limits" icon="gauge-high">
+    Decide in advance how much you're willing to lose on any single trade.
+  </Accordion>
+
+  <Accordion title="Research Thoroughly" icon="magnifying-glass">
+    Make informed decisions based on research, not emotion or hype.
+  </Accordion>
+
+  <Accordion title="Understand Probabilities" icon="percent">
+    Don't confuse possible with probable. A 10% chance means it happens 1 in 10 times.
+  </Accordion>
+
+  <Accordion title="Take Profits" icon="piggy-bank">
+    Consider exiting when you've made a good profit rather than always holding to resolution.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Start Trading" icon="rocket" href="/getting-started/quickstart">
+    Ready to begin? Follow our quickstart guide
+  </Card>
+  <Card title="Learn About Products" icon="grid-2" href="/products/overview">
+    Explore Aggregator vs Native CLOB
+  </Card>
+  <Card title="Trading Guide" icon="book" href="/getting-started/trading-guide">
+    Detailed trading instructions and strategies
+  </Card>
+  <Card title="FAQ" icon="circle-question" href="/support/faq">
+    Common questions answered
+  </Card>
+</CardGroup>

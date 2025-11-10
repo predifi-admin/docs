@@ -1,0 +1,360 @@
+---
+title: "Aggregator"
+description: "Trade on multiple prediction market venues with unified liquidity and seamless cross-chain execution"
+---
+
+## What is the Aggregator?
+
+The **Predifi Aggregator** brings together prediction markets from multiple platforms into one unified interface. Instead of creating accounts on Polymarket, Limitless, and other venues, trade on all of them through Predifi.
+
+<Frame>
+  <div style={{padding: '20px', background: '#f8fafc', borderRadius: '8px'}}>
+    **One Interface → Multiple Venues → Best Prices → Unified Portfolio**
+  </div>
+</Frame>
+
+---
+
+## How It Works
+
+### The Challenge
+
+Traditional prediction markets are **fragmented**:
+- Different platforms require different accounts
+- Liquidity is split across venues
+- You need to manually compare prices
+- Managing positions across platforms is painful
+- Each venue uses different blockchain networks
+
+### The Predifi Solution
+
+The Aggregator solves these problems by:
+
+1. **Connecting to Multiple Venues** - Direct integration with Polymarket, Limitless, and more
+2. **Pooling Liquidity** - Access combined liquidity from all connected venues
+3. **Smart Routing** - Automatically route trades to the venue with the best price
+4. **Cross-Chain Bridging** - Handle blockchain complexity behind the scenes
+5. **Unified Portfolio** - Track all positions in one place
+
+<Steps>
+  <Step title="You Place an Order">
+    Choose a market and enter your trade on Predifi's interface
+  </Step>
+  
+  <Step title="Best Price Discovery">
+    Predifi scans all connected venues to find the best available price
+  </Step>
+  
+  <Step title="Automatic Routing">
+    Your order is routed to the venue offering optimal execution
+  </Step>
+  
+  <Step title="Cross-Chain Execution">
+    Predifi handles bridging your funds to the correct blockchain
+  </Step>
+  
+  <Step title="Trade Execution">
+    Trade executes on the selected venue at the best price
+  </Step>
+  
+  <Step title="Position Tracking">
+    View your position in Predifi's unified portfolio dashboard
+  </Step>
+</Steps>
+
+---
+
+## Key Benefits
+
+### 🌐 Access to More Markets
+
+Get exposure to hundreds of active markets from:
+
+<CardGroup cols={2}>
+  <Card title="Polymarket" icon="chart-line">
+    Largest prediction market platform with $100M+ in monthly volume
+  </Card>
+  <Card title="Limitless" icon="infinity">
+    Base-native prediction markets with innovative features
+  </Card>
+</CardGroup>
+
+More venue integrations coming soon!
+
+### 💰 Better Prices
+
+By aggregating liquidity, you get:
+- ✅ Tighter bid-ask spreads
+- ✅ Less slippage on larger orders
+- ✅ More competitive pricing
+- ✅ Better execution than trading on venues directly
+
+<Note>
+  **Example**: If Polymarket offers YES at $0.65 and Limitless offers YES at $0.63, Predifi routes your buy order to Limitless automatically.
+</Note>
+
+### ⚡ Unified Experience
+
+- **One wallet** - No need for separate accounts
+- **One portfolio** - Track all positions together
+- **One interface** - Consistent UX across venues
+- **One history** - Complete trading record in one place
+
+### 🔗 Cross-Chain Made Simple
+
+Trading across multiple blockchains is complex:
+- Polymarket uses Polygon
+- Limitless uses Base
+- Different venues use different chains
+
+**Predifi handles all of this automatically.** You don't need to:
+- Manually bridge funds
+- Switch networks in your wallet
+- Manage gas on multiple chains
+- Track positions on different explorers
+
+---
+
+## Supported Venues
+
+### Currently Live
+
+| Venue | Blockchain | Markets | Volume |
+|-------|-----------|---------|--------|
+| **Polymarket** | Polygon | 500+ | High |
+| **Limitless** | Base | 100+ | Growing |
+
+### Coming Soon
+
+- Additional EVM-compatible prediction markets
+- Integrations with emerging venues
+- Community-requested platforms
+
+<Info>
+  Have a venue you'd like to see supported? [Let us know!](/support/contact)
+</Info>
+
+---
+
+## Trading on the Aggregator
+
+### Market Orders
+
+The simplest way to trade:
+
+1. Select a market
+2. Choose YES or NO
+3. Enter amount in USDC
+4. See estimated price and fee
+5. Confirm trade
+
+Your order executes immediately at the best available price across all venues.
+
+### Price Comparison
+
+Before executing, Predifi shows you:
+
+- **Best available price** across all venues
+- **Estimated cost** including fees
+- **Expected shares** you'll receive
+- **Execution venue** where order will be routed
+- **Estimated time** for cross-chain execution
+
+### Slippage Protection
+
+Set a **maximum slippage tolerance** to protect against price movements:
+
+- Default: 1%
+- Adjustable from 0.1% to 5%
+- Trade reverts if price moves beyond tolerance
+
+---
+
+## Cross-Chain Execution
+
+### How Bridging Works
+
+When you trade on a venue that's on a different blockchain:
+
+<Steps>
+  <Step title="Initiate Trade">
+    You confirm the trade on Predifi
+  </Step>
+  
+  <Step title="Bridge Funds">
+    Predifi bridges your USDC to the venue's blockchain using Circle CCTP
+  </Step>
+  
+  <Step title="Execute on Venue">
+    Trade executes on the destination venue
+  </Step>
+  
+  <Step title="Position Tracking">
+    Position appears in your Predifi portfolio
+  </Step>
+  
+  <Step title="Settlement">
+    When market resolves, winnings can be claimed back to your preferred chain
+  </Step>
+</Steps>
+
+### Timing
+
+- **Bridge time**: 2-5 minutes (depends on chain congestion)
+- **Total execution**: Usually under 10 minutes
+- **Real-time status**: Track progress in your transaction history
+
+### Costs
+
+- **Bridging fee**: ~$1-3 in gas costs
+- **Protocol fee**: 0.05% - 0.1% of trade amount
+- **No hidden fees**: All costs shown upfront
+
+---
+
+## Fees
+
+### Aggregator Fee Structure
+
+| Fee Type | Amount | When Charged |
+|----------|--------|--------------|
+| **Protocol Fee** | 0.05% - 0.1% | At trade execution |
+| **Bridge Gas** | ~$1-3 | When crossing chains |
+| **Network Gas** | Varies | Each transaction |
+
+### Fee Example
+
+**Trade**: Buy $1,000 of YES shares on a Polymarket market
+
+- Protocol fee: $1.00 (0.1%)
+- Bridge gas: $2.50 (one-time per chain)
+- Network gas: $0.50
+- **Total cost**: $4.00 (0.4% total fee)
+
+<Tip>
+  Larger trades are more efficient! The fixed bridge cost is spread over a larger amount.
+</Tip>
+
+[View complete fee breakdown →](/traders/fees-and-pricing)
+
+---
+
+## Portfolio Management
+
+### Unified Dashboard
+
+Track all your Aggregator positions in one place:
+
+- **Active positions** across all venues
+- **Realized P&L** from closed positions
+- **Unrealized P&L** on open positions
+- **Position value** at current market prices
+- **Claim status** for resolved markets
+
+### Position Actions
+
+For each position, you can:
+- **Sell early** at current market price
+- **Add to position** (average in)
+- **Claim winnings** after resolution
+- **View details** (trade history, fees paid)
+
+---
+
+## Best Practices
+
+<AccordionGroup>
+  <Accordion title="Compare Before Trading" icon="magnifying-glass">
+    Check the execution venue and price. Sometimes the same market is cheaper on one platform.
+  </Accordion>
+
+  <Accordion title="Consider Bridge Costs" icon="bridge">
+    For small trades (under $100), bridge fees eat into profits. Consider batching trades or using Native CLOB for smaller amounts.
+  </Accordion>
+
+  <Accordion title="Monitor Slippage" icon="gauge-high">
+    On illiquid markets, your trade size might move the price. Set appropriate slippage tolerance.
+  </Accordion>
+
+  <Accordion title="Track Cross-Chain Positions" icon="list-check">
+    Remember your positions exist on different chains. Factor this into your wallet management strategy.
+  </Accordion>
+
+  <Accordion title="Plan Your Exits" icon="door-open">
+    Selling early also incurs bridge costs if you need to move back to your home chain. Plan accordingly.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Liquidity Information
+
+Every market shows real-time liquidity data:
+
+- **Available liquidity** at current price
+- **24-hour volume** across all venues
+- **Orderbook depth** (for markets with orderbooks)
+- **Last trade price** and time
+- **Total TVL** in the market
+
+Use this information to assess if your desired trade size is feasible without excessive slippage.
+
+---
+
+## Comparison: Aggregator vs Direct Venue Trading
+
+| Aspect | Trading on Predifi Aggregator | Trading Directly on Venue |
+|--------|------------------------------|---------------------------|
+| **Setup** | One Predifi account | Separate account per venue |
+| **Price** | Best across all venues | Only that venue's price |
+| **Portfolio** | Unified dashboard | Scattered across platforms |
+| **Bridging** | Automated | Manual bridging required |
+| **Fee** | 0.05-0.1% markup | Venue's native fees |
+| **User Experience** | Consistent | Different per venue |
+
+---
+
+## Getting Started with Aggregator
+
+<CardGroup cols={2}>
+  <Card title="Quickstart Guide" icon="rocket" href="/getting-started/quickstart">
+    Step-by-step first trade walkthrough
+  </Card>
+  <Card title="Trading Guide" icon="book" href="/getting-started/trading-guide">
+    Learn trading strategies
+  </Card>
+  <Card title="View Fees" icon="dollar-sign" href="/traders/fees-and-pricing">
+    Complete fee breakdown
+  </Card>
+  <Card title="Launch App" icon="arrow-up-right-from-square" href="https://app.predifi.com">
+    Start trading now
+  </Card>
+</CardGroup>
+
+---
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="Can I choose which venue my trade executes on?">
+    By default, Predifi routes to the venue with the best price. Advanced users can manually select a specific venue if desired.
+  </Accordion>
+
+  <Accordion title="What happens if the bridge fails?">
+    Bridging is highly reliable (99.9%+ success rate). If it fails, your funds are safely returned to your wallet automatically.
+  </Accordion>
+
+  <Accordion title="Can I withdraw positions to my own wallet?">
+    Yes! Positions are stored as ERC1155 tokens on the venue's chain. You can withdraw them to your wallet and manage them directly if preferred.
+  </Accordion>
+
+  <Accordion title="How long does cross-chain execution take?">
+    Typically 5-10 minutes. You'll see real-time progress updates in your transaction history.
+  </Accordion>
+
+  <Accordion title="Are there minimum trade sizes?">
+    Minimum trade is $10 USDC. For trades under $100, consider Native CLOB to avoid bridge costs eating into profits.
+  </Accordion>
+</AccordionGroup>
+
+[More questions? Check our full FAQ →](/support/faq)

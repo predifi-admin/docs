@@ -1,0 +1,408 @@
+---
+title: "Frequently Asked Questions"
+description: "Common questions about Predifi, prediction markets, trading, and more"
+---
+
+## General Questions
+
+<AccordionGroup>
+  <Accordion title="What is Predifi?" icon="circle-question">
+    Predifi is a prediction market trading platform that lets you trade on real-world events. We aggregate markets from multiple venues (Polymarket, Limitless) and operate our own native prediction market with a professional orderbook.
+  </Accordion>
+
+  <Accordion title="What are prediction markets?" icon="chart-line">
+    Prediction markets let you trade on the outcomes of future events. You buy YES or NO shares that pay $1.00 if your prediction is correct. Prices reflect the market's collective belief about probability.
+  </Accordion>
+
+  <Accordion title="Is Predifi legal?" icon="scale-balanced">
+    Predifi operates as a decentralized protocol on public blockchains. Users are responsible for ensuring compliance with their local laws. We recommend consulting with legal counsel in your jurisdiction.
+  </Accordion>
+
+  <Accordion title="Do I need to create an account?" icon="user">
+    No! Predifi is non-custodial. Just connect your wallet and start trading. No email, password, or KYC required.
+  </Accordion>
+
+  <Accordion title="What blockchains does Predifi support?" icon="link">
+    Predifi is chain-agnostic and can be deployed on any EVM-compatible blockchain. We're currently live on Layer 2 networks for fast, cheap transactions.
+  </Accordion>
+
+  <Accordion title="Is Predifi audited?" icon="shield-check">
+    Our smart contracts undergo rigorous internal testing and are being prepared for external audit. We maintain 90%+ test coverage across all contracts.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Account & Wallet
+
+<AccordionGroup>
+  <Accordion title="What wallets are supported?" icon="wallet">
+    Any EVM-compatible wallet works:
+    - MetaMask (browser extension & mobile)
+    - Coinbase Wallet
+    - WalletConnect (connects 100+ wallets)
+    - Rainbow, Trust Wallet, and more
+  </Accordion>
+
+  <Accordion title="Can I use multiple wallets?" icon="users">
+    Yes! You can connect different wallets, and each will have its own separate positions and balance.
+  </Accordion>
+
+  <Accordion title="What if I lose access to my wallet?" icon="key">
+    Predifi cannot recover lost wallets. ALWAYS back up your seed phrase securely. We recommend:
+    - Writing it down on paper (not digital)
+    - Storing in a safe location
+    - Never sharing with anyone
+  </Accordion>
+
+  <Accordion title="Does Predifi hold my funds?" icon="hand-holding-dollar">
+    No! Predifi is non-custodial. You trade directly from your wallet. We never have access to your private keys or funds.
+  </Accordion>
+
+  <Accordion title="Can I have multiple accounts?" icon="clone">
+    You can use multiple wallets, but each wallet is considered a separate "account" from a portfolio tracking perspective.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Trading & Orders
+
+<AccordionGroup>
+  <Accordion title="What's the minimum trade size?" icon="gauge-min">
+    Minimum trade: $10 USDC. No maximum (subject to available liquidity).
+  </Accordion>
+
+  <Accordion title="Can I cancel an order?" icon="xmark">
+    - **Native CLOB limit orders**: Yes, free to cancel anytime before execution
+    - **Market orders**: No, they execute immediately
+    - **Aggregator orders**: No, they route immediately
+  </Accordion>
+
+  <Accordion title="What's slippage?" icon="arrow-down-up-across-line">
+    Slippage is when the price you get differs from the price you expected. It happens on large orders in illiquid markets. Set slippage tolerance to protect yourself.
+  </Accordion>
+
+  <Accordion title="Can I sell my position before the market resolves?" icon="door-open">
+    Yes! You can sell (exit) your position anytime at the current market price. This lets you lock in profits or cut losses without waiting for resolution.
+  </Accordion>
+
+  <Accordion title="What happens if a market is canceled?" icon="ban">
+    All positions are refunded at cost with no fees charged. This is rare and only happens if the market becomes unresolvable.
+  </Accordion>
+
+  <Accordion title="Can I trade on my phone?" icon="mobile">
+    Yes! Predifi's web app works on mobile browsers. Connect with WalletConnect or mobile wallet browsers. Native mobile apps are planned for the future.
+  </Accordion>
+
+  <Accordion title="Why did my trade take so long?" icon="clock">
+    - **Native CLOB**: Executes in seconds
+    - **Aggregator cross-chain**: Takes 5-10 minutes for bridging
+    - Network congestion can slow transactions
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Fees & Costs
+
+<AccordionGroup>
+  <Accordion title="What fees does Predifi charge?" icon="dollar-sign">
+    **Aggregator**: 0.05-0.1% on trade amount  
+    **Native CLOB**: 2% on winnings only  
+    **Bridge fees**: $1-3 for cross-chain trades  
+    **Gas fees**: ~$0.50-$2 per transaction
+    
+    [View complete fee breakdown →](/traders/fees-and-pricing)
+  </Accordion>
+
+  <Accordion title="Are there deposit or withdrawal fees?" icon="money-bill-transfer">
+    No! Depositing to your wallet and withdrawing from Predifi are both free (only standard gas fees apply).
+  </Accordion>
+
+  <Accordion title="Why are there gas fees?" icon="gas-pump">
+    Gas fees pay blockchain validators to process transactions. These go to the network, not Predifi. Layer 2 networks keep gas under $2 per transaction.
+  </Accordion>
+
+  <Accordion title="Can I pay fees in ETH or other tokens?" icon="coins">
+    Currently, you need USDC for trading and some native tokens (ETH, MATIC, etc.) for gas. Multi-token support is under consideration.
+  </Accordion>
+
+  <Accordion title="Do I pay fees on losing trades?" icon="circle-xmark">
+    **Aggregator**: Yes, 0.1% fee is charged at trade time regardless of outcome  
+    **Native CLOB**: No! Only winners pay the 2% fee on claims
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Winnings & Payouts
+
+<AccordionGroup>
+  <Accordion title="How do I claim my winnings?" icon="hand-holding-dollar">
+    1. Go to your Portfolio
+    2. Find resolved markets where you won
+    3. Click "Claim Winnings"
+    4. Approve the transaction in your wallet
+    5. USDC is sent directly to your wallet
+  </Accordion>
+
+  <Accordion title="How long does it take to receive payouts?" icon="stopwatch">
+    Once you submit a claim transaction, payout is instant (1 block confirmation, ~2 seconds on most L2s).
+  </Accordion>
+
+  <Accordion title="Can winnings be auto-claimed?" icon="robot">
+    Not currently. You must manually claim winning positions. Auto-claim features are under consideration.
+  </Accordion>
+
+  <Accordion title="What if I don't claim my winnings?" icon="hourglass">
+    There's no time limit. Winnings stay claimable indefinitely. However, we recommend claiming within a reasonable time to avoid losing track.
+  </Accordion>
+
+  <Accordion title="Are winnings taxable?" icon="receipt">
+    Likely yes in most jurisdictions, but tax laws vary by country. Consult a tax professional. Predifi does not provide tax advice or issue tax forms.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Market Resolution
+
+<AccordionGroup>
+  <Accordion title="Who decides market outcomes?" icon="gavel">
+    **Native CLOB**: Resolved by Stork Network oracles using verifiable real-world data  
+    **Aggregator**: Resolved by the source venue (Polymarket, Limitless, etc.)
+  </Accordion>
+
+  <Accordion title="What if the resolution is wrong?" icon="triangle-exclamation">
+    Most markets have a dispute period allowing challenges. If disputed, additional validators review the outcome. In rare cases, markets may be voided and refunded.
+  </Accordion>
+
+  <Accordion title="How long after an event does a market resolve?" icon="calendar-check">
+    Typically 1-48 hours after the outcome is known and confirmed by reliable sources. Complex events may take longer for verification.
+  </Accordion>
+
+  <Accordion title="What happens if the event is canceled or postponed?" icon="calendar-xmark">
+    Depends on the market's resolution rules (stated in the market description). Usually:
+    - Postponed: Market end date extends
+    - Canceled: Market may resolve as "No" or be voided/refunded
+  </Accordion>
+
+  <Accordion title="Can Predifi manipulate market outcomes?" icon="hand-point-up">
+    No! Resolutions are determined by decentralized oracles (Stork Network) or external venues. Predifi has no control over outcomes.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Security & Safety
+
+<AccordionGroup>
+  <Accordion title="Is Predifi safe?" icon="shield-halved">
+    Predifi implements industry-leading security:
+    - Non-custodial (you control your funds)
+    - Smart contracts with 90%+ test coverage
+    - Regular security audits (planned)
+    - Bug bounty program
+    - Emergency pause capabilities
+  </Accordion>
+
+  <Accordion title="What if Predifi gets hacked?" icon="user-shield">
+    Our smart contracts include emergency pause mechanisms and are designed with security-first principles. An insurance fund protects against certain risks.
+  </Accordion>
+
+  <Accordion title="Can I lose more than I invest?" icon="circle-xmark">
+    No! Your maximum loss is limited to the amount you trade. There's no leverage or liquidation risk.
+  </Accordion>
+
+  <Accordion title="How do I report a security issue?" icon="bug">
+    Email security@predifi.com immediately. We take security seriously and will respond promptly. Responsible disclosures may be eligible for bug bounties.
+  </Accordion>
+
+  <Accordion title="What info does Predifi collect?" icon="eye">
+    Minimal! We don't require KYC. We may collect:
+    - Wallet addresses (public information)
+    - Trade history (on-chain, public)
+    - Basic usage analytics
+    
+    [Privacy Policy](/support/privacy)
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Liquidity Providers
+
+<AccordionGroup>
+  <Accordion title="Can I earn yield on Predifi?" icon="chart-line-up">
+    Yes! Provide liquidity to earn a share of protocol fees. LPs receive 60% of all fees collected.
+    
+    [Learn more about providing liquidity →](/liquidity/overview)
+  </Accordion>
+
+  <Accordion title="What's the minimum to provide liquidity?" icon="gauge-min">
+    Minimum LP deposit: $100 USDC. No maximum.
+  </Accordion>
+
+  <Accordion title="Can I withdraw my liquidity anytime?" icon="door-open">
+    Liquidity withdrawals depend on utilization. If liquidity is actively being used for trades, you may need to wait for positions to close or partial withdrawal.
+  </Accordion>
+
+  <Accordion title="What are the risks of providing liquidity?" icon="triangle-exclamation">
+    Main risks:
+    - Impermanent loss (if markets move against LP positions)
+    - Smart contract risk
+    - Liquidity lockup during high utilization
+    
+    [Understand LP risks →](/liquidity/returns-and-risks)
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Technical Questions
+
+<AccordionGroup>
+  <Accordion title="What's USDC?" icon="circle-dollar">
+    USDC (USD Coin) is a stablecoin pegged 1:1 to the US Dollar. It's the primary currency for trading on Predifi. 1 USDC = $1.00 (always).
+  </Accordion>
+
+  <Accordion title="What's a Layer 2 blockchain?" icon="layer-group">
+    Layer 2s are blockchains built on top of Ethereum that offer faster, cheaper transactions while maintaining Ethereum's security. Examples: Optimism, Arbitrum, Base, Polygon.
+  </Accordion>
+
+  <Accordion title="What are ERC1155 tokens?" icon="ticket">
+    ERC1155 is a token standard that allows multiple token types in one contract. Predifi uses ERC1155 for position tokens (YES/NO shares).
+  </Accordion>
+
+  <Accordion title="What's EIP-712?" icon="signature">
+    EIP-712 is a standard for typed structured data signing. It lets you sign orders off-chain securely without paying gas for each order placement.
+  </Accordion>
+
+  <Accordion title="Why do I need to 'approve' tokens?" icon="check-double">
+    Token approval lets Predifi's smart contracts access your USDC to execute trades. This is a one-time action per token. It doesn't give Predifi control—only permission to execute approved trades.
+  </Accordion>
+
+  <Accordion title="What's Circle CCTP?" icon="circle">
+    Circle's Cross-Chain Transfer Protocol is a secure bridging mechanism for USDC between blockchains. It burns USDC on the source chain and mints it on the destination chain.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="My transaction failed. What do I do?" icon="exclamation">
+    Common causes:
+    - Insufficient gas in wallet (need ETH/MATIC/etc.)
+    - Slippage tolerance too low (increase it)
+    - Network congestion (try again later)
+    - Insufficient USDC balance
+    
+    Check the error message in your wallet for specifics.
+  </Accordion>
+
+  <Accordion title="My wallet won't connect" icon="plug">
+    Try:
+    - Refresh the page
+    - Clear browser cache
+    - Try a different browser
+    - Update your wallet extension
+    - Check if your wallet supports the network
+  </Accordion>
+
+  <Accordion title="I don't see my position after trading" icon="magnifying-glass">
+    - Check if transaction confirmed (view on block explorer)
+    - For cross-chain trades, wait 5-10 minutes for bridging
+    - Refresh your Portfolio page
+    - Verify you're connected with the correct wallet
+  </Accordion>
+
+  <Accordion title="Prices seem wrong or frozen" icon="gauge-circle-bolt">
+    - Refresh the page to get latest data
+    - Check network status (may be temporary API issue)
+    - Verify you're looking at the right outcome (YES vs NO)
+  </Accordion>
+
+  <Accordion title="Where can I see my transaction history?" icon="clock-rotate-left">
+    Go to Portfolio → History (or Transactions). You'll see all trades, claims, and other actions with transaction hashes and timestamps.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Platform Features
+
+<AccordionGroup>
+  <Accordion title="Can I set price alerts?" icon="bell">
+    Yes! In market detail pages, click the bell icon to set up price alerts. You'll be notified when the market reaches your target price.
+  </Accordion>
+
+  <Accordion title="Is there a mobile app?" icon="mobile-screen">
+    Not yet. Currently, use the mobile-responsive web app in your phone's browser. Native iOS and Android apps are on our roadmap.
+  </Accordion>
+
+  <Accordion title="Can I create my own markets?" icon="plus">
+    Not currently. Market creation is curated by Predifi to ensure quality and resolvability. Community market creation is planned for the future.
+  </Accordion>
+
+  <Accordion title="Do you offer an API for developers?" icon="code">
+    Yes! REST and WebSocket APIs are available. Documentation coming soon. Contact partnerships@predifi.com for early access.
+  </Accordion>
+
+  <Accordion title="Can I share my trades on social media?" icon="share-nodes">
+    Yes! Each position has a share button that generates a link/image for Twitter, Discord, etc.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Community & Support
+
+<AccordionGroup>
+  <Accordion title="How do I get help?" icon="life-ring">
+    - **Discord**: [discord.gg/predifi](https://discord.gg/predifi) - Community support, usually fastest
+    - **Email**: support@predifi.com - We respond within 24 hours
+    - **Twitter**: [@predifi](https://twitter.com/predifi) - Updates and announcements
+  </Accordion>
+
+  <Accordion title="Can I suggest new features?" icon="lightbulb">
+    Absolutely! Join our Discord and share ideas in the #feature-requests channel. We actively consider community feedback for our roadmap.
+  </Accordion>
+
+  <Accordion title="Is there a referral program?" icon="user-plus">
+    Not yet, but it's coming! Follow us on Twitter or join Discord for announcements.
+  </Accordion>
+
+  <Accordion title="How can I stay updated?" icon="newspaper">
+    - Twitter: [@predifi](https://twitter.com/predifi)
+    - Discord: [discord.gg/predifi](https://discord.gg/predifi)
+    - Blog: blog.predifi.com
+    - Changelog: [docs.predifi.com/changelog](/changelog)
+  </Accordion>
+
+  <Accordion title="Are you hiring?" icon="briefcase">
+    Check careers.predifi.com for open positions. We're always looking for talented builders!
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Still Have Questions?
+
+<CardGroup cols={3}>
+  <Card title="Join Discord" icon="discord" href="https://discord.gg/predifi">
+    Get answers from the community
+  </Card>
+  <Card title="Email Support" icon="envelope" href="mailto:support@predifi.com">
+    support@predifi.com
+  </Card>
+  <Card title="Read Docs" icon="book" href="/">
+    Browse our complete documentation
+  </Card>
+</CardGroup>
+
+<Info>
+  **Can't find your answer?** Ask in our [Discord community](https://discord.gg/predifi) or email support@predifi.com. We're here to help!
+</Info>
