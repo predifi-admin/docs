@@ -1,0 +1,121 @@
+---
+title: "Placing Trades via API"
+description: "Programmatic trading guide"
+---
+
+## Trading via API
+
+Place orders programmatically using Predifi's Trading API.
+
+---
+
+## Authentication
+
+```typescript
+import { PredifiClient } from '@predifi/sdk';
+
+const client = new PredifiClient({
+  apiKey: process.env.PREDIFI_API_KEY,
+  apiSecret: process.env.PREDIFI_API_SECRET
+});
+```
+
+---
+
+## Market Orders
+
+Execute immediately at current price:
+
+```typescript
+const order = await client.trading.placeOrder({
+  marketId: 'btc-100k-jan15',
+  side: 'YES', // or 'NO'
+  amount: 100, // USDC
+  orderType: 'market'
+});
+
+console.log(order.id, order.fillPrice, order.shares);
+```
+
+---
+
+## Limit Orders
+
+Execute at specific price:
+
+```typescript
+const order = await client.trading.placeOrder({
+  marketId: 'btc-100k-jan15',
+  side: 'YES',
+  amount: 100,
+  orderType: 'limit',
+  limitPrice: 0.65 // Only buy at $0.65 or better
+});
+```
+
+---
+
+## Cancel Orders
+
+```typescript
+await client.trading.cancelOrder(orderId);
+
+// Cancel all orders for a market
+await client.trading.cancelAllOrders({ marketId: 'btc-100k-jan15' });
+```
+
+---
+
+## Check Order Status
+
+```typescript
+const order = await client.trading.getOrder(orderId);
+console.log(order.status); // 'pending', 'filled', 'cancelled'
+```
+
+---
+
+## Example: Arbitrage Bot
+
+```typescript
+async function arbitrageBot() {
+  // Get prices from multiple venues
+  const polymarketPrice = await getPolymarketPrice('btc-100k');
+  const limitlessPrice = await getLimitlessPrice('btc-100k');
+  
+  // If price difference > 2%
+  if (Math.abs(polymarketPrice - limitlessPrice) > 0.02) {
+    // Buy low venue
+    if (polymarketPrice < limitlessPrice) {
+      await client.trading.placeOrder({
+        marketId: 'btc-100k-polymarket',
+        side: 'YES',
+        amount: 1000,
+        orderType: 'market'
+      });
+      
+      // Sell high venue
+      await client.trading.placeOrder({
+        marketId: 'btc-100k-limitless',
+        side: 'NO',
+        amount: 1000,
+        orderType: 'market'
+      });
+    }
+  }
+}
+```
+
+---
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="API Reference" icon="book" href="/api-reference/trading">
+    Complete trading API docs
+  </Card>
+  
+  <Card title="Portfolio Tracking" icon="chart-pie" href="/developers/portfolio-tracking">
+    Monitor your trades
+  </Card>
+</CardGroup>

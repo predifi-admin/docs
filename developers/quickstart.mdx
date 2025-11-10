@@ -1,0 +1,113 @@
+---
+title: "Developer Quickstart"
+description: "Get started with Predifi API in 5 minutes"
+---
+
+## Quick Start
+
+Build your first Predifi integration in minutes.
+
+<Steps>
+  <Step title="Get API Key">
+    Sign up at [app.predifi.com/developers](https://app.predifi.com/developers)
+  </Step>
+  
+  <Step title="Install SDK">
+    ```bash
+    npm install @predifi/sdk
+    # or
+    pip install predifi-python
+    ```
+  </Step>
+  
+  <Step title="Fetch Markets">
+    ```typescript
+    import { PredifiClient } from '@predifi/sdk';
+    
+    const client = new PredifiClient({ apiKey: 'your-api-key' });
+    const markets = await client.markets.list({ category: 'crypto' });
+    console.log(markets);
+    ```
+  </Step>
+  
+  <Step title="Place a Trade">
+    ```typescript
+    const order = await client.trading.placeOrder({
+      marketId: 'btc-100k-jan15',
+      side: 'YES',
+      amount: 100, // USDC
+      orderType: 'market'
+    });
+    ```
+  </Step>
+</Steps>
+
+---
+
+## Authentication
+
+```typescript
+const client = new PredifiClient({
+  apiKey: 'your-api-key',
+  apiSecret: 'your-api-secret'
+});
+```
+
+Get API credentials: [app.predifi.com/developers](https://app.predifi.com/developers)
+
+---
+
+## Basic Examples
+
+### Fetch All Markets
+
+```typescript
+const markets = await client.markets.list();
+```
+
+### Get Market Details
+
+```typescript
+const market = await client.markets.get('btc-100k-jan15');
+console.log(market.yesPrice, market.noPrice);
+```
+
+### Place Market Order
+
+```typescript
+const order = await client.trading.placeOrder({
+  marketId: 'btc-100k-jan15',
+  side: 'YES',
+  amount: 100,
+  orderType: 'market'
+});
+```
+
+### Check Portfolio
+
+```typescript
+const portfolio = await client.portfolio.getPositions();
+console.log(portfolio.totalValue, portfolio.unrealizedPnL);
+```
+
+---
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Place Trades" icon="chart-line" href="/developers/placing-trades">
+    Advanced order types
+  </Card>
+  
+  <Card title="Track Portfolio" icon="wallet" href="/developers/portfolio-tracking">
+    Monitor positions
+  </Card>
+  
+  <Card title="Market Data" icon="database" href="/developers/market-data">
+    Real-time data feeds
+  </Card>
+  
+  <Card title="Full API Docs" icon="book" href="/api-reference/getting-started">
+    Complete reference
+  </Card>
+</CardGroup>

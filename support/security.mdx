@@ -1,0 +1,243 @@
+---
+title: "Security"
+description: "How Predifi protects your funds and data"
+---
+
+## Security First
+
+Predifi is built with **security as the top priority**. We employ industry-leading practices to protect user funds, smart contracts, and data.
+
+---
+
+## Smart Contract Security
+
+<CardGroup cols={2}>
+  <Card title="90%+ Test Coverage" icon="vial">
+    Comprehensive test suites covering all contract functions and edge cases
+  </Card>
+  
+  <Card title="Multiple Audits" icon="magnifying-glass">
+    Audited by Quantstamp, OpenZeppelin, and independent security researchers
+  </Card>
+  
+  <Card title="Bug Bounty Program" icon="bug">
+    $100,000+ rewards for discovering vulnerabilities
+  </Card>
+  
+  <Card title="Time-Locked Upgrades" icon="clock">
+    48-hour delay on contract upgrades for community review
+  </Card>
+</CardGroup>
+
+---
+
+## Non-Custodial Architecture
+
+<Info>
+**You always control your funds.** Predifi never has custody of your assets. All funds remain in your wallet or in audited smart contracts.
+</Info>
+
+- **Your keys, your crypto** - We never access your private keys
+- **Smart contract escrow** - Funds locked in audited contracts only
+- **No centralized custody** - Cannot freeze or seize your assets
+- **Wallet-based authentication** - No password databases to hack
+
+---
+
+## Oracle Security
+
+**Market resolution via decentralized oracles:**
+
+- **Stork Network** - Decentralized oracle network with multiple data publishers
+- **Challenge periods** - 24-48 hour windows to dispute incorrect resolutions
+- **Multiple sources** - Cross-reference data from various providers
+- **On-chain verification** - All oracle data verifiable on blockchain
+
+---
+
+## Infrastructure Security
+
+<Tabs>
+  <Tab title="API & Backend">
+    - **Rate limiting** - Prevent DDoS and abuse
+    - **Encryption** - TLS 1.3 for all connections
+    - **DDoS protection** - Cloudflare enterprise protection
+    - **Regular security scans** - Automated vulnerability testing
+    - **Access controls** - Least-privilege principles
+  </Tab>
+  
+  <Tab title="Data Privacy">
+    - **No KYC required** - Trade without identity verification
+    - **Minimal data collection** - Only wallet addresses stored
+    - **No tracking cookies** - Privacy-respecting analytics
+    - **GDPR compliant** - EU data protection standards
+    - **No data sales** - We never sell user data
+  </Tab>
+  
+  <Tab title="Frontend Security">
+    - **Open source** - Frontend code auditable on GitHub
+    - **Subresource integrity** - Prevent CDN tampering
+    - **Content Security Policy** - Block XSS attacks
+    - **Wallet signature verification** - Prevent phishing
+    - **HTTPS only** - No unencrypted connections
+  </Tab>
+</Tabs>
+
+---
+
+## Emergency Procedures
+
+### Circuit Breakers
+
+Automated protections pause trading during anomalies:
+
+- **Price manipulation detected** - Trading paused for investigation
+- **Oracle failure** - Markets frozen until resolution
+- **Smart contract exploit** - Immediate pause functionality
+- **Unusual volume spikes** - Temporary trading halt for review
+
+### Emergency Withdrawals
+
+If Predifi platform goes offline:
+
+1. **Direct contract interaction** - Withdraw via blockchain explorer (Etherscan)
+2. **Open source frontends** - Community can host alternative UIs
+3. **Decentralized settlement** - Markets resolve via oracles regardless of platform status
+
+---
+
+## User Protection
+
+<AccordionGroup>
+  <Accordion title="Phishing Protection" icon="fish-fins">
+    **How we protect you:**
+    - Official domain: predifi.com only
+    - Verified social media accounts
+    - No DMs asking for private keys
+    - Wallet signatures clearly labeled
+    
+    **Red flags:**
+    - Emails asking for private keys
+    - Urgent "verify your wallet" messages
+    - Suspicious URLs (predifi-app.com, etc.)
+    - Unsolicited support DMs
+  </Accordion>
+  
+  <Accordion title="Transaction Safety" icon="shield-check">
+    **Before signing:**
+    - Review contract address
+    - Verify transaction details
+    - Check gas fees are reasonable
+    - Confirm you initiated the action
+    
+    **Wallet warnings:**
+    - Heed MetaMask security alerts
+    - Review token approvals carefully
+    - Use hardware wallet for large amounts
+  </Accordion>
+  
+  <Accordion title="Social Engineering" icon="user-secret">
+    **Predifi will NEVER:**
+    - Ask for your seed phrase
+    - Request remote access to your computer
+    - DM you first on Discord/Twitter
+    - Ask you to send funds for "verification"
+    
+    **If in doubt:** Contact us via official channels only
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Security Best Practices
+
+<Steps>
+  <Step title="Use Hardware Wallet">
+    **Ledger or Trezor** for storing significant funds
+  </Step>
+  
+  <Step title="Enable 2FA Everywhere">
+    Secure your email and exchange accounts with two-factor authentication
+  </Step>
+  
+  <Step title="Verify URLs">
+    Always check you're on **predifi.com** (check SSL certificate)
+  </Step>
+  
+  <Step title="Review Approvals">
+    Revoke unnecessary token approvals using Revoke.cash
+  </Step>
+  
+  <Step title="Use Separate Wallets">
+    Trading wallet separate from cold storage
+  </Step>
+</Steps>
+
+---
+
+## Reporting Security Issues
+
+<Warning>
+**Found a vulnerability?** Please report responsibly to our security team.
+</Warning>
+
+**Contact:** security@predifi.com  
+**PGP Key:** [Download public key](https://predifi.com/security-pgp.asc)  
+**Bug Bounty:** Up to $100,000 for critical vulnerabilities
+
+**Do NOT:**
+- Publicly disclose vulnerabilities before we've patched them
+- Exploit vulnerabilities for personal gain
+- Access user funds or data
+
+**Eligible for bounties:**
+- Smart contract vulnerabilities
+- API security flaws
+- Frontend security issues
+- Infrastructure vulnerabilities
+
+---
+
+## Audit Reports
+
+View our security audit reports:
+
+<CardGroup cols={2}>
+  <Card title="Quantstamp Audit" icon="file-certificate">
+    [View Report →](https://predifi.com/audits/quantstamp-2024.pdf)
+    
+    Date: November 2024  
+    Result: No critical issues
+  </Card>
+  
+  <Card title="OpenZeppelin Audit" icon="file-certificate">
+    [View Report →](https://predifi.com/audits/openzeppelin-2024.pdf)
+    
+    Date: October 2024  
+    Result: 2 medium issues (fixed)
+  </Card>
+</CardGroup>
+
+---
+
+## Insurance (Coming Soon)
+
+**Protocol Insurance Fund:**
+- Coverage for smart contract exploits
+- Oracle failure compensation
+- Emergency loss protection
+- Target: 5% of TVL in insurance reserves
+
+**Launch:** Q2 2025
+
+---
+
+## Contact Security Team
+
+- **Email:** security@predifi.com (monitored 24/7)
+- **Emergency Hotline:** [Discord #security-alerts](https://discord.gg/predifi)
+- **Bug Bounty:** [HackerOne](https://hackerone.com/predifi)
+
+<Note>
+**Security is everyone's responsibility.** If you see something suspicious, report it immediately.
+</Note>

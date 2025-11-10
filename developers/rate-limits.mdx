@@ -1,0 +1,155 @@
+---
+title: "Rate Limits"
+description: "API rate limits and best practices"
+---
+
+## Rate Limits
+
+Predifi API has rate limits to ensure fair usage and system stability.
+
+---
+
+## Current Limits
+
+| Endpoint Type | Rate Limit | Window |
+|---------------|------------|--------|
+| **Market Data** | 100 requests | per minute |
+| **Trading** | 50 requests | per minute |
+| **Portfolio** | 100 requests | per minute |
+| **WebSocket** | 10 connections | concurrent |
+
+---
+
+## Response Headers
+
+Rate limit info returned in headers:
+
+```
+X-RateLimit-Limit: 100
+X-RateLimit-Remaining: 95
+X-RateLimit-Reset: 1704067200
+```
+
+---
+
+## Handling Rate Limits
+
+### Exponential Backoff
+
+```typescript
+async function fetchWithBackoff(fn, maxRetries = 3) {
+  for (let i = 0; i < maxRetries; i++) {
+    try {
+      return await fn();
+    } catch (error) {
+      if (error.status === 429) {
+        const wait = Math.pow(2, i) * 1000; // 1s, 2s, 4s
+        await sleep(wait);
+      } else {
+        throw error;
+      }
+    }
+  }
+}
+```
+
+### Batch Requests
+
+Instead of:
+```typescript
+for (const marketId of markets) {
+  await client.markets.get(marketId); // 100 requests
+}
+```
+
+Do this:
+```typescript
+const markets = await client.markets.getBatch(marketIds); // 1 request
+```
+
+---
+
+## WebSocket Best Practices
+
+- **Limit subscriptions:** Max 10 concurrent streams
+- **Use wildcards:** Subscribe to `market:*` instead of individual markets
+- **Implement reconnection:** Handle disconnects gracefully
+- **Batch updates:** Don't send updates on every tick
+
+---
+
+## Enterprise Plans
+
+Need higher limits? Contact [partnerships@predifi.com](mailto:partnerships@predifi.com) for enterprise API access with:
+
+- Higher rate limits (1000+ req/min)
+- Dedicated infrastructure
+- Priority support
+- SLA guarantees
+
+---
+
+## Monitoring Usage
+
+Track your API usage:
+
+```typescript
+const usage = await client.account.getUsage();
+
+console.log({
+  requestsToday: usage.requestsToday,
+  limitDaily: usage.limitDaily,
+  resetTime: usage.resetTime
+});
+```
+
+---
+
+## Best Practices
+
+<AccordionGroup>
+  <Accordion title="Cache Aggressively" icon="database">
+    - Cache market data for 1-5 seconds
+    - Don't re-fetch on every page load
+    - Use ETags for conditional requests
+  </Accordion>
+  
+  <Accordion title="Use WebSockets for Real-Time" icon="plug">
+    - Switch to WebSockets for live data
+    - Reduces API calls by 90%+
+    - Lower latency
+  </Accordion>
+  
+  <Accordion title="Batch Operations" icon="layer-group">
+    - Use batch endpoints when available
+    - Combine multiple requests into one
+    - Reduces rate limit consumption
+  </Accordion>
+  
+  <Accordion title="Implement Retries" icon="rotate">
+    - Retry 429 errors with backoff
+    - Implement circuit breakers
+    - Log rate limit hits
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Error Codes
+
+| Code | Meaning | Action |
+|------|---------|--------|
+| `429` | Rate limit exceeded | Retry after delay |
+| `401` | Invalid API key | Check credentials |
+| `403` | Forbidden | Check API permissions |
+| `500` | Server error | Retry or contact support |
+
+---
+
+## Contact
+
+Need help with rate limits?
+
+- **Email:** dev@predifi.com
+- **Discord:** #developer-support
+- **Enterprise:** partnerships@predifi.com

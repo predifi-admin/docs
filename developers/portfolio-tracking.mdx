@@ -1,0 +1,82 @@
+---
+title: "Portfolio Tracking"
+description: "Monitor positions and P&L programmatically"
+---
+
+## Portfolio API
+
+Track all your positions, P&L, and performance metrics via API.
+
+---
+
+## Get All Positions
+
+```typescript
+const portfolio = await client.portfolio.getPositions();
+
+console.log(portfolio.positions);
+// [
+//   {
+//     marketId: 'btc-100k-jan15',
+//     side: 'YES',
+//     shares: 150,
+//     entryPrice: 0.65,
+//     currentPrice: 0.70,
+//     unrealizedPnL: 7.50,
+//     value: 105
+//   },
+//   ...
+// ]
+```
+
+---
+
+## Get Single Position
+
+```typescript
+const position = await client.portfolio.getPosition('btc-100k-jan15');
+console.log(position.unrealizedPnL);
+```
+
+---
+
+## Portfolio Summary
+
+```typescript
+const summary = await client.portfolio.getSummary();
+
+console.log({
+  totalValue: summary.totalValue,
+  unrealizedPnL: summary.unrealizedPnL,
+  realizedPnL: summary.realizedPnL,
+  roi: summary.roi
+});
+```
+
+---
+
+## Example: Portfolio Dashboard
+
+```typescript
+async function displayPortfolio() {
+  const portfolio = await client.portfolio.getPositions();
+  
+  console.table(portfolio.positions.map(p => ({
+    Market: p.marketName,
+    Side: p.side,
+    Shares: p.shares,
+    Entry: `$${p.entryPrice}`,
+    Current: `$${p.currentPrice}`,
+    PnL: `$${p.unrealizedPnL.toFixed(2)}`,
+    ROI: `${((p.unrealizedPnL / (p.shares * p.entryPrice)) * 100).toFixed(1)}%`
+  })));
+}
+```
+
+---
+
+## Next Steps
+
+<Card title="Full Portfolio API" icon="book" href="/api-reference/portfolio">
+  Complete API reference
+</Card>

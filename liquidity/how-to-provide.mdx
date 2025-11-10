@@ -1,0 +1,477 @@
+---
+title: "How to Provide Liquidity"
+description: "Step-by-step guide to depositing USDC into Predifi LP vaults"
+---
+
+## Quick Start
+
+<Steps>
+  <Step title="Connect Wallet">
+    Connect your Web3 wallet to Predifi
+  </Step>
+  
+  <Step title="Get USDC">
+    Ensure you have USDC on your preferred chain
+  </Step>
+  
+  <Step title="Choose Vault">
+    Select an LP vault based on your strategy
+  </Step>
+  
+  <Step title="Deposit">
+    Deposit USDC and receive vault tokens
+  </Step>
+  
+  <Step title="Earn">
+    Start earning trading fees immediately
+  </Step>
+</Steps>
+
+---
+
+## Detailed Instructions
+
+### 1. Connect Your Wallet
+
+<Tabs>
+  <Tab title="MetaMask">
+    1. Visit [app.predifi.com](https://app.predifi.com)
+    2. Click **Connect Wallet**
+    3. Select **MetaMask**
+    4. Approve connection in MetaMask popup
+    5. Select network (Arbitrum, Optimism, Base, or Polygon)
+  </Tab>
+  
+  <Tab title="WalletConnect">
+    1. Click **Connect Wallet**
+    2. Select **WalletConnect**
+    3. Scan QR code with mobile wallet
+    4. Approve connection
+  </Tab>
+  
+  <Tab title="Coinbase Wallet">
+    1. Click **Connect Wallet**
+    2. Select **Coinbase Wallet**
+    3. Approve in Coinbase Wallet extension/app
+  </Tab>
+</Tabs>
+
+### 2. Get USDC
+
+<Tabs>
+  <Tab title="Already Have USDC">
+    If you have USDC on the correct chain, skip to step 3.
+  </Tab>
+  
+  <Tab title="Bridge from Another Chain">
+    Use Predifi's built-in CCTP bridge:
+    1. Go to **Bridge** tab
+    2. Select source chain and destination chain
+    3. Enter USDC amount
+    4. Confirm transaction (2-3 minutes)
+    
+    [Learn more about bridging →](/technology/cross-chain-bridging)
+  </Tab>
+  
+  <Tab title="Buy USDC">
+    Purchase USDC through:
+    - **Coinbase, Binance, Kraken** - Buy and withdraw to wallet
+    - **On-ramp partners** - Use credit card through Predifi
+    - **DEX swap** - Swap ETH/other tokens for USDC on Uniswap
+    
+    [See funding guide →](/getting-started/funding)
+  </Tab>
+</Tabs>
+
+### 3. Navigate to LP Vaults
+
+<Steps>
+  <Step title="Go to Liquidity Tab">
+    Click **Liquidity** in main navigation
+  </Step>
+  
+  <Step title="View Available Vaults">
+    See all LP vaults with APY, TVL, and risk ratings
+  </Step>
+  
+  <Step title="Compare Vaults">
+    Review vault strategies, historical performance, and fees
+  </Step>
+</Steps>
+
+### 4. Choose Your Vault
+
+Consider these factors:
+
+<CardGroup cols={2}>
+  <Card title="Expected APY" icon="percent">
+    Higher APY = higher risk
+    
+    Conservative: 6-8%  
+    Moderate: 10-15%  
+    Aggressive: 15-25%
+  </Card>
+  
+  <Card title="Market Focus" icon="bullseye">
+    Universal: All markets  
+    Crypto: Crypto markets  
+    Sports: Sports betting  
+    Politics: Elections
+  </Card>
+  
+  <Card title="TVL & Liquidity" icon="vault">
+    Higher TVL = more liquidity  
+    Lower TVL = potentially higher APY
+  </Card>
+  
+  <Card title="Risk Rating" icon="gauge">
+    Low: Diversified, stable  
+    Medium: Focused exposure  
+    High: Volatile markets
+  </Card>
+</CardGroup>
+
+### 5. Deposit USDC
+
+<Steps>
+  <Step title="Click 'Deposit' on Vault">
+    Select vault and click the **Deposit** button
+  </Step>
+  
+  <Step title="Enter Amount">
+    Input USDC amount to deposit
+    
+    **Minimum:** $100  
+    **Maximum:** No limit
+  </Step>
+  
+  <Step title="Review Details">
+    Verify:
+    - Vault strategy
+    - Deposit amount
+    - Estimated vault tokens received
+    - Gas fee (~$0.15-0.50)
+  </Step>
+  
+  <Step title="Approve USDC (First Time)">
+    Approve Predifi vault to spend your USDC (one-time approval)
+    
+    <Info>**Two transactions needed first time:**  
+    1. Approve USDC spending  
+    2. Deposit USDC into vault</Info>
+  </Step>
+  
+  <Step title="Confirm Deposit">
+    Sign the deposit transaction in your wallet
+  </Step>
+  
+  <Step title="Receive Vault Tokens">
+    Vault tokens (e.g., pdUSDC) appear in wallet within 1-2 minutes
+  </Step>
+</Steps>
+
+### 6. Verify Deposit
+
+<Tabs>
+  <Tab title="In Predifi App">
+    1. Go to **Portfolio → Liquidity Positions**
+    2. See your vault balance and current value
+    3. Track real-time APY and earnings
+  </Tab>
+  
+  <Tab title="In Your Wallet">
+    1. Add vault token to wallet (e.g., pdUSDC-Universal)
+    2. Token balance represents your share of vault
+    3. Value increases as fees accumulate
+  </Tab>
+  
+  <Tab title="On Blockchain">
+    1. View transaction on block explorer
+    2. Verify vault token balance in your address
+    3. Check vault contract for total deposits
+  </Tab>
+</Tabs>
+
+---
+
+## Adding More Liquidity
+
+To increase your position:
+
+<Steps>
+  <Step title="Go to Your Position">
+    Navigate to **Portfolio → Liquidity Positions**
+  </Step>
+  
+  <Step title="Click 'Add More'">
+    Select the vault you want to add to
+  </Step>
+  
+  <Step title="Enter Additional Amount">
+    Specify more USDC to deposit
+  </Step>
+  
+  <Step title="Confirm">
+    Sign transaction (no approval needed if previously approved)
+  </Step>
+</Steps>
+
+<Info>
+**Pro Tip:** Dollar-cost average (DCA) into vaults by adding small amounts regularly instead of one large deposit.
+</Info>
+
+---
+
+## Withdrawing Liquidity
+
+### Instant Withdrawal (When Available)
+
+<Steps>
+  <Step title="Go to Your Position">
+    Navigate to **Portfolio → Liquidity Positions**
+  </Step>
+  
+  <Step title="Click 'Withdraw'">
+    Select amount to withdraw (partial or full)
+  </Step>
+  
+  <Step title="Confirm">
+    Sign transaction
+  </Step>
+  
+  <Step title="Receive USDC">
+    USDC (principal + fees) sent to wallet instantly
+  </Step>
+</Steps>
+
+### Queued Withdrawal (High Utilization)
+
+If vault has high utilization (>90% capital deployed):
+
+<Steps>
+  <Step title="Request Withdrawal">
+    Click **Withdraw** and enter amount
+  </Step>
+  
+  <Step title="Join Withdrawal Queue">
+    Your request is added to the queue
+  </Step>
+  
+  <Step title="Wait for Liquidity">
+    As markets resolve or new deposits come in, queue processes
+  </Step>
+  
+  <Step title="Auto-Withdrawal">
+    When your turn arrives, USDC automatically sent to wallet
+  </Step>
+</Steps>
+
+<Warning>
+**Queue Time:** Typically 1-7 days during high utilization. Most withdrawals are instant.
+</Warning>
+
+---
+
+## Fees
+
+<Tabs>
+  <Tab title="Deposit Fees">
+    **0% deposit fee**
+    
+    ✅ No fees to add liquidity  
+    Only pay network gas (~$0.15-0.50)
+  </Tab>
+  
+  <Tab title="Withdrawal Fees">
+    **0% withdrawal fee**
+    
+    ✅ No fees to remove liquidity  
+    Only pay network gas (~$0.15-0.50)
+  </Tab>
+  
+  <Tab title="Performance Fees">
+    **0% performance fee**
+    
+    ✅ Keep 100% of your fee earnings  
+    No management or performance fees
+  </Tab>
+  
+  <Tab title="Gas Costs">
+    Network transaction costs:
+    
+    | Network | Deposit | Withdraw |
+    |---------|---------|----------|
+    | Arbitrum | $0.15-0.30 | $0.15-0.30 |
+    | Optimism | $0.20-0.40 | $0.20-0.40 |
+    | Base | $0.10-0.25 | $0.10-0.25 |
+    | Polygon | $0.05-0.15 | $0.05-0.15 |
+  </Tab>
+</Tabs>
+
+---
+
+## Monitoring Your Position
+
+### Dashboard Metrics
+
+Track your LP performance:
+
+<CardGroup cols={2}>
+  <Card title="Current Balance" icon="wallet">
+    Total value of your vault position (principal + fees)
+  </Card>
+  
+  <Card title="Unrealized Earnings" icon="chart-line">
+    Fees earned but not yet withdrawn
+  </Card>
+  
+  <Card title="APY (Real-Time)" icon="percent">
+    Current annualized yield based on recent performance
+  </Card>
+  
+  <Card title="Share of Vault" icon="pie-chart">
+    Your % ownership of total vault
+  </Card>
+  
+  <Card title="Time in Vault" icon="clock">
+    Days since initial deposit
+  </Card>
+  
+  <Card title="ROI" icon="trophy">
+    Total return on investment (%)
+  </Card>
+</CardGroup>
+
+### Performance History
+
+View historical data:
+- Daily/weekly/monthly APY
+- Fee income over time
+- Vault value changes
+- Deposits and withdrawals
+- Comparison to other vaults
+
+---
+
+## Best Practices
+
+<AccordionGroup>
+  <Accordion title="Start Small" icon="seedling">
+    Begin with a small deposit ($100-500) to understand how vaults work before committing significant capital.
+  </Accordion>
+  
+  <Accordion title="Diversify Across Vaults" icon="chart-scatter">
+    Don't put all capital in one vault. Spread across 2-3 different strategies to reduce risk.
+  </Accordion>
+  
+  <Accordion title="Monitor Regularly" icon="magnifying-glass-chart">
+    Check vault performance weekly. If APY drops significantly or risk increases, consider rebalancing.
+  </Accordion>
+  
+  <Accordion title="Compound Earnings" icon="rotate">
+    Let earnings compound by leaving them in the vault instead of withdrawing frequently.
+  </Accordion>
+  
+  <Accordion title="Understand the Risks" icon="triangle-exclamation">
+    Read [Returns and Risks](/liquidity/returns-and-risks) to fully understand what you're signing up for.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Troubleshooting
+
+<Tabs>
+  <Tab title="Transaction Failing">
+    **Common causes:**
+    - Insufficient USDC balance
+    - Insufficient gas (need ETH/MATIC/BNB for gas)
+    - Below minimum deposit ($100)
+    - Network congestion (increase gas)
+    
+    **Solutions:**
+    - Verify USDC balance
+    - Add gas token to wallet
+    - Wait 10 min and retry
+    - Increase gas price
+  </Tab>
+  
+  <Tab title="Not Receiving Vault Tokens">
+    **Check:**
+    - Transaction confirmed on blockchain explorer
+    - Correct wallet connected
+    - Vault token added to wallet
+    - Refresh Predifi app
+    
+    If still missing after 5 minutes, contact support with transaction hash.
+  </Tab>
+  
+  <Tab title="Can't Withdraw">
+    **Possible reasons:**
+    - Vault at high utilization (join queue)
+    - Pending withdrawal already in queue
+    - Network congestion
+    - Insufficient gas
+    
+    **Try:**
+    - Request queued withdrawal
+    - Wait for vault rebalancing
+    - Increase gas price
+  </Tab>
+  
+  <Tab title="APY Seems Wrong">
+    **Remember:**
+    - APY is annualized from last 7 days
+    - APY fluctuates based on trading volume
+    - Shown APY is gross (before your specific entry/exit)
+    - Your actual return may differ
+    
+    Check vault details page for methodology.
+  </Tab>
+</Tabs>
+
+---
+
+## Advanced: Direct Smart Contract Interaction
+
+For advanced users, interact directly with vault contracts:
+
+```solidity
+// ERC-4626 standard methods
+vault.deposit(uint256 assets, address receiver)
+vault.withdraw(uint256 assets, address receiver, address owner)
+vault.redeem(uint256 shares, address receiver, address owner)
+
+// View functions
+vault.totalAssets() // Total USDC in vault
+vault.convertToAssets(shares) // Your USDC value
+vault.previewDeposit(assets) // Shares you'd receive
+```
+
+[View contract on GitHub →](https://github.com/predifi-com/contracts/blob/main/src/vaults/LPVault.sol)
+
+---
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Returns and Risks" icon="balance-scale" href="/liquidity/returns-and-risks">
+    Understand LP economics in detail
+  </Card>
+  
+  <Card title="Vault Contracts" icon="code" href="https://github.com/predifi-com/contracts">
+    Review audited smart contracts
+  </Card>
+  
+  <Card title="LP Community" icon="discord" href="https://discord.gg/predifi">
+    Join other liquidity providers
+  </Card>
+  
+  <Card title="FAQ" icon="circle-question" href="/support/faq">
+    Common LP questions answered
+  </Card>
+</CardGroup>
+
+<Note>
+Need help? Contact LP support at [lp@predifi.com](mailto:lp@predifi.com) or chat with us on [Discord](https://discord.gg/predifi).
+</Note>

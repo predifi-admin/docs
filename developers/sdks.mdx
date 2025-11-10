@@ -1,0 +1,99 @@
+---
+title: "SDKs"
+description: "Official Predifi SDKs for multiple languages"
+---
+
+## Official SDKs
+
+Predifi provides official SDKs for popular programming languages.
+
+---
+
+## TypeScript / JavaScript
+
+```bash
+npm install @predifi/sdk
+```
+
+**GitHub:** [github.com/predifi-com/predifi-ts](https://github.com/predifi-com/predifi-ts)
+
+**Example:**
+```typescript
+import { PredifiClient } from '@predifi/sdk';
+
+const client = new PredifiClient({ apiKey: 'your-key' });
+const markets = await client.markets.list();
+```
+
+---
+
+## Python
+
+```bash
+pip install predifi-python
+```
+
+**GitHub:** [github.com/predifi-com/predifi-python](https://github.com/predifi-com/predifi-python)
+
+**Example:**
+```python
+from predifi import PredifiClient
+
+client = PredifiClient(api_key='your-key')
+markets = client.markets.list()
+```
+
+---
+
+## Rust (Coming Soon)
+
+```bash
+cargo add predifi
+```
+
+**Status:** In development. Expected Q2 2025.
+
+---
+
+## Go (Coming Soon)
+
+```bash
+go get github.com/predifi-com/predifi-go
+```
+
+**Status:** In development. Expected Q3 2025.
+
+---
+
+## Features
+
+All SDKs support:
+
+- ✅ Market data fetching
+- ✅ Order placement (market & limit)
+- ✅ Portfolio tracking
+- ✅ WebSocket subscriptions
+- ✅ Type-safe interfaces
+- ✅ Comprehensive error handling
+
+---
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Quickstart" icon="rocket" href="/developers/quickstart">
+    Get started with SDKs
+  </Card>
+  
+  <Card title="Code Examples" icon="code" href="/developers/code-examples">
+    Sample implementations
+  </Card>
+  
+  <Card title="API Reference" icon="book" href="/api-reference/getting-started">
+    REST API documentation
+  </Card>
+  
+  <Card title="GitHub" icon="github" href="https://github.com/predifi-com">
+    View source code
+  </Card>
+</CardGroup>

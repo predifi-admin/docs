@@ -1,0 +1,487 @@
+---
+title: "Managing Your Positions"
+description: "Track, manage, and optimize your open prediction market positions"
+---
+
+## Position Management
+
+Once you've placed trades, managing your positions effectively is key to maximizing profits and minimizing losses. Predifi provides comprehensive tools to monitor and adjust your positions across all venues.
+
+---
+
+## Viewing Your Positions
+
+### Portfolio Dashboard
+
+Access your complete portfolio from the Predifi dashboard:
+
+<Steps>
+  <Step title="Navigate to Portfolio">
+    Click **Portfolio** in the main navigation
+  </Step>
+  
+  <Step title="View Active Positions">
+    See all open positions across all venues and chains
+  </Step>
+  
+  <Step title="Filter and Sort">
+    Filter by market type, venue, profit/loss, or time
+  </Step>
+</Steps>
+
+### What You'll See
+
+<CardGroup cols={2}>
+  <Card title="Position Details" icon="list">
+    - Market name and outcome
+    - Entry price and quantity
+    - Current market price
+    - Unrealized P&L
+    - Position value
+  </Card>
+  
+  <Card title="Performance Metrics" icon="chart-line">
+    - ROI percentage
+    - Time held
+    - Value change (24h, 7d)
+    - Break-even price
+  </Card>
+</CardGroup>
+
+---
+
+## Position Status Types
+
+Your positions can be in different states:
+
+<Tabs>
+  <Tab title="Open Positions">
+    **Active markets** where you hold shares:
+    - Market hasn't resolved yet
+    - Can add to position or sell
+    - P&L is unrealized
+    - Price fluctuates with market
+    
+    **Actions Available:**
+    - Increase position size
+    - Reduce position (sell shares)
+    - Close position entirely
+    - Set price alerts
+  </Tab>
+  
+  <Tab title="Pending Settlements">
+    **Markets that have resolved** but not yet settled:
+    - Outcome determined
+    - Waiting for settlement period
+    - P&L is realized but not claimable
+    - No further trading possible
+    
+    **Actions Available:**
+    - View final outcome
+    - Check settlement ETA
+    - Prepare to claim winnings
+  </Tab>
+  
+  <Tab title="Claimable">
+    **Settled positions** ready to claim:
+    - Fully resolved and settled
+    - Winnings available to withdraw
+    - Show final P&L
+    
+    **Actions Available:**
+    - [Claim winnings](/traders/claiming-winnings)
+    - View position history
+    - Download tax report
+  </Tab>
+  
+  <Tab title="Closed/Lost">
+    **Historical positions** no longer active:
+    - Sold before resolution
+    - Lost positions (wrong outcome)
+    - Already claimed
+    
+    **Actions Available:**
+    - View trade history
+    - Analyze performance
+    - Export for records
+  </Tab>
+</Tabs>
+
+---
+
+## Managing Open Positions
+
+### Adding to Positions
+
+Increase your position size if you're confident in the outcome:
+
+<Steps>
+  <Step title="Navigate to Position">
+    Click on the position you want to increase
+  </Step>
+  
+  <Step title="Click 'Add More'">
+    Select the option to increase position size
+  </Step>
+  
+  <Step title="Enter Amount">
+    Specify additional shares or USDC amount
+  </Step>
+  
+  <Step title="Review Average Price">
+    Your entry price will be averaged with the new purchase
+  </Step>
+  
+  <Step title="Confirm">
+    Sign the transaction to add to your position
+  </Step>
+</Steps>
+
+<Info>
+**Average Cost Basis:** When adding to positions, your cost basis is averaged. If you bought 100 shares at $0.50 and add 100 more at $0.60, your average cost is $0.55.
+</Info>
+
+### Reducing Positions
+
+Partially close your position to lock in profits or cut losses:
+
+<Steps>
+  <Step title="Select Position">
+    Navigate to the position you want to reduce
+  </Step>
+  
+  <Step title="Click 'Sell Shares'">
+    Choose to sell a portion of your holdings
+  </Step>
+  
+  <Step title="Enter Quantity">
+    Specify how many shares to sell (or % of position)
+  </Step>
+  
+  <Step title="Choose Order Type">
+    - **Market Order**: Sell immediately at current price
+    - **Limit Order**: Sell when price reaches your target
+  </Step>
+  
+  <Step title="Confirm Sale">
+    Sign transaction and receive USDC immediately
+  </Step>
+</Steps>
+
+### Closing Positions Entirely
+
+Exit a position completely:
+
+<Tabs>
+  <Tab title="Market Close">
+    **Instant exit** at current market price:
+    
+    1. Click **Close Position**
+    2. Select **Market Order**
+    3. Review current price and proceeds
+    4. Confirm transaction
+    5. Receive USDC in seconds
+    
+    ✅ **Pros:** Instant execution  
+    ❌ **Cons:** May have price impact on thin markets
+  </Tab>
+  
+  <Tab title="Limit Close">
+    **Exit at target price**:
+    
+    1. Click **Close Position**
+    2. Select **Limit Order**
+    3. Set your target sell price
+    4. Set expiration time
+    5. Order fills when price is reached
+    
+    ✅ **Pros:** Control your exit price  
+    ❌ **Cons:** May not fill if price doesn't reach target
+  </Tab>
+</Tabs>
+
+---
+
+## Position Monitoring Tools
+
+### Price Alerts
+
+Get notified when positions hit key levels:
+
+<CardGroup cols={2}>
+  <Card title="Price Alerts" icon="bell">
+    Set alerts for:
+    - Specific price targets
+    - % change thresholds
+    - Break-even points
+    - Stop-loss triggers
+    
+    Receive via: Email, Push, Discord bot
+  </Card>
+  
+  <Card title="Market Events" icon="calendar">
+    Get notified of:
+    - Resolution date approaching
+    - High volatility detected
+    - Large trades in your markets
+    - News affecting market
+  </Card>
+</CardGroup>
+
+### Portfolio Analytics
+
+<Tabs>
+  <Tab title="P&L Tracking">
+    **Profit & Loss metrics:**
+    - Total unrealized P&L
+    - P&L by market category
+    - Daily/weekly/monthly P&L
+    - Best and worst performers
+    - Win rate percentage
+  </Tab>
+  
+  <Tab title="Risk Analysis">
+    **Position risk metrics:**
+    - Total capital at risk
+    - Diversification score
+    - Concentration risk (% in single market)
+    - Time-to-resolution distribution
+    - Correlation between positions
+  </Tab>
+  
+  <Tab title="Performance">
+    **Historical performance:**
+    - Total return (%)
+    - Sharpe ratio
+    - Max drawdown
+    - Average hold time
+    - Monthly returns heatmap
+  </Tab>
+</Tabs>
+
+---
+
+## Position Management Strategies
+
+### Dollar-Cost Averaging (DCA)
+
+Reduce timing risk by entering positions gradually:
+
+<Steps>
+  <Step title="Set Initial Entry">
+    Buy initial position (e.g., 25% of target size)
+  </Step>
+  
+  <Step title="Define Trigger Points">
+    Set price levels to add more (e.g., every 5% price drop)
+  </Step>
+  
+  <Step title="Add Gradually">
+    Increase position at predetermined intervals
+  </Step>
+  
+  <Step title="Average Down">
+    Lower your average cost if price moves against you
+  </Step>
+</Steps>
+
+**Example:**
+- Buy 100 shares at $0.60
+- Add 100 shares at $0.55
+- Add 100 shares at $0.50
+- Final average: $0.55 across 300 shares
+
+### Taking Profits Systematically
+
+Lock in gains while maintaining upside:
+
+1. **25% Rule**: Sell 25% of position after 25% gain
+2. **Half-off Rule**: When position doubles, sell half (recover initial capital)
+3. **Trailing Stops**: Sell if price drops X% from peak
+4. **Ladder Exits**: Sell portions at multiple price targets
+
+### Stop-Loss Management
+
+Protect against large losses:
+
+<Warning>
+**Important:** Predifi doesn't support automatic stop-losses yet. You must manually monitor and exit positions. Consider setting price alerts to notify you of stop-loss levels.
+</Warning>
+
+**Manual stop-loss strategy:**
+1. Decide max loss per position (e.g., 20%)
+2. Calculate stop price: Entry price × (1 - stop %)
+3. Set price alert at stop level
+4. When triggered, manually close position
+
+---
+
+## Multi-Venue Position Management
+
+### Viewing Across Venues
+
+Predifi aggregates positions from:
+- **Predifi Native CLOB** - Positions on our orderbook
+- **Polymarket** - Aggregated Polymarket positions
+- **Limitless** - Base-native market positions
+
+<Tabs>
+  <Tab title="Unified View">
+    See all positions in one dashboard regardless of venue:
+    ```
+    Portfolio Overview
+    ├── Total Value: $10,450
+    ├── Unrealized P&L: +$1,250 (+13.6%)
+    │
+    ├── Predifi CLOB: $4,200 (5 positions)
+    ├── Polymarket: $3,800 (3 positions)
+    └── Limitless: $2,450 (2 positions)
+    ```
+  </Tab>
+  
+  <Tab title="Venue-Specific">
+    Filter by venue to see platform-specific details:
+    - Venue-specific fees
+    - Settlement times
+    - Liquidity depth
+    - Cross-venue arbitrage opportunities
+  </Tab>
+</Tabs>
+
+### Cross-Venue Arbitrage
+
+Identify and exploit price differences:
+
+<Steps>
+  <Step title="Spot Price Difference">
+    Same market trading at different prices on different venues
+  </Step>
+  
+  <Step title="Buy Low Venue">
+    Purchase shares on the cheaper venue
+  </Step>
+  
+  <Step title="Sell High Venue">
+    Simultaneously sell on the more expensive venue
+  </Step>
+  
+  <Step title="Lock Profit">
+    Profit from price discrepancy (minus fees and gas)
+  </Step>
+</Steps>
+
+**Example:**
+- BTC > $100K by Jan 15: **Polymarket @ $0.62**, **Limitless @ $0.67**
+- Buy 1000 shares on Polymarket: -$620
+- Sell 1000 shares on Limitless: +$670
+- Profit: $50 (minus ~$5 in fees) = **$45 risk-free**
+
+---
+
+## Best Practices
+
+<AccordionGroup>
+  <Accordion title="Diversify Positions" icon="chart-pie">
+    **Don't put all capital in one market:**
+    - Spread across multiple markets (5-10 positions)
+    - Diversify by category (politics, sports, crypto)
+    - Vary time horizons (short-term and long-term)
+    - Limit single-position exposure (max 10-20% of portfolio)
+  </Accordion>
+  
+  <Accordion title="Set Position Limits" icon="gauge-high">
+    **Define risk per position:**
+    - Max position size: 20% of portfolio
+    - Max loss per position: 5% of portfolio
+    - Total capital at risk: Max 50-60% deployed at once
+    - Reserve capital for averaging down
+  </Accordion>
+  
+  <Accordion title="Use Limit Orders" icon="list-check">
+    **Avoid market impact:**
+    - Use limit orders for large positions
+    - Scale in/out with multiple orders
+    - Avoid dumping large positions at market
+    - Be patient for better fills
+  </Accordion>
+  
+  <Accordion title="Review Regularly" icon="calendar-check">
+    **Active portfolio management:**
+    - Daily: Check P&L and price alerts
+    - Weekly: Review open positions, rebalance if needed
+    - Monthly: Analyze performance, adjust strategy
+    - Before resolution: Decide hold vs. sell
+  </Accordion>
+  
+  <Accordion title="Track Resolution Dates" icon="clock">
+    **Time-based management:**
+    - Know when markets resolve
+    - Exit early if odds moved against you
+    - Hold winners close to expiry
+    - Avoid positions resolving during holidays
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Common Position Issues
+
+<Tabs>
+  <Tab title="Position Not Showing">
+    **Troubleshooting:**
+    - Refresh page and clear cache
+    - Check correct network/chain selected
+    - Verify transaction confirmed on blockchain
+    - Contact support with transaction hash
+  </Tab>
+  
+  <Tab title="Can't Sell Shares">
+    **Possible reasons:**
+    - Market resolved (no more trading)
+    - Insufficient liquidity (try limit order)
+    - Shares locked in pending settlement
+    - Network congestion (wait or increase gas)
+  </Tab>
+  
+  <Tab title="Wrong P&L Calculation">
+    **Common causes:**
+    - Fees not included in calculation
+    - Multiple entries at different prices
+    - Pending orders not reflected
+    - Cache/display issue (refresh)
+  </Tab>
+  
+  <Tab title="Missing Claimable Winnings">
+    **Check:**
+    - Settlement period completed?
+    - Navigate to Claim Winnings page
+    - Correct wallet connected?
+    - Try manual claim on blockchain explorer
+  </Tab>
+</Tabs>
+
+---
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Claim Winnings" icon="trophy" href="/traders/claiming-winnings">
+    Learn how to claim settled positions
+  </Card>
+  
+  <Card title="Risk Management" icon="shield-check" href="/traders/risk-management">
+    Advanced risk management strategies
+  </Card>
+  
+  <Card title="Portfolio API" icon="code" href="/api-reference/portfolio">
+    Programmatic portfolio management
+  </Card>
+  
+  <Card title="Trading Guide" icon="book" href="/getting-started/trading-guide">
+    Complete trading guide
+  </Card>
+</CardGroup>
+
+<Note>
+**Pro Tip:** Use the Predifi mobile app to set price alerts and monitor positions on the go. Never miss an exit opportunity!
+</Note>

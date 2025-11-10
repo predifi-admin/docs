@@ -1,0 +1,326 @@
+---
+title: "Trading Guide"
+description: "Complete guide to trading prediction markets on Predifi"
+---
+
+## Getting Started with Trading
+
+This guide covers everything you need to start trading prediction markets on Predifi—from understanding markets to placing your first trade.
+
+---
+
+## Choose Your Trading Product
+
+<CardGroup cols={2}>
+  <Card title="CLOB (Central Limit Orderbook)" icon="chart-candlestick" href="/products/clob-matching">
+    **Professional trading**
+    
+    - Limit orders, market orders
+    - Advanced order types
+    - Off-chain matching
+    - Best for active traders
+  </Card>
+  
+  <Card title="Aggregator" icon="layer-group" href="/products/aggregator">
+    **Access multiple venues**
+    
+    - Polymarket, Limitless, others
+    - Unified interface
+    - Best prices across venues
+    - Best for casual traders
+  </Card>
+</CardGroup>
+
+---
+
+## How to Place a Trade
+
+<Steps>
+  <Step title="Find a Market">
+    Browse markets by category: Politics, Sports, Crypto, etc.
+  </Step>
+  
+  <Step title="Research the Outcome">
+    Read market description, check current odds, review trading activity
+  </Step>
+  
+  <Step title="Decide YES or NO">
+    - **YES**: Event will happen
+    - **NO**: Event will not happen
+  </Step>
+  
+  <Step title="Choose Order Type">
+    - **Market Order**: Buy immediately at current price
+    - **Limit Order**: Buy only at your specified price
+  </Step>
+  
+  <Step title="Enter Amount">
+    Specify USDC amount or number of shares
+  </Step>
+  
+  <Step title="Review and Confirm">
+    Check price, fees, potential profit
+  </Step>
+  
+  <Step title="Sign Transaction">
+    Approve in your wallet (MetaMask, etc.)
+  </Step>
+  
+  <Step title="Monitor Position">
+    Track in Portfolio tab
+  </Step>
+</Steps>
+
+---
+
+## Order Types
+
+<Tabs>
+  <Tab title="Market Order">
+    **Buy/sell immediately at current market price**
+    
+    **Pros:**
+    - Instant execution
+    - Guaranteed fill
+    - Simple to use
+    
+    **Cons:**
+    - No price control
+    - May have slippage on large orders
+    - Pays current market price
+    
+    **Best for:** Small to medium orders, urgent trades
+  </Tab>
+  
+  <Tab title="Limit Order">
+    **Buy/sell only at your specified price (or better)**
+    
+    **Pros:**
+    - Control exact price
+    - No slippage
+    - Can set and forget
+    
+    **Cons:**
+    - May not fill if price doesn't reach your limit
+    - Requires patience
+    - Need to monitor/adjust
+    
+    **Best for:** Large orders, patient traders, specific price targets
+  </Tab>
+</Tabs>
+
+---
+
+## Understanding Prices & Odds
+
+### Price = Probability
+
+In prediction markets, the price reflects the market's estimated probability:
+
+| Price | Probability | Implied Odds |
+|-------|-------------|--------------|
+| $0.50 | 50% | 50/50 (Even) |
+| $0.67 | 67% | 2:1 (Likely) |
+| $0.80 | 80% | 4:1 (Very likely) |
+| $0.33 | 33% | 1:2 (Unlikely) |
+| $0.20 | 20% | 1:4 (Very unlikely) |
+
+**Example:**
+- Market: "BTC > $100K by Jan 15"
+- Current price: $0.65 YES
+- Interpretation: Market thinks there's a **65% chance** BTC will exceed $100K by Jan 15
+
+[Learn more about odds →](/getting-started/understanding-odds)
+
+---
+
+## Calculating Profit & Loss
+
+### If You Win
+
+$$
+\text{Profit} = \text{Shares} \times \$1.00 - \text{Cost}
+$$
+
+**Example:**
+- Buy 100 shares of YES at $0.60 = $60 cost
+- Market resolves YES
+- Payout: 100 × $1.00 = $100
+- **Profit: $100 - $60 = $40** (67% return)
+
+### If You Lose
+
+$$
+\text{Loss} = \text{Cost}
+$$
+
+**Example:**
+- Buy 100 shares of YES at $0.60 = $60 cost
+- Market resolves NO
+- Payout: $0
+- **Loss: $60** (100% of investment)
+
+---
+
+## Fees
+
+<Tabs>
+  <Tab title="Trading Fees">
+    **CLOB:**
+    - Maker (limit orders): 0.2%
+    - Taker (market orders): 0.5%
+    
+    **Aggregator:**
+    - Polymarket: 2% (venue fee)
+    - Limitless: 1.5% (venue fee)
+    - + 0.3% Predifi fee
+  </Tab>
+  
+  <Tab title="Gas Fees">
+    **Network costs:**
+    - Arbitrum: $0.10-0.30
+    - Optimism: $0.15-0.40
+    - Base: $0.08-0.25
+    - Polygon: $0.05-0.15
+  </Tab>
+  
+  <Tab title="No Hidden Fees">
+    **What we DON'T charge:**
+    - ✅ No deposit fees
+    - ✅ No withdrawal fees
+    - ✅ No inactivity fees
+    - ✅ No subscription fees
+  </Tab>
+</Tabs>
+
+---
+
+## Trading Strategies
+
+<AccordionGroup>
+  <Accordion title="Value Betting" icon="gem">
+    **Find mispriced markets**
+    
+    1. Research true probability of event
+    2. Compare to market price
+    3. If market undervalues: Buy YES
+    4. If market overvalues: Buy NO
+    
+    **Example:**
+    - Your analysis: 70% chance BTC > $100K
+    - Market price: $0.60 (60% implied)
+    - **Action:** Buy YES (market underpricing by 10%)
+  </Accordion>
+  
+  <Accordion title="Event Trading" icon="calendar">
+    **Trade around news and events**
+    
+    - Buy before positive catalysts
+    - Sell before negative catalysts
+    - React quickly to breaking news
+    - Exit before event conclusion
+    
+    **Example:** Buy BTC > $100K before Fed rate decision, sell after if favorable
+  </Accordion>
+  
+  <Accordion title="Scalping" icon="gauge-high">
+    **Quick in-and-out trades**
+    
+    - Buy low, sell high (same market)
+    - Profit from short-term price movements
+    - High frequency, small profits
+    - Requires active monitoring
+    
+    **Example:** Buy YES at $0.65, sell at $0.68 for 4.6% gain
+  </Accordion>
+  
+  <Accordion title="Arbitrage" icon="scale-balanced">
+    **Exploit price differences**
+    
+    - Same market, different venues
+    - Buy low venue, sell high venue
+    - Risk-free profit (minus fees)
+    
+    **Example:**
+    - Polymarket: BTC > $100K at $0.62
+    - Limitless: Same market at $0.67
+    - Buy Polymarket, sell Limitless = $0.05/share profit
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Risk Management
+
+<Warning>
+**Never risk more than you can afford to lose.** Prediction markets involve real financial risk.
+</Warning>
+
+### Position Sizing
+
+**Beginner:** Risk 2-5% of capital per trade  
+**Intermediate:** Risk 5-10% per trade  
+**Advanced:** Risk up to 15-20% on high-conviction trades
+
+**Example with $1,000 bankroll:**
+- Conservative: $20-50 per trade
+- Moderate: $50-100 per trade
+- Aggressive: $150-200 per trade
+
+[Learn more about risk management →](/traders/risk-management)
+
+---
+
+## Common Mistakes to Avoid
+
+<Tabs>
+  <Tab title="Overtrading">
+    ❌ **Don't:** Place 20 trades per day without analysis
+    
+    ✅ **Do:** Focus on 2-5 high-quality setups per week
+  </Tab>
+  
+  <Tab title="Chasing Losses">
+    ❌ **Don't:** Double down after losses to "win it back"
+    
+    ✅ **Do:** Stick to position sizing rules, accept losses
+  </Tab>
+  
+  <Tab title="FOMO Trading">
+    ❌ **Don't:** Buy after big price moves ("can't miss out!")
+    
+    ✅ **Do:** Wait for pullbacks, stick to your plan
+  </Tab>
+  
+  <Tab title="Ignoring Fees">
+    ❌ **Don't:** Make many small trades (fees eat profits)
+    
+    ✅ **Do:** Consider fees in profit calculations
+  </Tab>
+</Tabs>
+
+---
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Understanding Odds" icon="percent" href="/getting-started/understanding-odds">
+    Deep dive into probability and pricing
+  </Card>
+  
+  <Card title="Managing Positions" icon="sliders" href="/traders/managing-positions">
+    Track and optimize your trades
+  </Card>
+  
+  <Card title="Risk Management" icon="shield" href="/traders/risk-management">
+    Protect your capital
+  </Card>
+  
+  <Card title="API Trading" icon="code" href="/api-reference/trading">
+    Automate your trading
+  </Card>
+</CardGroup>
+
+<Note>
+**Questions?** Join our [Discord](https://discord.gg/predifi) and ask in #trading-help. Our community and team are here to help!
+</Note>

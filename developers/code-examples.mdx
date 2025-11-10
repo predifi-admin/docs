@@ -1,0 +1,177 @@
+---
+title: "Code Examples"
+description: "Sample code and implementations"
+---
+
+## Code Examples
+
+Real-world examples for common use cases.
+
+---
+
+## Simple Market Order
+
+```typescript
+import { PredifiClient } from '@predifi/sdk';
+
+const client = new PredifiClient({ 
+  apiKey: process.env.PREDIFI_API_KEY 
+});
+
+async function buyYes() {
+  const order = await client.trading.placeOrder({
+    marketId: 'btc-100k-jan15',
+    side: 'YES',
+    amount: 100, // $100 USDC
+    orderType: 'market'
+  });
+  
+  console.log(`Bought ${order.shares} shares at $${order.fillPrice}`);
+}
+```
+
+---
+
+## Arbitrage Bot
+
+```typescript
+async function arbitrageBot() {
+  while (true) {
+    const markets = await client.markets.list();
+    
+    for (const market of markets) {
+      // Check if same market exists on multiple venues
+      const prices = await getSameMark etOnVenues(market.id);
+      
+      // If price difference > 3%
+      if (Math.max(...prices) - Math.min(...prices) > 0.03) {
+        // Buy low, sell high
+        await executArbitrage(market.id, prices);
+      }
+    }
+    
+    await sleep(1000); // Wait 1 second
+  }
+}
+```
+
+---
+
+## Portfolio Monitor
+
+```typescript
+async function monitorPortfolio() {
+  const portfolio = await client.portfolio.getPositions();
+  
+  for (const position of portfolio.positions) {
+    console.log(`
+      Market: ${position.marketName}
+      Side: ${position.side}
+      P&L: $${position.unrealizedPnL.toFixed(2)}
+      ROI: ${(position.roi * 100).toFixed(1)}%
+    `);
+    
+    // Alert if position down > 20%
+    if (position.roi < -0.20) {
+      sendAlert(`Position ${position.marketId} down 20%!`);
+    }
+  }
+}
+
+setInterval(monitorPortfolio, 60000); // Every minute
+```
+
+---
+
+## Real-Time Price Alerts
+
+```typescript
+const ws = client.websocket.connect();
+
+ws.subscribe('market:btc-100k-jan15', (data) => {
+  // Alert if price crosses 0.70
+  if (data.yesPrice > 0.70) {
+    sendAlert(`BTC market YES price now ${data.yesPrice}!`);
+  }
+});
+```
+
+---
+
+## Auto-Claim Winnings
+
+```typescript
+async function autoClaim() {
+  const claimable = await client.portfolio.getClaimable();
+  
+  for (const position of claimable) {
+    console.log(`Claiming $${position.claimAmount} from ${position.marketName}`);
+    await client.portfolio.claim(position.marketId);
+  }
+}
+
+// Run daily
+setInterval(autoClaim, 24 * 60 * 60 * 1000);
+```
+
+---
+
+## Trading Bot with Kelly Criterion
+
+```typescript
+function kellyBetSize(winProb: number, odds: number, bankroll: number): number {
+  // Kelly: f* = (bp - q) / b
+  const b = odds; // net odds
+  const p = winProb;
+  const q = 1 - p;
+  
+  const kelly = (b * p - q) / b;
+  const halfKelly = kelly / 2; // More conservative
+  
+  return bankroll * halfKelly;
+}
+
+async function smartTrade(marketId: string, myProbability: number) {
+  const market = await client.markets.get(marketId);
+  const impliedProb = market.yesPrice;
+  
+  // Only trade if we have edge
+  if (myProbability > impliedProb + 0.05) {
+    const portfolio = await client.portfolio.getSummary();
+    const betSize = kellyBetSize(
+      myProbability,
+      (1 / impliedProb) - 1,
+      portfolio.totalValue
+    );
+    
+    await client.trading.placeOrder({
+      marketId,
+      side: 'YES',
+      amount: betSize,
+      orderType: 'market'
+    });
+  }
+}
+```
+
+---
+
+## More Examples
+
+<CardGroup cols={2}>
+  <Card title="GitHub Examples" icon="github" href="https://github.com/predifi-com/examples">
+    Full example repository
+  </Card>
+  
+  <Card title="API Reference" icon="book" href="/api-reference/getting-started">
+    Complete API docs
+  </Card>
+  
+  <Card title="Discord" icon="discord" href="https://discord.gg/predifi">
+    Ask questions in #dev-help
+  </Card>
+  
+  <Card title="Quickstart" icon="rocket" href="/developers/quickstart">
+    Get started guide
+  </Card>
+</CardGroup>
