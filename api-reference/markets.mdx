@@ -1,74 +1,50 @@
 ---
 title: "Markets API"
-description: "Browse, search, and filter prediction markets across all categories"
+description: "Browse, search, and filter prediction markets"
 ---
 
 ## Overview
 
-The Markets API enables you to:
-- **List all markets** - Browse active, upcoming, and closed markets
-- **Search markets** - Find markets by keywords
-- **Filter by category** - Crypto, sports, and more
-- **Get market details** - Full market information including pricing
-- **Historical data** - Price history and trading volume
+The Markets API provides access to:
+- **Market discovery** - Browse and search all markets
+- **Market details** - Full metadata and trading information
+- **Price history** - Historical price data with intervals
+- **Recent trades** - Trade execution stream
 
 ---
 
 ## List Markets
 
-Get all available prediction markets.
+Get all markets with filtering and sorting.
 
 <ParamField path="GET" type="method">
   /v1/markets
 </ParamField>
 
-### Request
+### Parameters
 
 <ParamField query="category" type="string">
-  Filter by category:
-  - `crypto` - Cryptocurrency markets
-  - `sports` - Sports betting markets
-  - `all` - All categories (default)
+  Filter by category: `crypto`, `sports`, `politics`, `finance`, `other`
 </ParamField>
 
 <ParamField query="status" type="string">
-  Filter by market status:
-  - `active` - Currently trading (default)
-  - `upcoming` - Not yet open
-  - `closed` - Ended, awaiting settlement
-  - `settled` - Fully resolved
-  - `all` - All statuses
+  Filter by status: `active`, `closed`, `resolved`
 </ParamField>
 
 <ParamField query="asset" type="string">
-  Filter by underlying asset (crypto only):
-  - `BTC` - Bitcoin markets
-  - `ETH` - Ethereum markets
-  - `SOL` - Solana markets
-  - `BNB` - Binance Coin markets
-  - `DOGE` - Dogecoin markets
-  - `XRP` - Ripple markets
+  Filter by underlying asset (e.g., `BTC`, `ETH`, `SPX`)
 </ParamField>
 
 <ParamField query="interval" type="string">
-  Filter by time interval (crypto only):
-  - `15M` - 15-minute markets
-  - `30M` - 30-minute markets
-  - `1H` - 1-hour markets
+  Filter by time interval: `15M`, `1H`, `4H`, `1D`, `1W`
 </ParamField>
 
 <ParamField query="sort" type="string">
-  Sort results by:
-  - `volume` - Trading volume (default)
-  - `liquidity` - Total liquidity
-  - `expiry` - Expiration time
-  - `created` - Creation time
+  Sort by: `volume`, `liquidity`, `created`, `closing` (default: `volume`)
 </ParamField>
 
 <ParamField query="order" type="string">
-  Sort order:
-  - `desc` - Descending (default)
-  - `asc` - Ascending
+  Sort order: `asc`, `desc` (default: `desc`)
 </ParamField>
 
 <ParamField query="page" type="number">
@@ -76,7 +52,7 @@ Get all available prediction markets.
 </ParamField>
 
 <ParamField query="limit" type="number">
-  Results per page (default: 20, max: 100)
+  Results per page (max: 100, default: 20)
 </ParamField>
 
 ### Response
@@ -84,154 +60,65 @@ Get all available prediction markets.
 ```json
 {
   "ok": true,
-  "data": {
-    "markets": [
-      {
-        "marketId": "BTC-15M-20250111-1430",
-        "question": "Will BTC price be above $102,500 at 14:30 UTC?",
-        "category": "crypto",
-        "asset": "BTC",
-        "interval": "15M",
-        "status": "active",
-        "createdAt": 1638345000000,
-        "expiresAt": 1638363600000,
-        "timeRemaining": 3600000,
-        "currentPrice": {
-          "yes": 0.6543,
-          "no": 0.3457,
-          "timestamp": 1638360000000
+  "data": [
+    {
+      "marketId": "BTC-15M-20250111-1430",
+      "question": "Will BTC be above $100K at 2:30 PM?",
+      "category": "crypto",
+      "asset": "BTC",
+      "interval": "15M",
+      "status": "active",
+      "createdAt": 1638350000000,
+      "closesAt": 1638360000000,
+      "resolvesAt": 1638360300000,
+      "currentPrice": {
+        "yes": 0.6543,
+        "no": 0.3457,
+        "lastUpdate": 1638359900000
+      },
+      "strike": 100000,
+      "volume24h": 125678.90,
+      "liquidity": 89012.34,
+      "traders": 567,
+      "outcomes": [
+        {"id": 0, "name": "YES", "price": 0.6543, "volume": 78901.23},
+        {"id": 1, "name": "NO", "price": 0.3457, "volume": 46777.67}
+      ],
+      "settlement": {
+        "price": 99500,
+        "result": null,
+        "source": "chainlink"
+      },
+      "venues": {
+        "polymarket": {
+          "marketId": "0x123...",
+          "volume": 67890.12,
+          "liquidity": 45000.00
         },
-        "strike": 102500.00,
-        "currentSpot": 102420.50,
-        "volume24h": 145678.90,
-        "liquidity": 234567.80,
-        "traders": 1234,
-        "outcomes": [
-          {
-            "id": 0,
-            "name": "YES",
-            "price": 0.6543,
-            "volume": 98765.40
-          },
-          {
-            "id": 1,
-            "name": "NO",
-            "price": 0.3457,
-            "volume": 46913.50
-          }
-        ],
-        "settlement": {
-          "source": "stork",
-          "oraclePrice": null,
-          "result": null,
-          "settledAt": null
-        },
-        "venues": {
-          "polymarket": {
-            "liquidity": 134567.80,
-            "volume24h": 87654.30
-          },
-          "predifi_clob": {
-            "liquidity": 100000.00,
-            "volume24h": 58024.60
-          }
+        "predifi_clob": {
+          "marketId": "0xabc...",
+          "volume": 57788.78,
+          "liquidity": 44012.34
         }
       }
-      // ... more markets
-    ]
-  },
+    }
+  ],
   "pagination": {
     "page": 1,
     "limit": 20,
-    "total": 156,
-    "pages": 8,
+    "total": 1234,
+    "pages": 62,
     "hasMore": true
-  },
-  "timestamp": 1638360000000
+  }
 }
 ```
 
-<ResponseField name="marketId" type="string">
-  Unique market identifier
-  
-  Format: `{ASSET}-{INTERVAL}-{DATE}-{TIME}`
-</ResponseField>
-
-<ResponseField name="question" type="string">
-  Market question/description
-</ResponseField>
-
-<ResponseField name="category" type="string">
-  Market category: `crypto`, `sports`, etc.
-</ResponseField>
-
-<ResponseField name="status" type="string">
-  Market status:
-  - `active` - Currently trading
-  - `upcoming` - Not yet open (created but trading not started)
-  - `closed` - Expired, awaiting settlement
-  - `settled` - Fully resolved
-  - `cancelled` - Market cancelled (rare)
-</ResponseField>
-
-<ResponseField name="expiresAt" type="number">
-  Market expiration timestamp (Unix ms)
-  
-  When trading stops and settlement begins
-</ResponseField>
-
-<ResponseField name="timeRemaining" type="number">
-  Milliseconds until expiration
-</ResponseField>
-
-<ResponseField name="currentPrice" type="object">
-  Current YES/NO prices (0-1)
-  
-  Updated in real-time
-</ResponseField>
-
-<ResponseField name="strike" type="number">
-  Strike price for crypto markets
-  
-  Market resolves YES if spot price > strike
-</ResponseField>
-
-<ResponseField name="currentSpot" type="number">
-  Current spot price of underlying asset
-</ResponseField>
-
-<ResponseField name="volume24h" type="number">
-  24-hour trading volume (USDC)
-</ResponseField>
-
-<ResponseField name="liquidity" type="number">
-  Total available liquidity (USDC)
-  
-  Aggregated across all venues
-</ResponseField>
-
-<ResponseField name="traders" type="number">
-  Number of unique traders
-</ResponseField>
-
-<ResponseField name="settlement" type="object">
-  Settlement information:
-  - `source` - Oracle provider (Stork, Pyth, etc.)
-  - `oraclePrice` - Final settlement price (null until settled)
-  - `result` - Winning outcome (YES/NO, null until settled)
-  - `settledAt` - Settlement timestamp (null until settled)
-</ResponseField>
-
-<ResponseField name="venues" type="object">
-  Per-venue breakdown of liquidity and volume
-</ResponseField>
-
-### Example Request
+### Example
 
 <CodeGroup>
 
 ```bash cURL
-curl "https://api.predifi.com/v1/markets?category=crypto&status=active&asset=BTC&limit=50" \
+curl "https://api.predifi.com/v1/markets?category=crypto&status=active&sort=volume&limit=10" \
   -H "Authorization: Bearer YOUR_API_KEY"
 ```
 
@@ -240,23 +127,15 @@ const markets = await api.get('/v1/markets', {
   params: {
     category: 'crypto',
     status: 'active',
-    asset: 'BTC',
-    interval: '15M',
     sort: 'volume',
-    order: 'desc',
-    limit: 50
+    limit: 10
   }
 });
 
-console.log(`Found ${markets.data.markets.length} markets`);
-
-markets.data.markets.forEach(market => {
-  console.log(`\n${market.question}`);
-  console.log(`  YES: ${(market.currentPrice.yes * 100).toFixed(1)}%`);
-  console.log(`  NO: ${(market.currentPrice.no * 100).toFixed(1)}%`);
-  console.log(`  Volume: $${market.volume24h.toLocaleString()}`);
-  console.log(`  Liquidity: $${market.liquidity.toLocaleString()}`);
-  console.log(`  Expires: ${new Date(market.expiresAt).toLocaleString()}`);
+console.log(`Found ${markets.data.length} markets`);
+markets.data.forEach(m => {
+  console.log(`${m.question}`);
+  console.log(`  YES: $${m.currentPrice.yes} | Volume: $${m.volume24h}`);
 });
 ```
 
@@ -264,23 +143,11 @@ markets.data.markets.forEach(market => {
 response = requests.get(
     'https://api.predifi.com/v1/markets',
     headers={'Authorization': f'Bearer {api_key}'},
-    params={
-        'category': 'crypto',
-        'status': 'active',
-        'asset': 'BTC',
-        'interval': '15M',
-        'limit': 50
-    }
+    params={'category': 'crypto', 'status': 'active', 'limit': 10}
 )
 
-markets = response.json()['data']['markets']
-
-for market in markets:
-    print(f"\n{market['question']}")
-    print(f"  YES: {market['currentPrice']['yes']*100:.1f}%")
-    print(f"  NO: {market['currentPrice']['no']*100:.1f}%")
-    print(f"  Volume: ${market['volume24h']:,.0f}")
-    print(f"  Liquidity: ${market['liquidity']:,.0f}")
+for market in response.json()['data']:
+    print(f"{market['question']}: ${market['currentPrice']['yes']}")
 ```
 
 </CodeGroup>
@@ -289,138 +156,29 @@ for market in markets:
 
 ## Get Market Details
 
-Get detailed information about a specific market.
+Get full details for a specific market.
 
 <ParamField path="GET" type="method">
   /v1/markets/:id
 </ParamField>
 
-### Request
-
-<ParamField path="id" type="string" required>
-  Market identifier
-</ParamField>
-
 ### Response
 
-```json
-{
-  "ok": true,
-  "data": {
-    "marketId": "BTC-15M-20250111-1430",
-    "question": "Will BTC price be above $102,500 at 14:30 UTC?",
-    "description": "Market resolves YES if Bitcoin spot price is strictly greater than $102,500.00 at exactly 14:30:00 UTC on January 11, 2025. Settlement price provided by Stork Network oracle.",
-    "category": "crypto",
-    "asset": "BTC",
-    "interval": "15M",
-    "status": "active",
-    "createdAt": 1638345000000,
-    "expiresAt": 1638363600000,
-    "timeRemaining": 3600000,
-    "currentPrice": {
-      "yes": 0.6543,
-      "no": 0.3457,
-      "timestamp": 1638360000000
-    },
-    "strike": 102500.00,
-    "currentSpot": 102420.50,
-    "volume24h": 145678.90,
-    "volumeTotal": 567890.12,
-    "liquidity": 234567.80,
-    "traders": 1234,
-    "trades": 5678,
-    "outcomes": [
-      {
-        "id": 0,
-        "name": "YES",
-        "price": 0.6543,
-        "priceChange24h": 0.0234,
-        "volume": 98765.40,
-        "liquidity": 134567.80,
-        "holders": 789
-      },
-      {
-        "id": 1,
-        "name": "NO",
-        "price": 0.3457,
-        "priceChange24h": -0.0234,
-        "volume": 46913.50,
-        "liquidity": 100000.00,
-        "holders": 445
-      }
-    ],
-    "settlement": {
-      "source": "stork",
-      "oracleAddress": "0x...",
-      "settlementDelay": 300,
-      "oraclePrice": null,
-      "result": null,
-      "settledAt": null
-    },
-    "venues": {
-      "polymarket": {
-        "liquidity": 134567.80,
-        "volume24h": 87654.30,
-        "url": "https://polymarket.com/market/..."
-      },
-      "predifi_clob": {
-        "liquidity": 100000.00,
-        "volume24h": 58024.60,
-        "url": null
-      }
-    },
-    "rules": {
-      "minTradeSize": 1.00,
-      "maxTradeSize": 100000.00,
-      "resolutionCriteria": "Market resolves YES if BTC spot price > $102,500 at 14:30 UTC per Stork oracle. Otherwise resolves NO."
-    },
-    "metadata": {
-      "tags": ["bitcoin", "crypto", "short-term"],
-      "difficulty": "medium",
-      "volatility": "high"
-    }
-  },
-  "timestamp": 1638360000000
-}
-```
+Includes all fields from list endpoint plus:
 
 <ResponseField name="description" type="string">
-  Detailed market description and resolution criteria
+  Detailed market description and rules
 </ResponseField>
 
 <ResponseField name="volumeTotal" type="number">
-  Total lifetime volume (USDC)
-</ResponseField>
-
-<ResponseField name="trades" type="number">
-  Total number of trades executed
-</ResponseField>
-
-<ResponseField name="outcomes[].priceChange24h" type="number">
-  24-hour price change (absolute)
-  
-  Positive = price increased, Negative = price decreased
-</ResponseField>
-
-<ResponseField name="outcomes[].holders" type="number">
-  Number of unique token holders for this outcome
-</ResponseField>
-
-<ResponseField name="settlement.settlementDelay" type="number">
-  Seconds to wait after expiry before settlement
-  
-  Allows time for oracle price to finalize
-</ResponseField>
-
-<ResponseField name="rules" type="object">
-  Trading rules and constraints
+  Total lifetime volume
 </ResponseField>
 
 <ResponseField name="metadata" type="object">
-  Additional market metadata (tags, difficulty, etc.)
+  Additional market metadata (creator, tags, etc.)
 </ResponseField>
 
-### Example Request
+### Example
 
 <CodeGroup>
 
@@ -431,31 +189,9 @@ curl "https://api.predifi.com/v1/markets/BTC-15M-20250111-1430" \
 
 ```typescript TypeScript
 const market = await api.get('/v1/markets/BTC-15M-20250111-1430');
-
-const m = market.data;
-
-console.log('=== Market Details ===');
-console.log(`Question: ${m.question}`);
-console.log(`Status: ${m.status}`);
-console.log(`Expires: ${new Date(m.expiresAt).toLocaleString()}`);
-console.log(`Time remaining: ${Math.floor(m.timeRemaining / 60000)} minutes`);
-
-console.log('\n=== Pricing ===');
-console.log(`Strike: $${m.strike.toLocaleString()}`);
-console.log(`Current Spot: $${m.currentSpot.toLocaleString()}`);
-console.log(`YES Price: ${(m.currentPrice.yes * 100).toFixed(1)}%`);
-console.log(`NO Price: ${(m.currentPrice.no * 100).toFixed(1)}%`);
-
-console.log('\n=== Activity ===');
-console.log(`24h Volume: $${m.volume24h.toLocaleString()}`);
-console.log(`Total Volume: $${m.volumeTotal.toLocaleString()}`);
-console.log(`Liquidity: $${m.liquidity.toLocaleString()}`);
-console.log(`Traders: ${m.traders}`);
-console.log(`Trades: ${m.trades}`);
-
-console.log('\n=== Settlement ===');
-console.log(`Oracle: ${m.settlement.source}`);
-console.log(`Settlement Delay: ${m.settlement.settlementDelay}s`);
+console.log(market.data.question);
+console.log(market.data.description);
+console.log(`Total volume: $${market.data.volumeTotal}`);
 ```
 
 ```python Python
@@ -463,24 +199,8 @@ response = requests.get(
     'https://api.predifi.com/v1/markets/BTC-15M-20250111-1430',
     headers={'Authorization': f'Bearer {api_key}'}
 )
-
-m = response.json()['data']
-
-print("=== Market Details ===")
-print(f"Question: {m['question']}")
-print(f"Status: {m['status']}")
-print(f"Expires: {datetime.fromtimestamp(m['expiresAt']/1000)}")
-
-print("\n=== Pricing ===")
-print(f"Strike: ${m['strike']:,.0f}")
-print(f"Current Spot: ${m['currentSpot']:,.0f}")
-print(f"YES Price: {m['currentPrice']['yes']*100:.1f}%")
-print(f"NO Price: {m['currentPrice']['no']*100:.1f}%")
-
-print("\n=== Activity ===")
-print(f"24h Volume: ${m['volume24h']:,.0f}")
-print(f"Liquidity: ${m['liquidity']:,.0f}")
-print(f"Traders: {m['traders']}")
+market = response.json()['data']
+print(f"Volume: ${market['volumeTotal']}")
 ```
 
 </CodeGroup>
@@ -489,18 +209,16 @@ print(f"Traders: {m['traders']}")
 
 ## Search Markets
 
-Search markets by keywords.
+Full-text search across market questions and descriptions.
 
 <ParamField path="GET" type="method">
   /v1/markets/search
 </ParamField>
 
-### Request
+### Parameters
 
 <ParamField query="q" type="string" required>
   Search query
-  
-  Searches in market questions and descriptions
 </ParamField>
 
 <ParamField query="category" type="string">
@@ -511,51 +229,28 @@ Search markets by keywords.
   Filter by status
 </ParamField>
 
-<ParamField query="limit" type="number">
-  Results limit (default: 20, max: 100)
-</ParamField>
-
 ### Response
 
-Same format as list markets, but filtered by search query.
+Same format as list markets.
 
-### Example Request
+### Example
 
 <CodeGroup>
 
-```bash cURL
-curl "https://api.predifi.com/v1/markets/search?q=ethereum&category=crypto" \
-  -H "Authorization: Bearer YOUR_API_KEY"
-```
-
 ```typescript TypeScript
 const results = await api.get('/v1/markets/search', {
-  params: {
-    q: 'ethereum',
-    category: 'crypto',
-    status: 'active'
-  }
+  params: { q: 'bitcoin 100k', category: 'crypto' }
 });
 
-console.log(`Found ${results.data.markets.length} markets matching "ethereum"`);
-
-results.data.markets.forEach(market => {
-  console.log(`- ${market.question}`);
-});
+console.log(`Found ${results.data.length} markets matching "bitcoin 100k"`);
 ```
 
 ```python Python
 response = requests.get(
     'https://api.predifi.com/v1/markets/search',
     headers={'Authorization': f'Bearer {api_key}'},
-    params={'q': 'ethereum', 'category': 'crypto'}
+    params={'q': 'bitcoin 100k'}
 )
-
-markets = response.json()['data']['markets']
-print(f"Found {len(markets)} markets")
-
-for market in markets:
-    print(f"- {market['question']}")
 ```
 
 </CodeGroup>
@@ -564,42 +259,24 @@ for market in markets:
 
 ## Get Price History
 
-Get historical price data for a market.
+Historical price data with configurable intervals.
 
 <ParamField path="GET" type="method">
   /v1/markets/:id/prices
 </ParamField>
 
-### Request
-
-<ParamField path="id" type="string" required>
-  Market identifier
-</ParamField>
-
-<ParamField query="outcomeId" type="number">
-  Outcome to query (0=YES, 1=NO)
-  
-  Omit to get both
-</ParamField>
+### Parameters
 
 <ParamField query="interval" type="string">
-  Price interval:
-  - `1m` - 1 minute
-  - `5m` - 5 minutes (default)
-  - `15m` - 15 minutes
-  - `1h` - 1 hour
+  Interval: `1m`, `5m`, `15m`, `1h`, `4h`, `1d` (default: `1h`)
 </ParamField>
 
 <ParamField query="from" type="number">
   Start timestamp (Unix ms)
-  
-  Default: market creation time
 </ParamField>
 
 <ParamField query="to" type="number">
   End timestamp (Unix ms)
-  
-  Default: current time
 </ParamField>
 
 ### Response
@@ -609,56 +286,39 @@ Get historical price data for a market.
   "ok": true,
   "data": {
     "marketId": "BTC-15M-20250111-1430",
-    "outcomeId": 0,
-    "interval": "5m",
-    "from": 1638345000000,
-    "to": 1638360000000,
+    "interval": "1h",
     "prices": [
       {
-        "timestamp": 1638345000000,
-        "price": 0.6200,
+        "timestamp": 1638356400000,
+        "yesPrice": 0.6234,
+        "noPrice": 0.3766,
         "volume": 12345.67,
-        "trades": 45
+        "liquidity": 87654.32
       },
       {
-        "timestamp": 1638345300000,
-        "price": 0.6350,
-        "volume": 15678.90,
-        "trades": 52
+        "timestamp": 1638360000000,
+        "yesPrice": 0.6543,
+        "noPrice": 0.3457,
+        "volume": 23456.78,
+        "liquidity": 89012.34
       }
-      // ... more data points
     ]
-  },
-  "timestamp": 1638360000000
+  }
 }
 ```
 
-### Example Request
+### Example
 
 <CodeGroup>
 
-```bash cURL
-curl "https://api.predifi.com/v1/markets/BTC-15M-20250111-1430/prices?outcomeId=0&interval=5m" \
-  -H "Authorization: Bearer YOUR_API_KEY"
-```
-
 ```typescript TypeScript
 const history = await api.get('/v1/markets/BTC-15M-20250111-1430/prices', {
-  params: {
-    outcomeId: 0,  // YES
-    interval: '5m',
-    from: Date.now() - (24 * 60 * 60 * 1000),  // Last 24 hours
-    to: Date.now()
-  }
+  params: { interval: '15m' }
 });
 
-console.log(`Got ${history.data.prices.length} price points`);
-
-// Plot simple chart
-history.data.prices.forEach(point => {
-  const bar = '█'.repeat(Math.floor(point.price * 100));
-  const date = new Date(point.timestamp).toLocaleTimeString();
-  console.log(`${date}: ${bar} $${point.price.toFixed(4)}`);
+history.data.prices.forEach(p => {
+  const date = new Date(p.timestamp);
+  console.log(`${date.toLocaleString()}: $${p.yesPrice}`);
 });
 ```
 
@@ -666,19 +326,11 @@ history.data.prices.forEach(point => {
 response = requests.get(
     'https://api.predifi.com/v1/markets/BTC-15M-20250111-1430/prices',
     headers={'Authorization': f'Bearer {api_key}'},
-    params={
-        'outcomeId': 0,  # YES
-        'interval': '5m',
-        'from': int((time.time() - 86400) * 1000),  # Last 24h
-        'to': int(time.time() * 1000)
-    }
+    params={'interval': '15m'}
 )
 
-prices = response.json()['data']['prices']
-
-for point in prices:
-    timestamp = datetime.fromtimestamp(point['timestamp']/1000)
-    print(f"{timestamp}: ${point['price']:.4f} (vol: ${point['volume']:,.0f})")
+for price in response.json()['data']['prices']:
+    print(f"Time: {price['timestamp']}, Price: ${price['yesPrice']}")
 ```
 
 </CodeGroup>
@@ -687,20 +339,16 @@ for point in prices:
 
 ## Get Recent Trades
 
-Get recent trades for a market.
+Get recent trade executions for a market.
 
 <ParamField path="GET" type="method">
   /v1/markets/:id/trades
 </ParamField>
 
-### Request
-
-<ParamField path="id" type="string" required>
-  Market identifier
-</ParamField>
+### Parameters
 
 <ParamField query="limit" type="number">
-  Number of trades (default: 50, max: 500)
+  Number of trades (max: 100, default: 20)
 </ParamField>
 
 ### Response
@@ -708,27 +356,84 @@ Get recent trades for a market.
 ```json
 {
   "ok": true,
-  "data": {
-    "marketId": "BTC-15M-20250111-1430",
-    "trades": [
-      {
-        "tradeId": "trade_123abc",
-        "timestamp": 1638360000000,
-        "side": "buy",
-        "outcomeId": 0,
-        "outcome": "YES",
-        "shares": 150.75,
-        "price": 0.6633,
-        "cost": 100.00,
-        "venue": "polymarket",
-        "trader": "0x742d..."
-      }
-      // ... more trades
-    ]
-  },
-  "timestamp": 1638360000000
+  "data": [
+    {
+      "tradeId": "0x123...",
+      "marketId": "BTC-15M-20250111-1430",
+      "outcomeId": 0,
+      "side": "buy",
+      "price": 0.6543,
+      "size": 1000.00,
+      "value": 654.30,
+      "venue": "polymarket",
+      "timestamp": 1638360000000
+    }
+  ]
 }
 ```
+
+### Example
+
+<CodeGroup>
+
+```typescript TypeScript
+const trades = await api.get('/v1/markets/BTC-15M-20250111-1430/trades', {
+  params: { limit: 50 }
+});
+
+trades.data.forEach(t => {
+  console.log(`${t.side.toUpperCase()} ${t.size} @ $${t.price} on ${t.venue}`);
+});
+```
+
+```python Python
+response = requests.get(
+    'https://api.predifi.com/v1/markets/BTC-15M-20250111-1430/trades',
+    headers={'Authorization': f'Bearer {api_key}'},
+    params={'limit': 50}
+)
+
+for trade in response.json()['data']:
+    print(f"{trade['side']} {trade['size']} @ ${trade['price']}")
+```
+
+</CodeGroup>
+
+---
+
+## Response Fields
+
+<ResponseField name="marketId" type="string">
+  Unique market identifier
+</ResponseField>
+
+<ResponseField name="question" type="string">
+  Market question
+</ResponseField>
+
+<ResponseField name="category" type="string">
+  Market category
+</ResponseField>
+
+<ResponseField name="status" type="string">
+  `active`, `closed`, or `resolved`
+</ResponseField>
+
+<ResponseField name="currentPrice" type="object">
+  Current YES/NO prices
+</ResponseField>
+
+<ResponseField name="volume24h" type="number">
+  24-hour trading volume in USDC
+</ResponseField>
+
+<ResponseField name="liquidity" type="number">
+  Available liquidity in USDC
+</ResponseField>
+
+<ResponseField name="venues" type="object">
+  Per-venue breakdown of volume and liquidity
+</ResponseField>
 
 ---
 
@@ -739,40 +444,24 @@ Get recent trades for a market.
 | `GET /v1/markets` | 60 req/min |
 | `GET /v1/markets/:id` | 100 req/min |
 | `GET /v1/markets/search` | 30 req/min |
-| `GET /v1/markets/:id/prices` | 30 req/min |
-| `GET /v1/markets/:id/trades` | 30 req/min |
+| `GET /v1/markets/:id/prices` | 60 req/min |
+| `GET /v1/markets/:id/trades` | 60 req/min |
 
 ---
 
 ## Next Steps
 
 <CardGroup cols={2}>
-  <Card
-    title="Trading API"
-    icon="cart-shopping"
-    href="/api-reference/trading"
-  >
+  <Card title="Trading API" icon="cart-shopping" href="/api-reference/trading">
     Place trades on markets
   </Card>
-  <Card
-    title="Orderbook API"
-    icon="list"
-    href="/api-reference/orderbook"
-  >
-    Check market liquidity
+  <Card title="Orderbook API" icon="book" href="/api-reference/orderbook">
+    View orderbook depth
   </Card>
-  <Card
-    title="WebSocket API"
-    icon="bolt"
-    href="/api-reference/websockets"
-  >
+  <Card title="WebSocket API" icon="bolt" href="/api-reference/websockets">
     Real-time market updates
   </Card>
-  <Card
-    title="Portfolio API"
-    icon="wallet"
-    href="/api-reference/portfolio"
-  >
+  <Card title="Portfolio API" icon="wallet" href="/api-reference/portfolio">
     Track your positions
   </Card>
 </CardGroup>

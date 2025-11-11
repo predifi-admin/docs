@@ -1,44 +1,28 @@
 ---
 title: "Portfolio API"
-description: "Track positions, balances, P&L, and trading history across all chains"
+description: "Track balances, positions, P&L, and trade history across all chains and venues"
 ---
 
 ## Overview
 
-The Portfolio API provides:
-- **Multi-chain balances** - USDC and token balances across all supported chains
-- **Position tracking** - All open positions with real-time P&L
-- **Trading history** - Complete history of trades and settlements
-- **Cross-venue aggregation** - Unified view across Polymarket, Predifi CLOB, and other venues
+Portfolio tracking provides:
+- **Multi-chain balances** - USDC across Arbitrum, Base, Optimism, BSC
+- **Positions** - Open/closed positions with P&L
+- **P&L summary** - Performance metrics and breakdowns
+- **Trade history** - Complete transaction log with settlements
 
 <Info>
-  All portfolio data is **cross-chain and cross-venue** aggregated. You get a single unified view regardless of where your funds and positions are.
+  All data aggregated across chains and venues automatically.
 </Info>
 
 ---
 
 ## Get User Balances
 
-Get USDC and token balances across all chains.
+Get USDC balances across all chains.
 
 <ParamField path="GET" type="method">
-  /v1/portfolio/balances
-</ParamField>
-
-### Request
-
-<ParamField query="address" type="string" required>
-  User wallet address (0x...)
-</ParamField>
-
-<ParamField query="chain" type="string">
-  Filter by specific chain:
-  - `arbitrum`
-  - `optimism`
-  - `binance`
-  - `polygon`
-  
-  Omit to get balances across all chains
+  /v1/portfolio/:address/balances
 </ParamField>
 
 ### Response
@@ -47,120 +31,66 @@ Get USDC and token balances across all chains.
 {
   "ok": true,
   "data": {
-    "address": "0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb",
-    "totalUSDC": 5234.56,
-    "totalPositionValue": 3421.89,
-    "totalValue": 8656.45,
+    "address": "0x your_address",
+    "totalUSDC": 12345.67,
+    "totalPositionValue": 8901.23,
+    "totalValue": 21246.90,
     "chains": {
       "arbitrum": {
-        "chainId": 42161,
-        "usdc": 2100.00,
-        "tokens": 1500.45,
-        "lpShares": 890.34,
-        "total": 4490.79
+        "balance": 5000.00,
+        "positionValue": 3500.00,
+        "total": 8500.00
       },
-      "optimism": {
-        "chainId": 10,
-        "usdc": 1200.00,
-        "tokens": 1021.44,
-        "lpShares": 500.00,
-        "total": 2721.44
-      },
-      "binance": {
-        "chainId": 56,
-        "usdc": 1934.56,
-        "tokens": 900.00,
-        "lpShares": 0,
-        "total": 2834.56
-      },
-      "polygon": {
-        "chainId": 137,
-        "usdc": 0,
-        "tokens": 0,
-        "lpShares": 1500.00,
-        "total": 1500.00
+      "base": {
+        "balance": 7345.67,
+        "positionValue": 5401.23,
+        "total": 12746.90
       }
     },
     "breakdown": {
-      "availableUSDC": 5234.56,
-      "activePositions": 3421.89,
-      "lpVaults": 2890.34,
-      "pendingSettlements": 150.00
+      "availableUSDC": 12345.67,
+      "activePositions": 8901.23,
+      "lpVaults": 0.00,
+      "pendingSettlements": 0.00
     }
-  },
-  "timestamp": 1638360000000
+  }
 }
 ```
 
 <ResponseField name="totalUSDC" type="number">
-  Total USDC across all chains
-  
-  Available for trading or withdrawal
+  Available USDC balance across all chains
 </ResponseField>
 
 <ResponseField name="totalPositionValue" type="number">
   Current value of all open positions
-  
-  Calculated at current market prices
-</ResponseField>
-
-<ResponseField name="totalValue" type="number">
-  Total portfolio value (USDC + positions + LP shares)
 </ResponseField>
 
 <ResponseField name="chains" type="object">
-  Per-chain breakdown of balances
-  
-  Each chain shows USDC, token values, and LP shares
+  Per-chain breakdown of balances and positions
 </ResponseField>
 
-<ResponseField name="breakdown" type="object">
-  Balance breakdown by type:
-  - `availableUSDC` - Free USDC for trading
-  - `activePositions` - Value of open positions
-  - `lpVaults` - LP vault shares
-  - `pendingSettlements` - Winnings awaiting claim
-</ResponseField>
-
-### Example Request
+### Example
 
 <CodeGroup>
 
 ```bash cURL
-curl "https://api.predifi.com/v1/portfolio/balances?address=0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb" \
+curl "https://api.predifi.com/v1/portfolio/0x your_address/balances" \
   -H "Authorization: Bearer YOUR_API_KEY"
 ```
 
 ```typescript TypeScript
-const balances = await api.get('/v1/portfolio/balances', {
-  params: {
-    address: userAddress
-  }
-});
-
-console.log(`Total value: $${balances.data.totalValue}`);
-console.log(`Available USDC: $${balances.data.totalUSDC}`);
-console.log(`Position value: $${balances.data.totalPositionValue}`);
-
-// Per-chain breakdown
-Object.entries(balances.data.chains).forEach(([chain, balance]) => {
-  console.log(`${chain}: $${balance.total}`);
-});
+const balances = await api.get('/v1/portfolio/0x your_address/balances');
+console.log(`Total: $${balances.data.totalValue}`);
+console.log(`Available: $${balances.data.totalUSDC}`);
+console.log(`In positions: $${balances.data.totalPositionValue}`);
 ```
 
 ```python Python
 response = requests.get(
-    'https://api.predifi.com/v1/portfolio/balances',
-    headers={'Authorization': f'Bearer {api_key}'},
-    params={'address': user_address}
+    'https://api.predifi.com/v1/portfolio/0x your_address/balances',
+    headers={'Authorization': f'Bearer {api_key}'}
 )
-
-data = response.json()['data']
-print(f"Total value: ${data['totalValue']}")
-print(f"Available USDC: ${data['totalUSDC']}")
-
-for chain, balance in data['chains'].items():
-    print(f"{chain}: ${balance['total']}")
+print(f"Total: ${response.json()['data']['totalValue']}")
 ```
 
 </CodeGroup>
@@ -169,23 +99,16 @@ for chain, balance in data['chains'].items():
 
 ## Get User Positions
 
-Get all open positions with real-time P&L.
+Get all open or closed positions.
 
 <ParamField path="GET" type="method">
   /v1/portfolio/:address/positions
 </ParamField>
 
-### Request
-
-<ParamField path="address" type="string" required>
-  User wallet address
-</ParamField>
+### Parameters
 
 <ParamField query="status" type="string">
-  Filter by position status:
-  - `open` - Active positions (default)
-  - `closed` - Settled positions
-  - `all` - Both open and closed
+  Filter: `open`, `closed`, or omit for all
 </ParamField>
 
 <ParamField query="market" type="string">
@@ -193,7 +116,7 @@ Get all open positions with real-time P&L.
 </ParamField>
 
 <ParamField query="category" type="string">
-  Filter by category: `crypto`, `sports`, etc.
+  Filter by category (crypto, sports, politics, etc.)
 </ParamField>
 
 ### Response
@@ -201,175 +124,70 @@ Get all open positions with real-time P&L.
 ```json
 {
   "ok": true,
-  "data": {
-    "address": "0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb",
-    "openPositions": 15,
-    "totalInvested": 2500.00,
-    "currentValue": 3421.89,
-    "totalPnL": 921.89,
-    "totalPnLPercent": 36.88,
-    "positions": [
-      {
-        "positionId": "pos_123abc",
-        "marketId": "BTC-15M-20250111-1430",
-        "market": {
-          "question": "Will BTC price be above $102,500 at 14:30 UTC?",
-          "category": "crypto",
-          "asset": "BTC",
-          "interval": "15M",
-          "expiresAt": 1638363600000
-        },
-        "outcome": "YES",
-        "outcomeId": 0,
-        "shares": 150.75,
-        "avgEntryPrice": 0.6633,
-        "invested": 100.00,
-        "currentPrice": 0.7200,
-        "currentValue": 108.54,
-        "pnl": 8.54,
-        "pnlPercent": 8.54,
-        "venue": "polymarket",
-        "chain": "arbitrum",
-        "openedAt": 1638360000000,
-        "status": "open"
-      },
-      {
-        "positionId": "pos_456def",
-        "marketId": "ETH-30M-20250111-1500",
-        "market": {
-          "question": "Will ETH price be above $3,800 at 15:00 UTC?",
-          "category": "crypto",
-          "asset": "ETH",
-          "interval": "30M",
-          "expiresAt": 1638365400000
-        },
-        "outcome": "NO",
-        "outcomeId": 1,
-        "shares": 200.50,
-        "avgEntryPrice": 0.4500,
-        "invested": 90.23,
-        "currentPrice": 0.5100,
-        "currentValue": 102.26,
-        "pnl": 12.03,
-        "pnlPercent": 13.33,
-        "venue": "predifi_clob",
-        "chain": "optimism",
-        "openedAt": 1638361200000,
-        "status": "open"
-      }
-    ]
-  },
-  "timestamp": 1638360000000
+  "data": [
+    {
+      "positionId": "pos_123",
+      "marketId": "BTC-15M-20250111-1430",
+      "question": "Will BTC be above $100K?",
+      "outcome": "YES",
+      "outcomeId": 0,
+      "shares": 150.0,
+      "avgEntryPrice": 0.6543,
+      "currentPrice": 0.6789,
+      "entryValue": 98.15,
+      "currentValue": 101.84,
+      "pnl": 3.69,
+      "pnlPercent": 3.76,
+      "venue": "polymarket",
+      "chain": "polygon",
+      "status": "open",
+      "openedAt": 1638360000000,
+      "closedAt": null
+    }
+  ]
 }
 ```
 
-<ResponseField name="openPositions" type="number">
-  Number of active positions
+<ResponseField name="shares" type="number">
+  Number of outcome shares held
 </ResponseField>
 
-<ResponseField name="totalInvested" type="number">
-  Total USDC invested in open positions
+<ResponseField name="avgEntryPrice" type="number">
+  Average price paid per share (0-1)
 </ResponseField>
 
-<ResponseField name="currentValue" type="number">
-  Current total value at market prices
+<ResponseField name="pnl" type="number">
+  Profit/loss in USDC (unrealized for open positions)
 </ResponseField>
 
-<ResponseField name="totalPnL" type="number">
-  Total profit/loss across all positions (USDC)
-  
-  Positive = profit, Negative = loss
-</ResponseField>
-
-<ResponseField name="totalPnLPercent" type="number">
-  Total P&L as percentage of invested capital
-</ResponseField>
-
-<ResponseField name="positions" type="array">
-  Array of position objects
-</ResponseField>
-
-<ResponseField name="positions[].positionId" type="string">
-  Unique position identifier
-</ResponseField>
-
-<ResponseField name="positions[].shares" type="number">
-  Number of outcome tokens held
-</ResponseField>
-
-<ResponseField name="positions[].avgEntryPrice" type="number">
-  Average price paid per token (0-1)
-</ResponseField>
-
-<ResponseField name="positions[].currentPrice" type="number">
-  Current market price (0-1)
-</ResponseField>
-
-<ResponseField name="positions[].pnl" type="number">
-  Position P&L in USDC
-  
-  Formula: `(currentPrice - avgEntryPrice) × shares`
-</ResponseField>
-
-<ResponseField name="positions[].venue" type="string">
-  Where position was opened:
-  - `polymarket`
-  - `predifi_clob`
-  - `limitless`
-</ResponseField>
-
-<ResponseField name="positions[].chain" type="string">
-  Chain where tokens are held:
-  - `arbitrum`
-  - `optimism`
-  - `binance`
-  - `polygon`
-</ResponseField>
-
-### Example Request
+### Example
 
 <CodeGroup>
 
-```bash cURL
-curl "https://api.predifi.com/v1/portfolio/0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb/positions" \
-  -H "Authorization: Bearer YOUR_API_KEY"
-```
-
 ```typescript TypeScript
-const positions = await api.get(`/v1/portfolio/${userAddress}/positions`, {
-  params: {
-    status: 'open'
-  }
+// Get all open positions
+const positions = await api.get('/v1/portfolio/0x your_address/positions', {
+  params: { status: 'open' }
 });
 
-console.log(`Open positions: ${positions.data.openPositions}`);
-console.log(`Total P&L: $${positions.data.totalPnL} (${positions.data.totalPnLPercent.toFixed(2)}%)`);
+console.log(`Open positions: ${positions.data.length}`);
 
-// Show each position
-positions.data.positions.forEach(pos => {
-  console.log(`\n${pos.market.question}`);
-  console.log(`  Outcome: ${pos.outcome}`);
-  console.log(`  Shares: ${pos.shares}`);
-  console.log(`  Entry: $${pos.avgEntryPrice}`);
-  console.log(`  Current: $${pos.currentPrice}`);
+positions.data.forEach(pos => {
+  console.log(`${pos.question}: ${pos.outcome}`);
+  console.log(`  Shares: ${pos.shares} @ $${pos.avgEntryPrice}`);
   console.log(`  P&L: $${pos.pnl} (${pos.pnlPercent.toFixed(2)}%)`);
 });
 ```
 
 ```python Python
 response = requests.get(
-    f'https://api.predifi.com/v1/portfolio/{user_address}/positions',
+    'https://api.predifi.com/v1/portfolio/0x your_address/positions',
     headers={'Authorization': f'Bearer {api_key}'},
     params={'status': 'open'}
 )
 
-data = response.json()['data']
-print(f"Open positions: {data['openPositions']}")
-print(f"Total P&L: ${data['totalPnL']} ({data['totalPnLPercent']:.2f}%)")
-
-for pos in data['positions']:
-    print(f"\n{pos['market']['question']}")
-    print(f"  Outcome: {pos['outcome']}")
+for pos in response.json()['data']:
+    print(f"{pos['question']}: {pos['outcome']}")
     print(f"  P&L: ${pos['pnl']} ({pos['pnlPercent']:.2f}%)")
 ```
 
@@ -379,31 +197,16 @@ for pos in data['positions']:
 
 ## Get P&L Summary
 
-Get profit/loss summary with historical performance.
+Get profit/loss summary and performance metrics.
 
 <ParamField path="GET" type="method">
   /v1/portfolio/:address/pnl
 </ParamField>
 
-### Request
-
-<ParamField path="address" type="string" required>
-  User wallet address
-</ParamField>
+### Parameters
 
 <ParamField query="period" type="string">
-  Time period for P&L calculation:
-  - `24h` - Last 24 hours
-  - `7d` - Last 7 days
-  - `30d` - Last 30 days (default)
-  - `all` - All time
-</ParamField>
-
-<ParamField query="groupBy" type="string">
-  Group results by:
-  - `day` - Daily P&L
-  - `week` - Weekly P&L
-  - `month` - Monthly P&L
+  Time period: `24h`, `7d`, `30d`, `all` (default: `all`)
 </ParamField>
 
 ### Response
@@ -412,159 +215,75 @@ Get profit/loss summary with historical performance.
 {
   "ok": true,
   "data": {
-    "address": "0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb",
-    "period": "30d",
+    "period": "all",
     "summary": {
-      "totalPnL": 1245.67,
-      "totalPnLPercent": 24.91,
-      "realizedPnL": 823.45,
-      "unrealizedPnL": 422.22,
-      "totalInvested": 5000.00,
-      "totalReturned": 6245.67,
-      "winRate": 65.4,
-      "avgWin": 45.67,
-      "avgLoss": -23.45,
-      "bestTrade": 234.56,
-      "worstTrade": -89.12,
-      "totalTrades": 52,
-      "winningTrades": 34,
-      "losingTrades": 18
+      "totalPnL": 1234.56,
+      "realizedPnL": 890.12,
+      "unrealizedPnL": 344.44,
+      "roi": 15.43,
+      "winRate": 0.65,
+      "avgWin": 125.30,
+      "avgLoss": -78.45,
+      "bestTrade": 456.78,
+      "worstTrade": -234.12,
+      "totalTrades": 89,
+      "winningTrades": 58,
+      "losingTrades": 31
     },
     "byCategory": {
-      "crypto": {
-        "pnl": 1023.45,
-        "trades": 45,
-        "winRate": 68.9
-      },
-      "sports": {
-        "pnl": 222.22,
-        "trades": 7,
-        "winRate": 42.9
-      }
+      "crypto": { "pnl": 789.01, "trades": 45 },
+      "sports": { "pnl": 345.55, "trades": 32 },
+      "politics": { "pnl": 100.00, "trades": 12 }
     },
     "byVenue": {
-      "polymarket": {
-        "pnl": 678.90,
-        "trades": 28
-      },
-      "predifi_clob": {
-        "pnl": 566.77,
-        "trades": 24
-      }
+      "polymarket": { "pnl": 678.90, "trades": 54 },
+      "predifi_clob": { "pnl": 555.66, "trades": 35 }
     },
     "timeline": [
-      {
-        "date": "2025-01-11",
-        "pnl": 45.67,
-        "trades": 3,
-        "invested": 300.00,
-        "returned": 345.67
-      },
-      {
-        "date": "2025-01-10",
-        "pnl": -12.34,
-        "trades": 2,
-        "invested": 200.00,
-        "returned": 187.66
-      }
-      // ... more daily data
+      { "date": "2024-01-01", "pnl": 123.45, "cumulativePnL": 123.45 },
+      { "date": "2024-01-02", "pnl": 67.89, "cumulativePnL": 191.34 }
     ]
-  },
-  "timestamp": 1638360000000
+  }
 }
 ```
 
-<ResponseField name="summary.totalPnL" type="number">
-  Total profit/loss in USDC
+<ResponseField name="totalPnL" type="number">
+  Total P&L (realized + unrealized)
 </ResponseField>
 
-<ResponseField name="summary.realizedPnL" type="number">
-  P&L from closed/settled positions
-</ResponseField>
-
-<ResponseField name="summary.unrealizedPnL" type="number">
-  P&L from open positions (mark-to-market)
-</ResponseField>
-
-<ResponseField name="summary.winRate" type="number">
-  Percentage of winning trades (0-100)
-</ResponseField>
-
-<ResponseField name="summary.avgWin" type="number">
-  Average profit per winning trade
-</ResponseField>
-
-<ResponseField name="summary.avgLoss" type="number">
-  Average loss per losing trade (negative)
+<ResponseField name="winRate" type="number">
+  Percentage of winning trades (0-1)
 </ResponseField>
 
 <ResponseField name="byCategory" type="object">
   P&L breakdown by market category
 </ResponseField>
 
-<ResponseField name="byVenue" type="object">
-  P&L breakdown by trading venue
-</ResponseField>
-
-<ResponseField name="timeline" type="array">
-  Historical P&L over time
-  
-  Grouped by `groupBy` parameter (day/week/month)
-</ResponseField>
-
-### Example Request
+### Example
 
 <CodeGroup>
 
-```bash cURL
-curl "https://api.predifi.com/v1/portfolio/0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb/pnl?period=30d" \
-  -H "Authorization: Bearer YOUR_API_KEY"
-```
-
 ```typescript TypeScript
-const pnl = await api.get(`/v1/portfolio/${userAddress}/pnl`, {
-  params: {
-    period: '30d',
-    groupBy: 'day'
-  }
+const pnl = await api.get('/v1/portfolio/0x your_address/pnl', {
+  params: { period: '30d' }
 });
 
-const { summary, byCategory, timeline } = pnl.data;
-
-console.log('=== 30-Day Performance ===');
-console.log(`Total P&L: $${summary.totalPnL} (${summary.totalPnLPercent}%)`);
-console.log(`Win Rate: ${summary.winRate}%`);
-console.log(`Avg Win: $${summary.avgWin}`);
-console.log(`Avg Loss: $${summary.avgLoss}`);
-
-console.log('\n=== By Category ===');
-Object.entries(byCategory).forEach(([cat, stats]) => {
-  console.log(`${cat}: $${stats.pnl} (${stats.winRate}% win rate)`);
-});
-
-// Plot timeline
-timeline.forEach(day => {
-  const bar = '█'.repeat(Math.abs(day.pnl) / 10);
-  const sign = day.pnl >= 0 ? '+' : '-';
-  console.log(`${day.date}: ${sign}$${Math.abs(day.pnl).toFixed(2)} ${bar}`);
-});
+const { summary } = pnl.data;
+console.log(`Total P&L: $${summary.totalPnL}`);
+console.log(`Win rate: ${(summary.winRate * 100).toFixed(1)}%`);
+console.log(`ROI: ${summary.roi.toFixed(2)}%`);
 ```
 
 ```python Python
 response = requests.get(
-    f'https://api.predifi.com/v1/portfolio/{user_address}/pnl',
+    'https://api.predifi.com/v1/portfolio/0x your_address/pnl',
     headers={'Authorization': f'Bearer {api_key}'},
-    params={'period': '30d', 'groupBy': 'day'}
+    params={'period': '30d'}
 )
 
-data = response.json()['data']
-summary = data['summary']
-
-print(f"Total P&L: ${summary['totalPnL']} ({summary['totalPnLPercent']}%)")
-print(f"Win Rate: {summary['winRate']}%")
-print(f"Total Trades: {summary['totalTrades']}")
-print(f"  Wins: {summary['winningTrades']}")
-print(f"  Losses: {summary['losingTrades']}")
+summary = response.json()['data']['summary']
+print(f"Total P&L: ${summary['totalPnL']}")
+print(f"Win rate: {summary['winRate'] * 100:.1f}%")
 ```
 
 </CodeGroup>
@@ -573,28 +292,16 @@ print(f"  Losses: {summary['losingTrades']}")
 
 ## Get Trade History
 
-Get complete trading history with settlements.
+Get complete trade history with settlements.
 
 <ParamField path="GET" type="method">
   /v1/portfolio/:address/history
 </ParamField>
 
-### Request
+### Parameters
 
-<ParamField path="address" type="string" required>
-  User wallet address
-</ParamField>
-
-<ParamField query="page" type="number">
-  Page number (default: 1)
-</ParamField>
-
-<ParamField query="limit" type="number">
-  Results per page (default: 20, max: 100)
-</ParamField>
-
-<ParamField query="marketId" type="string">
-  Filter by specific market
+<ParamField query="market" type="string">
+  Filter by market ID
 </ParamField>
 
 <ParamField query="category" type="string">
@@ -605,182 +312,92 @@ Get complete trading history with settlements.
   Filter by venue
 </ParamField>
 
+<ParamField query="page" type="number">
+  Page number (default: 1)
+</ParamField>
+
+<ParamField query="limit" type="number">
+  Results per page (max: 100, default: 20)
+</ParamField>
+
 ### Response
 
 ```json
 {
   "ok": true,
-  "data": {
-    "address": "0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb",
-    "trades": [
-      {
-        "tradeId": "trade_123abc",
-        "type": "buy",
-        "marketId": "BTC-15M-20250111-1430",
-        "market": {
-          "question": "Will BTC price be above $102,500 at 14:30 UTC?",
-          "category": "crypto"
-        },
-        "outcome": "YES",
-        "outcomeId": 0,
-        "shares": 150.75,
-        "price": 0.6633,
-        "cost": 100.00,
-        "fee": 0.10,
-        "total": 100.10,
-        "venue": "polymarket",
-        "chain": "arbitrum",
-        "timestamp": 1638360000000,
-        "txHash": "0xabc123...",
-        "settlement": {
-          "settled": true,
-          "result": "YES",
-          "payout": 150.75,
-          "pnl": 50.65,
-          "pnlPercent": 50.60,
-          "settledAt": 1638363600000,
-          "settlementTxHash": "0xdef456..."
-        }
-      },
-      {
-        "tradeId": "trade_456def",
-        "type": "sell",
-        "marketId": "ETH-30M-20250111-1400",
-        "market": {
-          "question": "Will ETH price be above $3,750 at 14:00 UTC?",
-          "category": "crypto"
-        },
-        "outcome": "NO",
-        "outcomeId": 1,
-        "shares": 180.50,
-        "price": 0.5200,
-        "proceeds": 93.86,
-        "fee": 0.09,
-        "total": 93.77,
-        "venue": "predifi_clob",
-        "chain": "optimism",
-        "timestamp": 1638359400000,
-        "txHash": "0x789ghi...",
-        "settlement": {
-          "settled": false,
-          "result": null,
-          "payout": null,
-          "pnl": null,
-          "settledAt": null
-        }
+  "data": [
+    {
+      "tradeId": "trade_123",
+      "marketId": "BTC-15M-20250111-1430",
+      "question": "Will BTC be above $100K?",
+      "outcome": "YES",
+      "outcomeId": 0,
+      "action": "buy",
+      "shares": 150.0,
+      "price": 0.6543,
+      "cost": 98.15,
+      "fee": 0.10,
+      "total": 98.25,
+      "venue": "polymarket",
+      "chain": "polygon",
+      "txHash": "0xabc...",
+      "timestamp": 1638360000000,
+      "settlement": {
+        "settled": true,
+        "result": "YES",
+        "payout": 150.00,
+        "pnl": 51.75
       }
-    ]
-  },
+    }
+  ],
   "pagination": {
     "page": 1,
     "limit": 20,
-    "total": 156,
-    "pages": 8,
+    "total": 89,
+    "pages": 5,
     "hasMore": true
-  },
-  "timestamp": 1638360000000
+  }
 }
 ```
 
-<ResponseField name="trades[].type" type="string">
-  Trade type: `buy` or `sell`
+<ResponseField name="settlement" type="object | null">
+  Settlement info if market resolved, null if still open
 </ResponseField>
 
-<ResponseField name="trades[].cost" type="number">
-  For buys: USDC spent (excluding fee)
-</ResponseField>
-
-<ResponseField name="trades[].proceeds" type="number">
-  For sells: USDC received (excluding fee)
-</ResponseField>
-
-<ResponseField name="trades[].settlement" type="object">
-  Settlement information (if market resolved)
-</ResponseField>
-
-<ResponseField name="trades[].settlement.settled" type="boolean">
-  Whether market has been settled
-</ResponseField>
-
-<ResponseField name="trades[].settlement.result" type="string">
-  Winning outcome: `YES` or `NO`
-</ResponseField>
-
-<ResponseField name="trades[].settlement.payout" type="number">
-  USDC payout received (for winning positions)
-</ResponseField>
-
-<ResponseField name="trades[].settlement.pnl" type="number">
-  Final profit/loss on the trade
-</ResponseField>
-
-### Example Request
+### Example
 
 <CodeGroup>
 
-```bash cURL
-curl "https://api.predifi.com/v1/portfolio/0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb/history?limit=50" \
-  -H "Authorization: Bearer YOUR_API_KEY"
-```
-
 ```typescript TypeScript
-const history = await api.get(`/v1/portfolio/${userAddress}/history`, {
-  params: {
-    limit: 50,
-    category: 'crypto'
-  }
+const history = await api.get('/v1/portfolio/0x your_address/history', {
+  params: { limit: 50, category: 'crypto' }
 });
 
 console.log(`Total trades: ${history.pagination.total}`);
 
-history.data.trades.forEach(trade => {
-  console.log(`\n${trade.type.toUpperCase()}: ${trade.market.question}`);
-  console.log(`  Outcome: ${trade.outcome}`);
-  console.log(`  Shares: ${trade.shares} @ $${trade.price}`);
-  console.log(`  Total: $${trade.total}`);
-  
-  if (trade.settlement.settled) {
-    const emoji = trade.settlement.pnl >= 0 ? '✅' : '❌';
-    console.log(`  ${emoji} Settled: $${trade.settlement.pnl} P&L`);
-  } else {
-    console.log(`  ⏳ Pending settlement`);
+history.data.forEach(trade => {
+  console.log(`${trade.action.toUpperCase()} ${trade.shares} ${trade.outcome}`);
+  console.log(`  @ $${trade.price} on ${trade.venue}`);
+  if (trade.settlement) {
+    console.log(`  Settled: ${trade.settlement.result} → P&L: $${trade.settlement.pnl}`);
   }
 });
 ```
 
 ```python Python
 response = requests.get(
-    f'https://api.predifi.com/v1/portfolio/{user_address}/history',
+    'https://api.predifi.com/v1/portfolio/0x your_address/history',
     headers={'Authorization': f'Bearer {api_key}'},
-    params={'limit': 50, 'category': 'crypto'}
+    params={'limit': 50}
 )
 
-data = response.json()
-print(f"Total trades: {data['pagination']['total']}")
-
-for trade in data['data']['trades']:
-    print(f"\n{trade['type'].upper()}: {trade['shares']} shares @ ${trade['price']}")
-    
-    if trade['settlement']['settled']:
-        pnl = trade['settlement']['pnl']
-        status = '✅ WIN' if pnl >= 0 else '❌ LOSS'
-        print(f"  {status}: ${pnl}")
-    else:
-        print("  ⏳ Pending")
+for trade in response.json()['data']:
+    print(f"{trade['action'].upper()} {trade['shares']} {trade['outcome']}")
+    if trade['settlement']:
+        print(f"  P&L: ${trade['settlement']['pnl']}")
 ```
 
 </CodeGroup>
-
----
-
-## Error Handling
-
-| Error Code | HTTP Status | Description |
-|------------|-------------|-------------|
-| `INVALID_ADDRESS` | 400 | Invalid wallet address format |
-| `USER_NOT_FOUND` | 404 | No data for this address |
-| `INVALID_PERIOD` | 400 | Invalid time period parameter |
-| `POSITION_NOT_FOUND` | 404 | Position doesn't exist |
 
 ---
 
@@ -788,42 +405,30 @@ for trade in data['data']['trades']:
 
 | Endpoint | Rate Limit |
 |----------|------------|
-| `GET /v1/portfolio/balances` | 30 req/min |
+| `GET /v1/portfolio/:address/balances` | 30 req/min |
 | `GET /v1/portfolio/:address/positions` | 30 req/min |
 | `GET /v1/portfolio/:address/pnl` | 20 req/min |
-| `GET /v1/portfolio/:address/history` | 20 req/min |
+| `GET /v1/portfolio/:address/history` | 30 req/min |
+
+<Tip>
+  Use WebSocket `portfolio` channel for real-time balance and position updates.
+</Tip>
 
 ---
 
 ## Next Steps
 
 <CardGroup cols={2}>
-  <Card
-    title="Trading API"
-    icon="cart-shopping"
-    href="/api-reference/trading"
-  >
-    Place trades based on portfolio data
+  <Card title="Trading API" icon="cart-shopping" href="/api-reference/trading">
+    Place trades to build positions
   </Card>
-  <Card
-    title="Markets API"
-    icon="chart-line"
-    href="/api-reference/markets"
-  >
-    Find new markets to trade
+  <Card title="Markets API" icon="chart-line" href="/api-reference/markets">
+    Browse available markets
   </Card>
-  <Card
-    title="WebSocket API"
-    icon="bolt"
-    href="/api-reference/websockets"
-  >
+  <Card title="WebSocket API" icon="bolt" href="/api-reference/websockets">
     Real-time portfolio updates
   </Card>
-  <Card
-    title="Orderbook API"
-    icon="list"
-    href="/api-reference/orderbook"
-  >
+  <Card title="Orderbook API" icon="book" href="/api-reference/orderbook">
     Check market liquidity
   </Card>
 </CardGroup>
