@@ -79,6 +79,37 @@ Predifi's architecture separates **user funds** from **trade execution**. Your a
 
 Smart AA Wallets are smart contract wallets that enable gasless transactions and automated execution.
 
+**Key features:**
+- **Gasless transactions** - Protocol pays gas for execution
+- **Batched operations** - Multiple actions in single tx
+- **Automated execution** - No manual signing required
+- **Smart routing** - Optimal path selection
+
+### How AA Wallets Work
+
+1. **Deposit to LP Vault** - User funds USDC to vault on home chain
+2. **Approve Trading** - One-time approval for protocol
+3. **Submit Trade Request** - User requests trade via UI/API
+4. **AA Wallet Execution** - Protocol's AA wallet:
+   - Bridges USDC if needed
+   - Executes trade on venue
+   - Bridges tokens back
+   - Returns profits to user
+5. **User Receives Tokens** - Position tokens in user wallet
+
+**Timeline:**
+    - Bridge (if needed): 2-5 minutes
+    - Trade execution: &lt;1 minute
+    - Total: 2-6 minutes average
+
+---
+
+## Smart Account Abstraction
+
+### What is Account Abstraction?
+
+Smart AA Wallets are smart contract wallets that enable gasless transactions and automated execution.
+
 **Powered by Alchemy:**
 - **Gas abstraction** - Protocol pays gas fees
 - **Batch transactions** - Multiple actions in one tx
