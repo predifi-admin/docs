@@ -18,7 +18,8 @@
             "pages": [
               "index",
               "about",
-              "how-it-works"
+              "how-it-works",
+              "technology/partners"
             ]
           },
           {
@@ -35,8 +36,7 @@
             "group": "Technology",
             "pages": [
               "technology/chain-agnostic",
-              "technology/cross-chain-bridging",
-              "technology/partners"
+              "technology/cross-chain-bridging"
             ]
           },
           {
