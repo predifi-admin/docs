@@ -7,34 +7,27 @@ description: "Built with industry-leading infrastructure partners"
 
 Predifi partners with top-tier protocols to deliver a **secure, fast, and reliable** prediction market platform. We don't reinvent the wheel—we integrate with proven solutions.
 
-> 🤝 **Circle CCTP + Via Labs + Stork Network + Wormhole = Production-Ready Infrastructure**
+> 🤝 **Circle CCTP + Stork Network + Wormhole + Alchemy = Production-Ready Infrastructure**
 
 ---
 
 ## Our Partners
 
 <CardGroup cols={2}>
-  <Card title="Circle" icon="circle">
-    **Cross-Chain Transfer Protocol**
-    
+  <Card title="Circle CCTP" icon="circle">
     Native USDC bridging between chains
   </Card>
   
-  <Card title="Via Labs" icon="v">
-    **Cross-Chain Messaging**
-    
-    Multi-chain communication infrastructure
+  <Card title="Stork Network" icon="bird">
+    Low-latency oracle price feeds
   </Card>
   
-  <Card title="Stork Network" icon="bird">
-    **Oracle Infrastructure**
-    
-    Low-latency, manipulation-resistant price feeds
-  </Card>
   <Card title="Wormhole" icon="worm">
-    **Generic Bridging**
-    
-    Backup bridge for non-CCTP routes
+    Generic cross-chain messaging
+  </Card>
+  
+  <Card title="Alchemy" icon="cube">
+    Account Abstraction infrastructure
   </Card>
 </CardGroup>
 
@@ -42,400 +35,59 @@ Predifi partners with top-tier protocols to deliver a **secure, fast, and reliab
 
 ## Circle - USDC & CCTP
 
-### About Circle
+**Who:** Circle is the issuer of USDC ($35B+ market cap) and creator of CCTP (Cross-Chain Transfer Protocol).
 
-**Circle** is the issuer of **USDC**, the world's second-largest stablecoin ($35B+ market cap). Their Cross-Chain Transfer Protocol (CCTP) enables native USDC transfers between chains.
+**What We Use:**
+- **USDC** - Primary stablecoin for all trading
+- **CCTP** - Native USDC bridging between chains
 
-<Info>
-  **Why USDC?** 
-  - **1:1 USD backing** - Fully reserved with transparency
-  - **Regulatory compliance** - Licensed and audited
-  - **Wide adoption** - Accepted everywhere in DeFi
-  - **Native on many chains** - Not wrapped or bridged
-</Info>
+**Why Circle:**
+- **Native USDC** - Real USDC on all chains, not wrapped
+- **Security** - Regulated, audited, fully backed 1:1 with USD
+- **Speed** - 15-minute bridge times
+- **Cost** - $0 bridge fees (only pay gas)
 
-### What We Use
+**How It Works:**
+1. Burn USDC on source chain
+2. Circle receives burn attestation
+3. Mint native USDC on destination chain
+4. No liquidity pools or wrapped tokens
 
-**CCTP for USDC Bridging:**
-
-- **Burn & Mint** - Burn USDC on source, mint on destination
-- **Always Native** - Receive real USDC, not wrapped tokens
-- **Capital Efficient** - No liquidity pools required
-- **Fast** - 2-3 minute transfers
-- **Cheap** - ~$0.10-0.50 per bridge
-
-```mermaid
-graph LR
-    USER[User's USDC]
-    BURN[Burn on Chain A]
-    CCTP[Circle CCTP]
-    MINT[Mint on Chain B]
-    RECEIVE[Receive Native USDC]
-    
-    USER --> BURN
-    BURN --> CCTP
-    CCTP --> MINT
-    MINT --> RECEIVE
-    
-    style CCTP fill:#3B82F6
-    style RECEIVE fill:#10B981
-```
-
-### Why Circle?
-
-<AccordionGroup>
-  <Accordion title="Security & Trust" icon="shield-check">
-    - **Regulated issuer** - Licensed as money transmitter
-    - **Monthly attestations** - Third-party audits of reserves
-    - **Full backing** - Every USDC backed 1:1 by USD
-    - **Transparent** - Public reserve reports
-  </Accordion>
-
-  <Accordion title="Native USDC Everywhere" icon="globe">
-    Circle supports native USDC on:
-    - Ethereum, Arbitrum, Optimism, Base
-    - Polygon, Avalanche, Solana
-    - Binance Smart Chain (via partner)
-    
-    No wrapped tokens, no liquidity fragmentation.
-  </Accordion>
-
-  <Accordion title="CCTP Innovation" icon="bolt">
-    First protocol to enable:
-    - **Burn/mint bridging** - No liquidity lock-up
-    - **Permissionless** - Anyone can integrate
-    - **Composable** - Build on top of CCTP
-    - **No slippage** - 1 USDC = 1 USDC always
-  </Accordion>
-
-  <Accordion title="Ecosystem Support" icon="handshake">
-    Circle actively supports developers:
-    - **Grants** - Funding for integrators
-    - **Technical support** - Direct engineering help
-    - **Marketing** - Co-marketing opportunities
-    - **Network effects** - Benefit from USDC adoption
-  </Accordion>
-</AccordionGroup>
-
-### Integration Details
-
-**CCTP Supported Chains:**
-
-| Chain | Native USDC | CCTP Support | Bridge Time |
-|-------|-------------|--------------|-------------|
-| **Arbitrum** | ✅ Yes | ✅ Yes | 2-3 min |
-| **Base** | ✅ Yes | ✅ Yes | 2-3 min |
-| **Optimism** | ✅ Yes | ✅ Yes | 2-3 min |
-| **Ethereum** | ✅ Yes | ✅ Yes | 2-3 min |
-| **Polygon** | ✅ Yes | ✅ Yes | 2-3 min |
-| **Avalanche** | ✅ Yes | ✅ Yes | 2-3 min |
+**Supported Routes:**
+- Arbitrum ↔ Polygon, Base, Optimism
+- Base ↔ Polygon, Arbitrum, Optimism
+- Polygon ↔ Arbitrum, Base, Optimism
 
 [Learn more about CCTP →](/technology/cross-chain-bridging)
 
 ---
 
-## Via Labs - Cross-Chain Messaging
-
-### About Via Labs
-
-**Via Labs** provides **omnichain communication infrastructure** that enables smart contracts on different chains to interact seamlessly.
-
-<Info>
-  **Why Via Labs?**
-  - **Sub-second messaging** - Faster than alternatives
-  - **Multi-chain native** - Built for cross-chain from day one
-  - **Developer-friendly** - Simple SDK and APIs
-  - **Reliable** - 99.9% uptime
-</Info>
-
-### What We Use
-
-**Cross-Chain Coordination:**
-
-<Tabs>
-  <Tab title="Order Matching">
-    **Cross-Chain CLOB:**
-    - Order placed on Chain A
-    - Matched with liquidity on Chain B
-    - Via Labs coordinates settlement
-    - Both users receive assets on their chain
-  </Tab>
-  
-  <Tab title="Liquidity Routing">
-    **Unified Liquidity Pools:**
-    - LP deposits on Chain A
-    - Liquidity available on Chains B, C, D
-    - Via Labs routes requests
-    - Automatic rebalancing
-  </Tab>
-  
-  <Tab title="Position Tracking">
-    **Multi-Chain Portfolio:**
-    - Positions on multiple chains
-    - Via Labs aggregates data
-    - Real-time unified view
-    - Single-click actions across chains
-  </Tab>
-  
-  <Tab title="Market Resolution">
-    **Synchronized Resolution:**
-    - Markets on multiple chains
-    - Via Labs broadcasts resolution
-    - All chains settle simultaneously
-    - Consistent outcomes everywhere
-  </Tab>
-</Tabs>
-
-### Architecture
-
-```mermaid
-graph TB
-    subgraph "Chain A"
-        UA[User Action]
-        CA[Smart Contract A]
-    end
-    
-    subgraph "Via Labs Infrastructure"
-        RELAYER[Message Relayer]
-        VALIDATOR[Validator Network]
-        ROUTER[Message Router]
-    end
-    
-    subgraph "Chain B"
-        CB[Smart Contract B]
-        EXEC[Execution]
-    end
-    
-    subgraph "Chain C"
-        CC[Smart Contract C]
-        EXEC2[Execution]
-    end
-    
-    UA --> CA
-    CA --> RELAYER
-    RELAYER --> VALIDATOR
-    VALIDATOR --> ROUTER
-    ROUTER --> CB
-    ROUTER --> CC
-    CB --> EXEC
-    CC --> EXEC2
-    
-    style RELAYER fill:#3B82F6
-    style VALIDATOR fill:#EC4899
-    style ROUTER fill:#F59E0B
-```
-
-### Why Via Labs?
-
-<AccordionGroup>
-  <Accordion title="Speed" icon="gauge-high">
-    Via Labs delivers messages in **&lt;1 second**:
-    - **Fast relayers** - Optimized infrastructure
-    - **Parallel processing** - Multiple messages simultaneously
-    - **Minimal hops** - Direct chain-to-chain communication
-    - **Low latency** - Sub-second across all supported chains
-  </Accordion>
-
-  <Accordion title="Reliability" icon="shield-check">
-    Built for production:
-    - **99.9% uptime** - Redundant infrastructure
-    - **Automatic retries** - Failed messages retried automatically
-    - **Monitoring** - 24/7 system monitoring
-    - **Incident response** - Quick issue resolution
-  </Accordion>
-
-  <Accordion title="Developer Experience" icon="code">
-    Easy to integrate:
-    ```typescript
-    // Send cross-chain message with Via Labs
-    await viaLabs.send({
-      from: 'arbitrum',
-      to: 'base',
-      message: {
-        action: 'MATCH_ORDER',
-        orderId: '0x123...',
-        amount: 1000
-      }
-    });
-    
-    // That's it! Via Labs handles the rest.
-    ```
-  </Accordion>
-
-  <Accordion title="Cost-Effective" icon="piggy-bank">
-    Competitive pricing:
-    - **Per-message fee**: $0.05-0.20
-    - **No minimum balance** - Pay as you go
-    - **Volume discounts** - Lower costs at scale
-    - **Predictable costs** - No gas spikes
-  </Accordion>
-</AccordionGroup>
-
-### Use Cases
-
-**1. Cross-Chain Order Books:**
-
-```typescript
-// User creates order on Arbitrum
-const order = await predifi.createOrder({
-  chain: 'arbitrum',
-  market: 'BTC-100K',
-  side: 'BUY',
-  amount: 1000
-});
-
-// Via Labs broadcasts to all chains
-await viaLabs.broadcast({
-  chains: ['base', 'optimism'],
-  message: {
-    type: 'NEW_ORDER',
-    order: order
-  }
-});
-
-// Order visible and matchable on all chains
-```
-
-**2. Unified Liquidity:**
-
-```typescript
-// LP deposits on Base
-await vault.deposit({ chain: 'base', amount: 10000 });
-
-// Via Labs distributes liquidity
-await viaLabs.distributeequidity({
-  from: 'base',
-  to: ['arbitrum', 'optimism'],
-  allocation: { arbitrum: 5000, optimism: 5000 }
-});
-
-// Liquidity now available on all chains
-```
-
-[Learn more about cross-chain features →](/technology/chain-agnostic)
-
----
-
 ## Stork Network - Oracle Infrastructure
 
-### About Stork
+**Who:** Stork provides ultra-low-latency, manipulation-resistant oracle price feeds for DeFi.
 
-**Stork Network** provides **ultra-low-latency price feeds** with sub-second updates, purpose-built for high-frequency DeFi applications like prediction markets.
+**What We Use:**
+- **Crypto price feeds** - BTC, ETH, SOL, and 50+ assets
+- **Pull-based oracles** - On-demand data delivery
+- **Real-time updates** - Sub-second price updates
 
-<Info>
-  **Why Stork?**
-  - **400ms latency** - Faster than any alternative
-  - **10,000+ feeds** - Crypto, stocks, sports, events
-  - **Pull-based pricing** - Pay only when you need data
-  - **Manipulation-resistant** - 40+ independent publishers
-</Info>
+**Why Stork:**
+- **Low latency** - &lt;400ms from exchange to on-chain
+- **Manipulation resistant** - 40+ independent publishers
+- **Cost efficient** - Pay per use, not per update
+- **Accurate** - ±0.05% of true market price
 
-### What We Use
+**How It Works:**
+1. Publishers fetch data from exchanges (&lt;100ms)
+2. Stork aggregates from multiple sources (&lt;200ms)
+3. Data delivered on-chain when requested (&lt;100ms)
+4. Markets resolve using verified prices
 
-**Price Feeds for Market Resolution:**
-
-- **Crypto Prices** - BTC, ETH, SOL, etc. (400ms latency)
-- **Stock Indices** - S&P 500, Nasdaq, etc. (1s latency)
-- **Forex & Commodities** - Major pairs and commodities
-- **Sports Scores** - Real-time game results
-- **Event Outcomes** - Elections, awards, custom events
-
-```mermaid
-graph LR
-    SOURCES[Data Sources<br/>Exchanges, APIs]
-    STORK[Stork Network<br/>40+ Publishers]
-    AGG[Aggregation<br/>Median Price]
-    CHAIN[On-Chain<br/>Verification]
-    PREDIFI[Predifi<br/>Market Resolution]
-    
-    SOURCES --> STORK
-    STORK --> AGG
-    AGG --> CHAIN
-    CHAIN --> PREDIFI
-    
-    style STORK fill:#3B82F6
-    style AGG fill:#EC4899
-    style PREDIFI fill:#10B981
-```
-
-### Why Stork?
-
-<AccordionGroup>
-  <Accordion title="Ultra-Low Latency" icon="bolt">
-    **400ms average** from data source to on-chain:
-    - Publishers fetch data: &lt;100ms
-    - Stork aggregation: &lt;200ms
-    - Blockchain delivery: &lt;100ms
-    
-    Critical for fast-moving crypto markets!
-  </Accordion>
-
-  <Accordion title="Pull-Based Model" icon="download">
-    Pay only for data you use:
-    - Traditional oracles: **Constant updates** (expensive)
-    - Stork: **On-demand updates** (cheap)
-    
-    Savings: **99%+ on oracle costs**
-    
-    We fetch prices only when markets resolve, not constantly.
-  </Accordion>
-
-  <Accordion title="Comprehensive Coverage" icon="globe">
-    10,000+ price feeds:
-    - **Crypto**: All major coins and tokens
-    - **TradFi**: Stocks, indices, forex, commodities
-    - **Sports**: NFL, NBA, MLB, soccer, etc.
-    - **Custom**: Elections, awards, weather, shipping
-    
-    One oracle for all market types.
-  </Accordion>
-
-  <Accordion title="Manipulation Resistance" icon="shield-halved">
-    Multiple layers of security:
-    - **40+ publishers** - Need 21+ to manipulate (infeasible)
-    - **Staked collateral** - Publishers lose stake if dishonest
-    - **Median aggregation** - Outliers removed automatically
-    - **Multiple sources** - Each publisher uses 5+ data sources
-    
-    Virtually impossible to manipulate.
-  </Accordion>
-</AccordionGroup>
-
-### Integration Example
-
-```solidity
-// Resolve market using Stork oracle
-contract BTCMarket {
-    IStorkOracle public immutable stork;
-    
-    function resolve() external {
-        // Fetch BTC price from Stork
-        (uint256 price, uint256 timestamp) = stork.getPrice("BTC/USD");
-        
-        // Validate freshness
-        require(block.timestamp - timestamp < 60, "Price stale");
-        
-        // Resolve market
-        if (price >= 100_000e8) {
-            _resolveYes(); // BTC hit $100k!
-        } else {
-            _resolveNo();
-        }
-    }
-}
-```
-
-### Cost Savings
-
-**Oracle cost comparison:**
-
-| Oracle | Model | Cost per Market Resolution |
-|--------|-------|---------------------------|
-| **Stork** (on-demand) | Pull | $0.05 |
-| **Chainlink** (hourly updates) | Push | $360/month → $0.50 per use |
-| **Pyth** (on-demand) | Pull | $0.10 |
-
-By using Stork's pull model, we save **90%+** on oracle costs compared to traditional push oracles.
+**Key Features:**
+- **Median aggregation** - Removes outliers automatically
+- **Publisher incentives** - Staked reputation system
+- **Fallback sources** - Multiple data providers
+- **Historical data** - Full price history available
 
 [Learn more about oracles →](/technology/oracles)
 
@@ -443,381 +95,178 @@ By using Stork's pull model, we save **90%+** on oracle costs compared to tradit
 
 ## Wormhole - Generic Bridging
 
-### About Wormhole
+**Who:** Wormhole is a generic cross-chain messaging protocol connecting 30+ blockchains.
 
-**Wormhole** is a **generic message-passing protocol** connecting 30+ blockchains, enabling asset transfers and cross-chain communication.
+**What We Use:**
+- **Token bridging** - YES/NO position tokens
+- **Message passing** - Cross-chain communication
+- **Backup bridging** - When CCTP unavailable
 
-<Info>
-  **Why Wormhole?**
-  - **30+ chains** - Most chains of any bridge
-  - **Generic messaging** - Send data + tokens
-  - **Battle-tested** - $30B+ cumulative volume
-  - **Fast** - ~1 minute transfers
-</Info>
+**Why Wormhole:**
+- **Battle-tested** - $10B+ in volume, 1B+ messages
+- **Fast** - 1-2 minute finality
+- **Secure** - 19 guardian network validators
+- **Flexible** - Supports any token or message
 
-### What We Use
+**How It Works:**
+1. Lock tokens on source chain
+2. Guardian network validates
+3. Mint wrapped tokens on destination
+4. Redeem for native tokens later
 
-**Backup Bridging:**
-
-Wormhole serves as our **fallback** when CCTP isn't available:
-
-| Scenario | Bridge Used |
-|----------|-------------|
-| USDC: Arbitrum ↔ Base | ✅ **CCTP** (preferred) |
-| USDC: Arbitrum ↔ BSC | ⚠️ **Wormhole** (CCTP not available) |
-| USDC: Base ↔ Solana | ⚠️ **Wormhole** (non-EVM chain) |
-| Non-USDC tokens | ⚠️ **Wormhole** |
-
-### Architecture
-
-```mermaid
-graph TB
-    subgraph "Source Chain"
-        LOCK[Lock Assets]
-    end
-    
-    subgraph "Wormhole Guardian Network"
-        G1[Guardian 1]
-        G2[Guardian 2]
-        G3[Guardian 3]
-        Gn[... 19 total]
-        CONSENSUS[13/19 Consensus]
-    end
-    
-    subgraph "Destination Chain"
-        MINT[Mint Assets]
-    end
-    
-    LOCK --> G1
-    LOCK --> G2
-    LOCK --> G3
-    LOCK --> Gn
-    
-    G1 --> CONSENSUS
-    G2 --> CONSENSUS
-    G3 --> CONSENSUS
-    Gn --> CONSENSUS
-    
-    CONSENSUS --> MINT
-    
-    style CONSENSUS fill:#3B82F6
-    style MINT fill:#10B981
-```
-
-### Why Wormhole?
-
-<AccordionGroup>
-  <Accordion title="Broadest Chain Support" icon="globe">
-    Connects 30+ chains:
-    - **EVM chains**: Ethereum, Arbitrum, Base, BSC, Polygon, Avalanche, etc.
-    - **Non-EVM**: Solana, Aptos, Sui, Near, etc.
-    - **L2s**: zkSync, Scroll, Linea, Mantle
-    
-    Go where CCTP can't.
-  </Accordion>
-
-  <Accordion title="Generic Messaging" icon="message">
-    Not just tokens:
-    - Send messages between chains
-    - Execute cross-chain function calls
-    - Bridge NFTs
-    - Synchronize state
-    
-    More flexible than CCTP.
-  </Accordion>
-
-  <Accordion title="Proven Security" icon="shield-check">
-    Guardian network includes:
-    - Jump Crypto
-    - Coinbase Cloud
-    - P2P
-    - Chorus One
-    - + 15 more reputable validators
-    
-    13/19 signatures required (67% threshold).
-  </Accordion>
-
-  <Accordion title="Speed" icon="rocket">
-    **~1 minute** typical transfer time:
-    - Faster than CCTP (2-3 min)
-    - But delivers wrapped tokens (not native)
-    
-    Trade-off: Speed vs native USDC.
-  </Accordion>
-</AccordionGroup>
-
-### When We Use Wormhole
-
-**Decision tree:**
-
-```
-Need to bridge USDC?
-├─ Both chains support CCTP?
-│  └─ Use CCTP ✅
-└─ One or both chains don't support CCTP?
-   ├─ Need native USDC?
-   │  └─ Use Wormhole + Convert to native
-   └─ Wrapped USDC acceptable?
-      └─ Use Wormhole ✅
-```
-
-### Integration
-
-```typescript
-// Bridge with Wormhole when CCTP unavailable
-async function bridgeUSDC(from: string, to: string, amount: number) {
-  // Check CCTP availability
-  if (await cctp.isSupported(from, to)) {
-    return await cctp.bridge(from, to, amount);
-  }
-  
-  // Fallback to Wormhole
-  return await wormhole.bridge({
-    from,
-    to,
-    token: 'USDC',
-    amount,
-    recipient: userAddress
-  });
-}
-```
+**Use Cases:**
+- Bridge position tokens back to user chains
+- Emergency fallback for USDC bridging
+- Future support for non-USDC assets
 
 [Learn more about bridging →](/technology/cross-chain-bridging)
 
 ---
 
-## Partner Comparison
+## Alchemy - Account Abstraction
 
-### At a Glance
+**Who:** Alchemy provides Account Abstraction infrastructure powering the next generation of web3 wallets.
 
-| Partner | Purpose | Why We Use Them | Alternatives |
-|---------|---------|-----------------|--------------|
-| **Circle** | USDC + CCTP | Native USDC bridging, regulatory compliance | Tether (USDT), MakerDAO (DAI) |
-| **Via Labs** | Cross-chain messaging | Fast, reliable message passing | LayerZero, Axelar |
-| **Stork** | Oracles | Ultra-low latency, pull-based pricing | Chainlink, Pyth |
-| **Wormhole** | Generic bridging | Broadest chain support | LayerZero, Axelar |
+**What We Use:**
+- **Smart Account Wallets** - For trade execution
+- **Gas abstraction** - Gasless transactions
+- **Bundler infrastructure** - Transaction batching
 
-### Why These Partners?
+**Why Alchemy:**
+- **Proven** - Powers 70% of top NFT projects
+- **Scalable** - 400M+ requests per day
+- **Reliable** - 99.99% uptime SLA
+- **Developer friendly** - Best-in-class APIs
 
-<AccordionGroup>
-  <Accordion title="Best-in-Class" icon="star">
-    Each partner is **#1 or #2** in their category:
-    - Circle: #1 regulated stablecoin issuer
-    - Via Labs: Top-tier messaging infrastructure
-    - Stork: Fastest oracle for DeFi
-    - Wormhole: Most chains of any bridge
-  </Accordion>
+**How It Works:**
+1. User signs trade intent
+2. Protocol creates UserOperation
+3. Alchemy Bundler executes on-chain
+4. Gas fees handled by protocol
 
-  <Accordion title="Proven Track Record" icon="badge-check">
-    All partners have:
-    - **Years of operation** - Not experimental
-    - **Billions in volume** - Battle-tested at scale
-    - **Major backers** - Well-funded and supported
-    - **Strong teams** - Experienced founders and engineers
-  </Accordion>
+**Benefits for Users:**
+- No gas tokens needed on execution chains
+- Batch multiple trades in one transaction
+- Social recovery for wallet access
+- Session keys for temporary permissions
 
-  <Accordion title="Developer-Friendly" icon="code">
-    Easy to integrate:
-    - Comprehensive documentation
-    - Active developer support
-    - Open-source SDKs
-    - Example code and tutorials
-  </Accordion>
-
-  <Accordion title="Aligned Incentives" icon="handshake">
-    Partners support our growth:
-    - Circle offers grants for CCTP integrators
-    - Via Labs provides technical support
-    - Stork offers volume discounts
-    - Wormhole has co-marketing opportunities
-  </Accordion>
-</AccordionGroup>
+[Learn more →](https://www.alchemy.com/account-abstraction)
 
 ---
 
-## Partnership Benefits for Users
+## Why These Partners?
 
-### 🔒 Security
-
-Using industry leaders means:
-- **Audited code** - Multiple security audits
-- **Bug bounties** - $10M+ in bug bounty programs
-- **Insurance** - Some partners offer insurance
-- **Track record** - Proven security over years
-
-### ⚡ Performance
-
-Best-of-breed solutions deliver:
-- **Low latency** - Sub-second to few minutes
-- **High throughput** - Handle millions of transactions
-- **99.9% uptime** - Reliable infrastructure
-- **Scalability** - Grows with our user base
-
-### 💰 Cost Efficiency
-
-Partners enable low costs:
-- **CCTP**: $0.10 bridges (vs $5+ on generic bridges)
-- **Stork**: $0.05 oracle updates (vs $0.50+)
-- **Via Labs**: $0.05-0.20 messages
-- **Total savings**: **90%+ vs alternatives**
-
-### 🌐 Multi-Chain Support
-
-Together, our partners support:
-- **50+ blockchains** (Wormhole)
-- **Native USDC on 6+ major chains** (Circle)
-- **10,000+ price feeds** (Stork)
-- **Cross-chain messaging on all EVM chains** (Via Labs)
-
----
-
-## Future Partnerships
-
-### Actively Exploring
-
-<CardGroup cols={2}>
-  <Card title="LayerZero" icon="layer-group">
-    Alternative messaging protocol
+<CardGroup cols={3}>
+  <Card title="Security First" icon="shield-check">
+    All partners are audited, battle-tested, and trusted by billions in TVL.
   </Card>
-  <Card title="Pyth Network" icon="p">
-    Additional oracle for crypto feeds
+  
+  <Card title="Best-in-Class" icon="star">
+    We integrate market leaders, not experimental protocols.
   </Card>
-  <Card title="The Graph" icon="chart-network">
-    Indexing and querying on-chain data
-  </Card>
-  <Card title="Gelato" icon="snowflake">
-    Automated task execution (auto-claims)
+  
+  <Card title="Production Ready" icon="rocket">
+    Proven infrastructure that scales to millions of users.
   </Card>
 </CardGroup>
 
-### Grant Applications
+---
 
-We're applying for grants from:
-- **Arbitrum Foundation** - LTIP/STIP programs
-- **Optimism Collective** - Retroactive public goods funding
-- **Base** - Builder grants
-- **Binance Chain** - MVB (Most Valuable Builder) program
+## Integration Architecture
 
-Success determines our **chain deployment priority**.
+**Stack Overview:**
+
+```
+┌─────────────────────────────────┐
+│      Predifi Application        │
+├─────────────────────────────────┤
+│   Alchemy Account Abstraction   │  ← Smart AA Wallets
+├─────────────────────────────────┤
+│  Circle CCTP  │  Wormhole       │  ← Cross-chain transfers
+├─────────────────────────────────┤
+│      Stork Network Oracles      │  ← Price feeds
+├─────────────────────────────────┤
+│    Arbitrum │ Base │ Polygon    │  ← EVM Chains
+└─────────────────────────────────┘
+```
+
+**Data Flow:**
+1. User deposits USDC (Circle)
+2. Funds bridged via CCTP
+3. Trade executed via AA Wallet (Alchemy)
+4. Prices verified by Stork
+5. Tokens bridged back via Wormhole
 
 ---
 
-## Become a Partner
+## Partner Comparison
 
-### Integration Opportunities
+| Partner | Function | Cost | Speed | Why Chosen |
+|---------|----------|------|-------|------------|
+| **Circle CCTP** | USDC bridging | $0 | 15 min | Native USDC, zero fees |
+| **Stork** | Price feeds | ~$0.01/update | &lt;400ms | Fastest, most accurate |
+| **Wormhole** | Token bridging | ~$0.50 | 1-2 min | Secure, proven at scale |
+| **Alchemy** | AA Wallets | $0 (protocol pays) | Instant | Best AA infrastructure |
 
-We're open to partnering with:
+---
+
+## Security & Audits
+
+All partners maintain rigorous security standards:
 
 <AccordionGroup>
-  <Accordion title="Infrastructure Providers" icon="server">
-    - RPC providers (Alchemy, Infura)
-    - Indexing solutions (The Graph, Goldsky)
-    - Wallet connect providers (WalletConnect, Privy)
-    - Account abstraction (Biconomy, ZeroDev)
+  <Accordion title="Circle" icon="circle">
+    - Licensed money transmitter
+    - Monthly reserve attestations
+    - Full regulatory compliance
+    - Third-party audits
   </Accordion>
 
-  <Accordion title="Data Providers" icon="database">
-    - Sports data (ESPN, The Odds API)
-    - Political data (FiveThirtyEight, PredictIt)
-    - Financial data (Bloomberg, Reuters)
-    - Custom event data
+  <Accordion title="Stork Network" icon="bird">
+    - Multiple independent publishers
+    - Staked reputation system
+    - Historical data verification
+    - Outlier detection algorithms
   </Accordion>
 
-  <Accordion title="Liquidity Partners" icon="droplet">
-    - Market makers
-    - Liquidity providers
-    - Treasury management
-    - Cross-protocol liquidity
+  <Accordion title="Wormhole" icon="worm">
+    - 19-validator guardian network
+    - Multiple security audits
+    - $2.5M bug bounty program
+    - Insurance partnerships
   </Accordion>
 
-  <Accordion title="Distribution Partners" icon="share-nodes">
-    - Wallets (MetaMask, Coinbase Wallet)
-    - Exchanges (Binance, Coinbase)
-    - Aggregators (1inch, Matcha)
-    - Social platforms (Lens, Farcaster)
+  <Accordion title="Alchemy" icon="cube">
+    - SOC 2 Type II certified
+    - ERC-4337 compliant
+    - Battle-tested at scale
+    - 99.99% uptime guarantee
   </Accordion>
 </AccordionGroup>
 
-### Partner Benefits
+---
 
-**What we offer partners:**
+## Future Partners
 
-- 📣 **Co-marketing** - Joint announcements, blog posts
-- 🎯 **User access** - Exposure to our user base
-- 💡 **Feedback loop** - Direct input on your product
-- 🤝 **Revenue share** - For certain partnership types
-- 🏆 **Case studies** - Feature your tech in our docs
+We're continuously evaluating new partners for:
 
-### Contact Us
+- Additional oracle providers (Chainlink, Pyth)
+- Alternative bridges (LayerZero, Axelar)
+- New chain integrations (Solana, Cosmos)
+- Enhanced AA features (Biconomy, ZeroDev)
 
-Interested in partnering?
-
-<Card
-  title="Partnership Inquiry"
-  icon="handshake"
-  href="mailto:partnerships@predifi.com"
->
-  Email partnerships@predifi.com with your proposal
-</Card>
+Have a partnership suggestion? [Contact us →](/support/contact)
 
 ---
 
-## Acknowledgments
-
-We're grateful to our partners for:
-
-- **Circle**: Enabling native USDC across chains with CCTP
-- **Via Labs**: Providing lightning-fast cross-chain messaging
-- **Stork Network**: Delivering ultra-low-latency oracle feeds
-- **Wormhole**: Connecting 30+ chains with reliable bridging
-
-Together, we're building the **most advanced prediction market infrastructure** in crypto.
-
----
-
-## Learn More
+## Next Steps
 
 <CardGroup cols={2}>
-  <Card
-    title="Circle CCTP"
-    icon="circle"
-    href="https://www.circle.com/cross-chain-transfer-protocol"
-  >
-    Official CCTP website
+  <Card title="Cross-Chain Bridging" icon="bridge" href="/technology/cross-chain-bridging">
+    Learn how CCTP and Wormhole work
   </Card>
-  <Card
-    title="Via Labs"
-    icon="v"
-    href="https://via.exchange"
-  >
-    Cross-chain infrastructure
-  </Card>
-  <Card
-    title="Stork Network"
-    icon="bird"
-    href="https://www.stork.network"
-  >
-    Oracle documentation
-  </Card>
-  <Card
-    title="Wormhole"
-    icon="worm"
-    href="https://wormhole.com"
-  >
-    Bridge and messaging
-  </Card>
-  <Card
-    title="Technology Overview"
-    icon="microchip"
-    href="/technology/chain-agnostic"
-  >
-    Our tech stack
-  </Card>
-  <Card
-    title="Build on Predifi"
-    icon="code"
-    href="/developers/introduction"
-  >
-    Developer docs
+  
+  <Card title="Oracle Infrastructure" icon="chart-line" href="/technology/oracles">
+    Deep dive into Stork Network
   </Card>
 </CardGroup>
