@@ -1,6 +1,6 @@
 ---
 title: "Cross-Chain Bridging"
-description: "Seamlessly move assets between chains with Circle CCTP and Wormhole"
+description: "Seamless USDC and token transfers powered by Circle CCTP and Wormhole"
 ---
 
 ## Bridging Made Simple
@@ -13,783 +13,319 @@ Predifi integrates best-in-class bridging solutions to enable **frictionless mov
 
 ## Why Cross-Chain Bridging?
 
-### 🌐 Trade Anywhere
+**The Problem:** Different prediction markets exist on different chains
+- Polymarket on Polygon
+- Limitless on Base  
+- Others on Arbitrum, Optimism
 
-Markets exist across multiple chains. Bridging lets you:
-
-- **Access opportunities** on any chain
-- **Avoid fragmentation** - your USDC works everywhere
-- **Optimize for fees** - trade where gas is cheapest
-- **Follow liquidity** - go where the volume is
-
-### 💰 Capital Efficiency
-
-Without bridging:
-```
-You have:  $1,000 USDC on Arbitrum
-You want:  Trade on Base
-Problem:   Need to buy USDC on Base separately 😞
-Result:    Capital split across chains
-```
-
-With bridging:
-```
-You have:  $1,000 USDC on Arbitrum
-You want:  Trade on Base
-Solution:  Bridge $1,000 to Base in ~2 minutes ✅
-Result:    Full capital available where needed
-```
-
-### 🔒 Security First
-
-Predifi only uses **battle-tested** bridging solutions:
-
-- **Circle CCTP** - Native USDC bridging (preferred)
-- **Wormhole** - Trusted by $30B+ TVL
-- **No generic bridges** - Avoid vulnerability risks
+**The Solution:** Bridge assets automatically so you can trade anywhere from any chain.
 
 ---
 
-## Circle CCTP (Cross-Chain Transfer Protocol)
+## Circle CCTP
 
 ### What is CCTP?
 
-Circle's **official protocol** for moving USDC between chains. Instead of locking and minting (which creates wrapped USDC), CCTP **burns** on the source chain and **mints** native USDC on the destination.
+**Circle's Cross-Chain Transfer Protocol** enables native USDC transfers between blockchains.
 
-### How It Works
+**How It Works:**
+1. **Burn** - USDC burned on source chain
+2. **Attest** - Circle verifies the burn
+3. **Mint** - Native USDC minted on destination chain
 
-```mermaid
-sequenceDiagram
-    participant User
-    participant Source as Source Chain<br/>(e.g., Arbitrum)
-    participant CCTP as Circle CCTP
-    participant Dest as Destination Chain<br/>(e.g., Base)
-    
-    User->>Source: Burn 1,000 USDC
-    Source->>CCTP: Burn attestation
-    CCTP->>CCTP: Verify burn
-    CCTP->>Dest: Mint authorization
-    Dest->>Dest: Mint 1,000 USDC
-    Dest->>User: Receive native USDC
-    
-    Note over User,Dest: Total time: ~2-3 minutes
-```
-
-### CCTP Advantages
-
-<CardGroup cols={2}>
-  <Card title="Native USDC" icon="circle-dollar">
-    Always receive **native USDC**, never wrapped tokens
-  </Card>
-  <Card title="Capital Efficient" icon="coins">
-    Burn & mint model—no liquidity pools needed
-  </Card>
-  <Card title="Secure" icon="shield-check">
-    Backed by Circle, issuer of USDC
-  </Card>
-  <Card title="Fast" icon="bolt">
-    Transfers complete in 2-3 minutes
-  </Card>
-  <Card title="Low Cost" icon="piggy-bank">
-    Minimal fees (~$0.10-0.50)
-  </Card>
-  <Card title="No Slippage" icon="equals">
-    1 USDC in = 1 USDC out, always
-  </Card>
-</CardGroup>
+**Key Benefits:**
+- **Native USDC** - Not wrapped tokens
+- **Zero fees** - No bridge protocol fees (only gas)
+- **Secure** - Direct burn/mint by Circle
+- **Simple** - No liquidity pools required
 
 ### Supported Routes
 
-CCTP currently supports:
+**Live Routes:**
+- Arbitrum ↔ Polygon, Base, Optimism
+- Base ↔ Polygon, Arbitrum, Optimism  
+- Polygon ↔ Arbitrum, Base, Optimism
+- Optimism ↔ Arbitrum, Base, Polygon
 
-| Source Chain | Destination Chains |
-|--------------|-------------------|
-| **Arbitrum** | Base, Optimism, Ethereum, Polygon, Avalanche |
-| **Base** | Arbitrum, Optimism, Ethereum, Polygon, Avalanche |
-| **Optimism** | Arbitrum, Base, Ethereum, Polygon, Avalanche |
-| **Ethereum** | All CCTP chains |
-| **Polygon** | All CCTP chains |
-| **Avalanche** | All CCTP chains |
+**Bridge Time:** ~15 minutes
 
-<Note>
-  CCTP is our **preferred** bridging method for all supported routes.
-</Note>
+**Cost Examples:**
+- Arbitrum → Base: ~$0.10 gas
+- Base → Polygon: ~$0.05 gas
+- Polygon → Arbitrum: ~$0.15 gas
 
-### Using CCTP in Predifi
+### When We Use CCTP
 
-**Automatic integration:**
+**Primary use:** Moving USDC for trade execution
 
-```javascript
-// User initiates bridge from UI
-await predifi.bridge({
-  from: 'arbitrum',
-  to: 'base',
-  amount: 1000, // USDC
-  method: 'cctp' // Auto-selected for CCTP routes
-});
-
-// Behind the scenes:
-// 1. Approve USDC on source chain
-// 2. Call CCTP burn function
-// 3. Wait for attestation (~2 min)
-// 4. Call CCTP mint on destination
-// 5. User receives native USDC
-```
+**Example:** User on Arbitrum wants to trade on Polymarket (Polygon)
+1. User deposits USDC to Arbitrum LP Vault
+2. Protocol bridges via CCTP: Arbitrum → Polygon
+3. Smart AA Wallet receives native USDC on Polygon
+4. Execute trade on Polymarket
+5. Profits returned to vault
 
 ---
 
-## Wormhole Bridge
+## Wormhole
 
 ### What is Wormhole?
 
-Wormhole is a **generic message-passing protocol** connecting 30+ blockchains. For USDC transfers, Wormhole uses a lock-and-mint model with **Wormhole-wrapped USDC** (USDC.e).
+**Wormhole** is a generic cross-chain messaging protocol connecting 30+ blockchains.
 
-### When to Use Wormhole
+**How It Works:**
+1. **Lock** - Assets locked on source chain
+2. **Verify** - Guardian network validates
+3. **Mint** - Wrapped assets minted on destination
+4. **Transfer** - User receives tokens
 
-We use Wormhole for:
+**Key Benefits:**
+- **Generic** - Works with any token
+- **Fast** - 1-2 minute finality
+- **Secure** - 19-validator guardian network
+- **Battle-tested** - $10B+ in volume
 
-- **Non-CCTP chains** - Chains not supported by CCTP
-- **Faster transfers** - When speed is critical (~1 minute vs 2-3)
-- **Non-USDC assets** - If we need to bridge other tokens
-- **Message passing** - Sending data along with tokens
+### When We Use Wormhole
 
-### How Wormhole Works
+**Primary use:** Bridging YES/NO position tokens back to user chains
 
-```mermaid
-sequenceDiagram
-    participant User
-    participant Source as Source Chain
-    participant Guardians as Wormhole Guardians<br/>(19 validators)
-    participant Dest as Destination Chain
-    
-    User->>Source: Lock 1,000 USDC
-    Source->>Guardians: Lock attestation
-    Guardians->>Guardians: 13/19 signatures required
-    Guardians->>Dest: Signed VAA
-    Dest->>Dest: Mint 1,000 USDC.e
-    Dest->>User: Receive wrapped USDC
-    
-    Note over User,Dest: Total time: ~1 minute
-```
+**Example:** After trading on Polymarket (Polygon), bridge tokens to Arbitrum
+1. User has YES tokens on Polygon
+2. Lock YES tokens in Wormhole contract
+3. Wormhole mints wrapped YES on Arbitrum
+4. User receives tokens in wallet
 
-### Wormhole Features
-
-<CardGroup cols={2}>
-  <Card title="Multi-Chain" icon="globe">
-    Supports 30+ chains (more than CCTP)
-  </Card>
-  <Card title="Fast" icon="rocket">
-    Transfers in ~1 minute
-  </Card>
-  <Card title="Proven" icon="badge-check">
-    $30B+ in cumulative volume
-  </Card>
-  <Card title="Generic Messaging" icon="message">
-    Can pass data, not just tokens
-  </Card>
-</CardGroup>
-
-### Wormhole Considerations
-
-<Warning>
-  Wormhole delivers **wrapped USDC** (USDC.e), not native USDC. Predifi automatically handles conversion where needed.
-</Warning>
-
-**Wrapped vs Native:**
-
-| Type | Symbol | Description |
-|------|--------|-------------|
-| **Native USDC** | USDC | Issued by Circle |
-| **Wormhole USDC** | USDC.e | Wrapped via Wormhole |
-
-Most DeFi protocols accept both, but native USDC is preferred.
-
----
-
-## Via Labs Integration
-
-### What is Via Labs?
-
-**Via Labs** provides **cross-chain messaging infrastructure** that we use to coordinate complex multi-chain operations.
-
-### Use Cases in Predifi
-
-<AccordionGroup>
-  <Accordion title="Cross-Chain Order Matching" icon="shuffle">
-    Match orders across chains:
-    - User A creates order on Chain A
-    - User B fills order on Chain B
-    - Via Labs coordinates settlement
-  </Accordion>
-
-  <Accordion title="Unified Liquidity" icon="droplet">
-    Access liquidity across all chains:
-    - LP deposits on Chain A
-    - Liquidity available on Chain B, C, D
-    - Via Labs routes requests
-  </Accordion>
-
-  <Accordion title="Cross-Chain Claims" icon="hand-holding-dollar">
-    Claim winnings on any chain:
-    - Position wins on Chain A
-    - User claims payout on Chain B
-    - Via Labs bridges winnings
-  </Accordion>
-
-  <Accordion title="Portfolio Aggregation" icon="layer-group">
-    Real-time multi-chain portfolio:
-    - Positions on multiple chains
-    - Via Labs aggregates data
-    - Single unified view
-  </Accordion>
-</AccordionGroup>
-
-### How Via Labs Works
-
-```mermaid
-graph TB
-    subgraph "Chain A"
-        UA[User Action]
-        CA[Contract A]
-    end
-    
-    subgraph "Via Labs"
-        VIA[Message Router]
-        VAL[Validators]
-    end
-    
-    subgraph "Chain B"
-        CB[Contract B]
-        UB[Settlement]
-    end
-    
-    UA --> CA
-    CA --> VIA
-    VIA --> VAL
-    VAL --> VIA
-    VIA --> CB
-    CB --> UB
-    
-    style VIA fill:#3B82F6
-    style VAL fill:#EC4899
-```
+**Also used for:**
+- Non-CCTP chains
+- Emergency fallback bridging
+- Future non-USDC asset support
 
 ---
 
 ## Bridge Comparison
 
-### CCTP vs Wormhole
+| Bridge | Assets | Time | Cost | Security | Use Case |
+|--------|--------|------|------|----------|----------|
+| **CCTP** | USDC only | 15 min | $0 + gas | Native (Circle) | Primary USDC bridging |
+| **Wormhole** | Any token | 1-2 min | ~$0.50 | Guardian network | Position tokens |
 
-| Feature | Circle CCTP | Wormhole |
-|---------|-------------|----------|
-| **Token Type** | Native USDC | Wrapped USDC.e |
-| **Speed** | 2-3 minutes | ~1 minute |
-| **Security** | Circle-backed | Guardian network |
-| **Chains Supported** | 6 major chains | 30+ chains |
-| **Fees** | Very low ($0.10-0.50) | Low ($0.50-2.00) |
-| **Slippage** | None | None |
-| **Use Case** | USDC transfers | Any token + messages |
-
-### When We Use Each
-
-**Decision tree:**
-
-```mermaid
-graph TD
-    START[Bridge USDC]
-    CCTP{Both chains<br/>support CCTP?}
-    NATIVE{Need native<br/>USDC?}
-    SPEED{Need max<br/>speed?}
-    
-    START --> CCTP
-    CCTP -->|Yes| USE_CCTP[Use CCTP]
-    CCTP -->|No| NATIVE
-    NATIVE -->|Yes| CONVERT[Use Wormhole<br/>+ Convert to native]
-    NATIVE -->|No| SPEED
-    SPEED -->|Yes| USE_WORM[Use Wormhole]
-    SPEED -->|No| USE_CCTP2[Wait for CCTP]
-    
-    style USE_CCTP fill:#10B981
-    style USE_WORM fill:#3B82F6
-```
+**Why two bridges?**
+- CCTP for USDC (cheaper, native)
+- Wormhole for everything else (flexible)
 
 ---
 
 ## User Experience
 
-### Bridging Flow
+### Automatic Bridging
 
-<Steps>
-  <Step title="Select Destination">
-    Choose which chain you want to trade on
-  </Step>
-  
-  <Step title="Predifi Checks Balance">
-    - See available USDC on current chain
-    - See required USDC on destination chain
-  </Step>
-  
-  <Step title="Initiate Bridge">
-    Click "Bridge to [Chain]" button
-  </Step>
-  
-  <Step title="Approve Transaction">
-    - **Tx 1**: Approve USDC (if first time)
-    - **Tx 2**: Execute bridge
-  </Step>
-  
-  <Step title="Wait for Transfer">
-    Track progress in real-time:
-    ```
-    ⏳ Burning USDC on Arbitrum...
-    ⏳ Waiting for attestation...
-    ⏳ Minting USDC on Base...
-    ✅ Bridge complete! (2m 15s)
-    ```
-  </Step>
-  
-  <Step title="Start Trading">
-    USDC now available on destination chain
-  </Step>
-</Steps>
+**Users never interact with bridges directly:**
 
-### Smart Routing
+1. Select market on any chain
+2. Click "Trade"
+3. Protocol handles all bridging
+4. Receive confirmation when complete
 
-Predifi **automatically selects** the best bridge:
+**You don't need to:**
+- Manually approve bridge contracts
+- Wait for bridge confirmations
+- Manage wrapped tokens
+- Understand technical details
 
-```typescript
-// User wants to bridge Arbitrum → Base
-const route = await predifi.findBestRoute({
-  from: 'arbitrum',
-  to: 'base',
-  amount: 1000,
-  priority: 'cost' // or 'speed'
-});
+### Bridge Status Tracking
 
-// Result:
-{
-  bridge: 'cctp',
-  estimatedTime: '2-3 minutes',
-  fee: '$0.15',
-  willReceive: 1000, // Native USDC
-  steps: [
-    'Approve USDC on Arbitrum',
-    'Burn via CCTP',
-    'Wait for attestation',
-    'Mint on Base'
-  ]
-}
-```
-
-### In-App Bridging
-
-**No need to leave Predifi:**
-
-- **Integrated UI** - Bridge directly from trading interface
-- **Gas Estimation** - See total cost before bridging
-- **Transaction Tracking** - Real-time status updates
-- **Failure Handling** - Auto-retry on failures
-- **History** - View all bridge transactions
+**In your portfolio:**
+- See pending bridges in real-time
+- Estimated completion time
+- Transaction links for verification
+- Automatic retry if bridge fails
 
 ---
 
-## Technical Implementation
-
-### CCTP Integration
-
-```solidity
-// Predifi's CCTP adapter
-contract CCTPBridgeAdapter {
-    ITokenMessenger public immutable tokenMessenger;
-    
-    function bridgeUSDC(
-        uint32 destinationDomain,
-        address recipient,
-        uint256 amount
-    ) external returns (bytes32 messageHash) {
-        // 1. Transfer USDC from user
-        IERC20(usdc).transferFrom(msg.sender, address(this), amount);
-        
-        // 2. Approve CCTP contract
-        IERC20(usdc).approve(address(tokenMessenger), amount);
-        
-        // 3. Burn and send via CCTP
-        messageHash = tokenMessenger.depositForBurn(
-            amount,
-            destinationDomain,
-            bytes32(uint256(uint160(recipient))),
-            usdc
-        );
-        
-        emit BridgeInitiated(msg.sender, destinationDomain, amount, messageHash);
-    }
-}
-```
-
-### Wormhole Integration
-
-```solidity
-// Predifi's Wormhole adapter
-contract WormholeBridgeAdapter {
-    IWormholeTokenBridge public immutable bridge;
-    
-    function bridgeUSDC(
-        uint16 targetChain,
-        address recipient,
-        uint256 amount
-    ) external payable returns (uint64 sequence) {
-        // 1. Transfer USDC from user
-        IERC20(usdc).transferFrom(msg.sender, address(this), amount);
-        
-        // 2. Approve Wormhole bridge
-        IERC20(usdc).approve(address(bridge), amount);
-        
-        // 3. Transfer via Wormhole
-        sequence = bridge.transferTokens{value: msg.value}(
-            usdc,
-            amount,
-            targetChain,
-            bytes32(uint256(uint160(recipient))),
-            0, // No arbiter fee
-            0  // No nonce
-        );
-        
-        emit BridgeInitiated(msg.sender, targetChain, amount, sequence);
-    }
-}
-```
-
-### Via Labs Messaging
-
-```typescript
-// Cross-chain order coordination
-async function crossChainOrderMatch(
-  makerChain: string,
-  takerChain: string,
-  orderId: string
-) {
-  // 1. Validate order on maker chain
-  const order = await getOrder(makerChain, orderId);
-  
-  // 2. Send message via Via Labs
-  const message = {
-    type: 'ORDER_MATCH',
-    makerChain,
-    takerChain,
-    orderId,
-    amount: order.amount,
-    price: order.price
-  };
-  
-  await viaLabs.sendMessage({
-    from: makerChain,
-    to: takerChain,
-    payload: message
-  });
-  
-  // 3. Via Labs delivers message to taker chain
-  // 4. Settlement happens on taker chain
-  // 5. Confirmation sent back to maker chain
-}
-```
-
----
-
-## Fees & Timing
-
-### Bridge Costs
-
-| Bridge | Gas Fee | Protocol Fee | Total |
-|--------|---------|--------------|-------|
-| **CCTP** (Arbitrum → Base) | $0.10 | $0 | **$0.10** |
-| **CCTP** (Base → Arbitrum) | $0.05 | $0 | **$0.05** |
-| **Wormhole** (any route) | $0.50-1.00 | $0.50 | **$1.00-1.50** |
-
-<Tip>
-  CCTP is typically 10x cheaper than Wormhole for USDC transfers.
-</Tip>
-
-### Transfer Times
-
-| Bridge | Typical Time | Max Time |
-|--------|--------------|----------|
-| **CCTP** | 2-3 minutes | 5 minutes |
-| **Wormhole** | 1 minute | 2 minutes |
-| **Via Labs Messaging** | 1-2 minutes | 3 minutes |
-
-### Amount Limits
-
-| Bridge | Min Amount | Max Amount |
-|--------|------------|------------|
-| **CCTP** | $1 | Unlimited |
-| **Wormhole** | $1 | Unlimited (but large amounts may need manual review) |
-
----
-
-## Security & Reliability
+## Security
 
 ### CCTP Security
 
-<CardGroup cols={2}>
-  <Card title="Circle-Backed" icon="building-columns">
-    Official protocol from USDC issuer
-  </Card>
-  <Card title="No 3rd Party Risk" icon="shield-check">
-    Direct burn/mint, no intermediaries
-  </Card>
-  <Card title="Audited" icon="file-certificate">
-    Multiple security audits
-  </Card>
-  <Card title="Battle-Tested" icon="helmet-battle">
-    Billions bridged successfully
-  </Card>
-</CardGroup>
+<AccordionGroup>
+  <Accordion title="Circle Attestation" icon="shield-check">
+    Circle (USDC issuer) directly attests burns and mints. No third-party risk.
+  </Accordion>
+
+  <Accordion title="Native USDC" icon="circle">
+    Receive real USDC, not wrapped tokens. No de-pegging risk.
+  </Accordion>
+
+  <Accordion title="No Liquidity Pools" icon="droplet">
+    Burn/mint model. No liquidity to hack or drain.
+  </Accordion>
+</AccordionGroup>
 
 ### Wormhole Security
 
-- **Guardian Network**: 19 validators including Jump, Coinbase, and others
-- **Threshold Signatures**: Requires 13/19 signatures to process
-- **Insurance**: $10M bug bounty program
-- **Audits**: Regular audits by top firms
-- **Track Record**: Despite 2022 exploit (fixed), now has strong security
+<AccordionGroup>
+  <Accordion title="Guardian Network" icon="users">
+    19 independent validators including Jump, Certus One, Staked.
+  </Accordion>
 
-### Via Labs Security
+  <Accordion title="Audited" icon="file-contract">
+    Multiple audits by Trail of Bits, Neodyme, OtterSec.
+  </Accordion>
 
-- **Distributed Validators**: Decentralized validator set
-- **Message Verification**: Cryptographic proof of message authenticity
-- **Timeout Handling**: Automatic reversal if delivery fails
-- **Monitoring**: 24/7 system monitoring
+  <Accordion title="Bug Bounty" icon="bug">
+    $2.5M maximum bug bounty through Immunefi.
+  </Accordion>
 
-### Failure Handling
+  <Accordion title="Insurance" icon="umbrella">
+    Partnerships with insurance protocols for coverage.
+  </Accordion>
+</AccordionGroup>
 
-**What if bridge fails?**
+### Predifi Safety Measures
 
-<Steps>
-  <Step title="Detection">
-    System detects failed bridge attempt
-  </Step>
-  
-  <Step title="User Notification">
-    Alert sent via email/push notification
-  </Step>
-  
-  <Step title="Automatic Retry">
-    System retries transaction (for transient failures)
-  </Step>
-  
-  <Step title="Manual Intervention">
-    If retry fails, support team investigates
-  </Step>
-  
-  <Step title="Refund">
-    Funds returned to original chain if necessary
-  </Step>
-</Steps>
-
-<Warning>
-  Always verify destination address before bridging. Bridge transactions are **irreversible**.
-</Warning>
+- **Automatic monitoring** - All bridges tracked 24/7
+- **Timeout handling** - Auto-retry if bridge stalls
+- **Failure recovery** - Funds returned if bridge fails
+- **Multi-sig controls** - Bridge contract upgrades require approval
 
 ---
 
-## Bridge Monitoring
+## Bridge Limits
 
-### Real-Time Status
+### CCTP Limits
 
-Track your bridge transfers:
+**Per Transaction:**
+- Minimum: $10 USDC
+- Maximum: $1,000,000 USDC
+- No daily limits
 
-```
-Bridge Transaction #12345
-├─ Status: In Progress
-├─ From: Arbitrum
-├─ To: Base
-├─ Amount: 1,000 USDC
-├─ Bridge: CCTP
-├─ Started: 2:34 PM
-├─ Progress:
-│  ✅ USDC burned on Arbitrum (Block 156,234,567)
-│  ⏳ Waiting for Circle attestation (estimated 2 min)
-│  ⏸️ Pending mint on Base
-└─ Est. Completion: 2:37 PM (3 min total)
-```
+### Wormhole Limits
 
-### Bridge Analytics
+**Per Transaction:**
+- Minimum: $1 equivalent
+- Maximum: $10,000,000 equivalent
+- Daily limit: $50,000,000 per user
 
-**Dashboard metrics:**
-
-- **Total Volume Bridged**: Track your bridge history
-- **Most Used Route**: Which chain pairs you bridge most
-- **Avg Bridge Time**: How long your bridges take
-- **Total Fees Paid**: Fees across all bridges
-- **Success Rate**: Percentage of successful bridges
+**Note:** Predifi may impose lower limits for risk management.
 
 ---
 
-## Advanced Features
+## Costs
 
-### Automatic Bridging
+### Gas Fees (User Pays)
 
-**Set up auto-bridge rules:**
+**CCTP:**
+- Arbitrum → Polygon: ~$0.10-0.20
+- Base → Arbitrum: ~$0.05-0.10
+- Polygon → Base: ~$0.02-0.05
+
+**Wormhole:**
+- Any route: ~$0.50-1.00
+
+### Bridge Fees
+
+- **CCTP:** $0 (zero bridge fees)
+- **Wormhole:** ~$0.50 (relayer fee)
+
+**Total typical cost:** $0.10-1.50 per bridge depending on route
+
+---
+
+## Monitoring & Support
+
+### Bridge Status
+
+Check bridge status:
+1. Go to **Portfolio → Activity**
+2. Find your trade
+3. Click "View Bridge Status"
+4. See real-time progress
+
+### If Bridge Fails
+
+**Automatic:**
+- Protocol retries 3 times
+- Funds returned if all retries fail
+- Email notification sent
+
+**Manual Support:**
+- Contact support with transaction hash
+- Team can manually complete bridge
+- Refund if unrecoverable
+
+---
+
+## Developer Access
+
+### Bridge USDC via API
 
 ```typescript
-// Auto-bridge to wherever best opportunities exist
-await predifi.setAutoBridgeRule({
-  enabled: true,
-  minOpportunity: 5, // 5% better odds
-  maxBridgeCost: 10, // Max $10 in fees
-  chains: ['arbitrum', 'base', 'optimism']
-});
-
-// When opportunity detected:
-// 1. Calculate net profit (opportunity - bridge cost)
-// 2. If profitable, auto-bridge funds
-// 3. Execute trade on destination chain
-```
-
-### Bridge Aggregation
-
-**Compare all options:**
-
-```typescript
-const routes = await predifi.getAllRoutes({
+// Bridge USDC using CCTP
+const bridge = await predifi.bridge({
+  asset: 'USDC',
+  amount: 100,
   from: 'arbitrum',
-  to: 'base',
-  amount: 1000
+  to: 'polygon',
+  recipient: '0x...'
 });
 
-// Returns:
-[
-  {
-    bridge: 'cctp',
-    time: '2-3 min',
-    cost: '$0.10',
-    result: '1000 USDC (native)'
-  },
-  {
-    bridge: 'wormhole',
-    time: '1 min',
-    cost: '$1.50',
-    result: '1000 USDC.e (wrapped)'
-  }
-]
-
-// User chooses based on preference
+console.log(bridge.status); // 'pending'
+console.log(bridge.estimatedTime); // '~15 minutes'
 ```
 
-### Bridging + Trading (Combo)
+### Bridge Tokens via Wormhole
 
-**Bridge and trade in one flow:**
+```typescript
+// Bridge position tokens
+const bridge = await predifi.bridge({
+  asset: 'YES-TOKEN',
+  amount: 50,
+  from: 'polygon',
+  to: 'arbitrum',
+  recipient: '0x...'
+});
+```
 
-1. User wants to trade on Base but has USDC on Arbitrum
-2. Click "Bridge & Trade" button
-3. Single confirmation bridges and opens position
-4. Predifi handles bridge → wait → trade automatically
+[Full API docs →](/api-reference/trading)
 
 ---
 
-## Best Practices
-
-### For Users
+## FAQ
 
 <AccordionGroup>
-  <Accordion title="Plan Ahead" icon="calendar">
-    Bridge before you need to trade to avoid waiting during volatile markets
+  <Accordion title="How long do bridges take?" icon="clock">
+    - CCTP: ~15 minutes
+    - Wormhole: 1-2 minutes
+    
+    Total for full trade: 2-3 minutes (including execution)
   </Accordion>
 
-  <Accordion title="Use CCTP When Possible" icon="circle-dollar">
-    Cheaper and delivers native USDC
+  <Accordion title="What if my bridge gets stuck?" icon="circle-pause">
+    Protocol automatically retries 3 times. If all fail, funds are returned to your LP Vault on the source chain.
   </Accordion>
 
-  <Accordion title="Bridge Larger Amounts" icon="sack-dollar">
-    Fixed fees mean bridging $1,000 is nearly same cost as $100
+  <Accordion title="Do I need gas tokens on destination chains?" icon="gas-pump">
+    No. Protocol's Smart AA Wallets handle all gas fees on destination chains.
   </Accordion>
 
-  <Accordion title="Keep Some USDC on Each Chain" icon="coins">
-    Have balance ready for opportunities
+  <Accordion title="Can I bridge manually?" icon="hand">
+    Not currently. All bridging is automatic through Predifi protocol for security and UX.
   </Accordion>
 
-  <Accordion title="Monitor Gas Prices" icon="gas-pump">
-    Bridge when gas is low to save on fees
-  </Accordion>
-</AccordionGroup>
-
-### For Developers
-
-<AccordionGroup>
-  <Accordion title="Prefer CCTP" icon="thumbs-up">
-    Use CCTP for all supported routes
-  </Accordion>
-
-  <Accordion title="Handle Failures Gracefully" icon="circle-exclamation">
-    Implement retry logic and user notifications
-  </Accordion>
-
-  <Accordion title="Verify Receipts" icon="receipt">
-    Always verify bridge completion before allowing trades
-  </Accordion>
-
-  <Accordion title="Cache Route Calculations" icon="database">
-    Pre-calculate common routes to speed up UX
-  </Accordion>
-
-  <Accordion title="Monitor Bridge Health" icon="heart-pulse">
-    Track success rates and alert on issues
+  <Accordion title="Are there bridge limits?" icon="gauge-max">
+    Min: $10, Max: $1M per transaction. Contact support for larger amounts.
   </Accordion>
 </AccordionGroup>
 
 ---
 
-## Roadmap
-
-### ✅ Live Now
-- Circle CCTP integration
-- Wormhole integration (backup)
-- Via Labs messaging
-- In-app bridge UI
-- Transaction tracking
-
-### 🔄 Coming Soon
-- **Instant Bridging** - Liquidity pools for 0-wait bridges
-- **Gas Abstraction** - Pay bridge fees in USDC
-- **Bridge Aggregator** - Compare 10+ bridge options
-- **Cross-Chain Limit Orders** - Place orders that bridge automatically
-
-### 🔮 Future
-- **Native Cross-Chain Trading** - Trade on Chain A while settlement happens on Chain B
-- **Unified Liquidity Pools** - LP on one chain, liquidity on all chains
-- **Cross-Chain Margin** - Collateral on any chain
-
----
-
-## Learn More
+## Next Steps
 
 <CardGroup cols={2}>
-  <Card
-    title="Circle CCTP Docs"
-    icon="circle"
-    href="https://developers.circle.com/stablecoins/cctp"
-  >
-    Official CCTP documentation
+  <Card title="Chain-Agnostic Trading" icon="globe" href="/technology/chain-agnostic">
+    Learn about our full cross-chain architecture
   </Card>
-  <Card
-    title="Wormhole Docs"
-    icon="worm"
-    href="https://docs.wormhole.com"
-  >
-    Learn about Wormhole
-  </Card>
-  <Card
-    title="Via Labs"
-    icon="v"
-    href="https://via.exchange"
-  >
-    Cross-chain messaging
-  </Card>
-  <Card
-    title="Start Trading"
-    icon="chart-line"
-    href="/getting-started/quickstart"
-  >
-    Trade on any chain
+  
+  <Card title="Start Trading" icon="rocket" href="/getting-started/quickstart">
+    Trade on any chain without worrying about bridges
   </Card>
 </CardGroup>
