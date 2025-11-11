@@ -5,21 +5,19 @@ description: "How to claim profits from winning prediction market positions"
 
 ## Claiming Settled Positions
 
-When a market resolves in your favor, your winnings need to be claimed. This guide walks you through the settlement and claiming process on Predifi.
+When a market resolves in your favor, your winnings need to be claimed. This guide walks you through the settlement and claiming process.
 
 ---
 
 ## How Settlement Works
 
-### Market Resolution Process
-
 <Steps>
   <Step title="Market Closes">
-    Trading stops when the event concludes or deadline passes
+    Trading stops when event concludes or deadline passes
   </Step>
   
   <Step title="Outcome Determined">
-    Real-world outcome is verified (oracle reports or venue resolution)
+    Real-world outcome verified (oracle reports or venue resolution)
   </Step>
   
   <Step title="Settlement Period">
@@ -27,53 +25,25 @@ When a market resolves in your favor, your winnings need to be claimed. This gui
   </Step>
   
   <Step title="Final Settlement">
-    Outcome is finalized and winnings become claimable
+    Outcome finalized and winnings become claimable
   </Step>
   
   <Step title="Claim Winnings">
-    You withdraw your winnings to your wallet
+    Withdraw your winnings to your wallet
   </Step>
 </Steps>
 
 ### Settlement Times by Venue
 
-<Tabs>
-  <Tab title="Predifi Native CLOB">
-    **Oracle-based resolution:**
-    - Event conclusion: Immediate
-    - Oracle report: 5-30 minutes
-    - Challenge period: 24 hours
-    - Total time: **~1-2 days**
-    
-    Resolved by Stork Network oracles with verifiable data feeds.
-  </Tab>
-  
-  <Tab title="Polymarket">
-    **UMA oracle resolution:**
-    - Event conclusion: Immediate
-    - Proposal period: 2 hours
-    - Challenge period: 48 hours
-    - Total time: **~2-3 days**
-    
-    Polymarket uses UMA's optimistic oracle for decentralized resolution.
-  </Tab>
-  
-  <Tab title="Limitless">
-    **Automated + manual resolution:**
-    - Event conclusion: Immediate
-    - Automated check: 1-6 hours
-    - Manual review: Up to 24 hours
-    - Total time: **~1-2 days**
-    
-    Limitless uses API-based automation with human oversight.
-  </Tab>
-</Tabs>
+| Venue | Total Time | Notes |
+|-------|------------|-------|
+| **Predifi Native CLOB** | ~1-2 days | Stork Network oracles with 24h challenge period |
+| **Polymarket** | ~2-3 days | UMA optimistic oracle with 48h challenge period |
+| **Limitless** | ~1-2 days | Automated + manual review with up to 24h review |
 
 ---
 
 ## Checking Claimable Positions
-
-### Via Predifi Dashboard
 
 <Steps>
   <Step title="Navigate to Portfolio">
@@ -81,7 +51,7 @@ When a market resolves in your favor, your winnings need to be claimed. This gui
   </Step>
   
   <Step title="View Settled Positions">
-    See all markets that have resolved with your positions
+    See all resolved markets with your positions
   </Step>
   
   <Step title="Check Winning Positions">
@@ -93,23 +63,16 @@ When a market resolves in your favor, your winnings need to be claimed. This gui
   </Step>
 </Steps>
 
-### Understanding Your Claim Amount
-
-**Winning position payout formula:**
+### Payout Formula
 
 $$
 \text{Payout} = \text{Shares Held} \times \$1.00
 $$
 
 **Example:**
-- You hold 500 shares of "YES" on BTC > $100K
+- You hold 500 YES shares on BTC > $100K
 - Market resolves YES
 - Your payout: 500 × $1.00 = **$500**
-
-**If you hold losing shares:**
-- You hold 300 shares of "NO" on BTC > $100K
-- Market resolves YES (not NO)
-- Your payout: **$0** (losing shares are worthless)
 
 ---
 
@@ -117,29 +80,17 @@ $$
 
 ### Single Position Claim
 
-Claim winnings from one specific market:
-
 <Steps>
   <Step title="Select Position">
-    Click on the claimable position you want to withdraw
+    Click on the claimable position
   </Step>
   
   <Step title="Click 'Claim Winnings'">
-    Review the claim amount and gas estimate
+    Review claim amount and gas estimate
   </Step>
   
   <Step title="Confirm Transaction">
-    Sign the transaction in your wallet
-    
-    <Frame>
-      ```
-      Transaction: Claim Winnings
-      Market: BTC > $100K by Jan 15
-      Shares: 500 YES
-      Claim Amount: $500 USDC
-      Gas Fee: ~$0.15
-      ```
-    </Frame>
+    Sign transaction in your wallet
   </Step>
   
   <Step title="Wait for Confirmation">
@@ -147,7 +98,7 @@ Claim winnings from one specific market:
   </Step>
   
   <Step title="Receive USDC">
-    USDC appears in your wallet balance immediately
+    USDC appears in your wallet immediately
   </Step>
 </Steps>
 
@@ -161,7 +112,7 @@ Claim all winnings at once to save on gas:
   </Step>
   
   <Step title="Select Multiple Positions">
-    Check boxes next to positions you want to claim (or "Select All")
+    Check boxes next to positions (or "Select All")
   </Step>
   
   <Step title="Click 'Claim All'">
@@ -185,49 +136,12 @@ Claim all winnings at once to save on gas:
 
 ## Claim Status Types
 
-<Tabs>
-  <Tab title="Ready to Claim">
-    **✅ Fully settled and claimable**
-    
-    - Market resolved and settlement period passed
-    - Your position was on winning side
-    - No disputes or challenges
-    - Can claim immediately
-    
-    **Action:** Claim your winnings now
-  </Tab>
-  
-  <Tab title="Pending Settlement">
-    **⏳ Resolved but not yet claimable**
-    
-    - Market outcome determined
-    - Currently in challenge/dispute period
-    - Waiting for final settlement
-    - Cannot claim yet
-    
-    **Action:** Wait for settlement period to complete (check ETA)
-  </Tab>
-  
-  <Tab title="Already Claimed">
-    **✔️ Previously withdrawn**
-    
-    - You already claimed these winnings
-    - USDC already in your wallet
-    - Position archived
-    
-    **Action:** None needed (view transaction history)
-  </Tab>
-  
-  <Tab title="Lost Position">
-    **❌ Losing outcome**
-    
-    - Market resolved against your position
-    - Shares are worthless
-    - No amount to claim
-    
-    **Action:** None available (position closed as loss)
-  </Tab>
-</Tabs>
+| Status | Description | Action |
+|--------|-------------|--------|
+| **Ready to Claim** ✅ | Fully settled and claimable | Claim your winnings now |
+| **Pending Settlement** ⏳ | Resolved but still in challenge period | Wait for settlement (check ETA) |
+| **Already Claimed** ✔️ | Previously withdrawn | None needed (view history) |
+| **Lost Position** ❌ | Market resolved against you | None available (closed as loss) |
 
 ---
 
@@ -248,21 +162,21 @@ Claim all winnings at once to save on gas:
   <Tab title="Gas Fees">
     **Network transaction costs:**
     
-    | Network | Single Claim | Bulk Claim (10 positions) |
-    |---------|--------------|---------------------------|
+    | Network | Single Claim | Bulk Claim (10) |
+    |---------|--------------|-----------------|
     | Arbitrum | $0.10-0.30 | $0.20-0.50 |
     | Optimism | $0.15-0.40 | $0.25-0.60 |
     | Base | $0.08-0.25 | $0.15-0.40 |
     | Polygon | $0.05-0.15 | $0.10-0.30 |
     
-    💡 **Tip:** Claim during off-peak hours for lower gas fees
+    💡 **Tip:** Claim during off-peak hours for lower gas
   </Tab>
   
   <Tab title="Venue Fees">
-    **Original trading venue fees** (already paid when you traded):
-    - Polymarket: 2% on winning positions (already deducted)
-    - Limitless: 1.5% on winning positions (already deducted)
-    - Predifi CLOB: 0.5% on winning positions (already deducted)
+    **Original trading venue fees** (already paid at trade time):
+    - Polymarket: 2% on winning positions
+    - Limitless: 1.5% on winning positions
+    - Predifi CLOB: 0.5% on winning positions
     
     These were deducted at trade time, **not** during claiming.
   </Tab>
@@ -271,8 +185,6 @@ Claim all winnings at once to save on gas:
 ---
 
 ## Claiming Across Chains
-
-### Multi-Chain Claims
 
 If you have winnings on multiple chains:
 
@@ -286,7 +198,7 @@ If you have winnings on multiple chains:
   </Step>
   
   <Step title="Claim on That Chain">
-    Sign transaction to claim (USDC goes to wallet on that chain)
+    Sign transaction (USDC goes to wallet on that chain)
   </Step>
   
   <Step title="Repeat for Other Chains">
@@ -294,252 +206,85 @@ If you have winnings on multiple chains:
   </Step>
   
   <Step title="Bridge if Needed (Optional)">
-    Use Predifi's built-in CCTP bridge to consolidate USDC on one chain
+    Use Predifi's built-in CCTP bridge to consolidate USDC
   </Step>
 </Steps>
 
-**Example multi-chain claim:**
-```
-Arbitrum: $1,200 claimable → Claim → USDC on Arbitrum
-Base: $800 claimable → Claim → USDC on Base
-Polygon: $500 claimable → Claim → USDC on Polygon
+### Consolidating USDC
 
-Optional: Bridge all to Arbitrum for single balance
-```
+To move all USDC to one chain:
+
+1. **Bridge via CCTP**: Use Predifi's bridge (fee: ~$2-3)
+2. **Wait**: 15-20 minutes for bridging
+3. **Confirm**: USDC arrives on destination chain
 
 ---
 
-## Troubleshooting Claims
+## Troubleshooting
 
 <AccordionGroup>
-  <Accordion title="Can't See Claimable Position" icon="eye-slash">
-    **Possible causes:**
-    
-    1. **Market hasn't settled yet**
-       - Check settlement period status
-       - Wait for challenge window to pass
-    
-    2. **Wrong wallet connected**
-       - Verify you're using the wallet that holds the position
-       - Check wallet address matches
-    
-    3. **Position was losing**
-       - Verify you bet on the correct outcome
-       - Check market resolution outcome
-    
-    4. **Display issue**
-       - Refresh page and clear cache
-       - Try different browser
-       - Check on blockchain explorer
+  <Accordion title="Why can't I claim yet?" icon="clock">
+    Market is likely still in settlement/challenge period. Check the ETA displayed on your position.
   </Accordion>
-  
-  <Accordion title="Claim Transaction Failing" icon="triangle-exclamation">
-    **Common fixes:**
+
+  <Accordion title="My transaction failed - what happened?" icon="triangle-exclamation">
+    Most common causes:
+    - Insufficient gas in wallet
+    - Network congestion (try again)
+    - Position already claimed
     
-    1. **Insufficient gas**
-       - Add ETH (or MATIC/BNB) for gas fees
-       - Increase gas limit in wallet
-    
-    2. **Already claimed**
-       - Check transaction history
-       - Verify USDC balance increased
-    
-    3. **Network congestion**
-       - Wait 10-20 minutes
-       - Try again during off-peak hours
-       - Increase gas price for faster confirmation
-    
-    4. **Contract error**
-       - Try claiming through blockchain explorer directly
-       - Contact support with error message
+    Check transaction on block explorer for details.
   </Accordion>
-  
-  <Accordion title="Claim Amount Looks Wrong" icon="calculator">
-    **Verify the following:**
+
+  <Accordion title="Do I pay tax on winnings?" icon="receipt">
+    **Varies by jurisdiction.** In most countries, prediction market winnings are taxable. Consult a tax professional.
     
-    1. **Check your share count**
-       - How many shares did you actually hold?
-       - Did you sell some before resolution?
-    
-    2. **Winning outcome**
-       - Did you bet YES or NO?
-       - What was the actual resolution?
-    
-    3. **Fees already deducted**
-       - Trading fees deducted at order time
-       - Claim amount reflects net winnings
-    
-    4. **Partial fills**
-       - If limit order only partially filled
-       - Check filled amount vs. intended amount
+    Predifi provides transaction export for tax reporting.
   </Accordion>
-  
-  <Accordion title="Claim Shows 'Pending' Forever" icon="hourglass">
-    **What to do:**
-    
-    1. **Check blockchain explorer**
-       - Look up your transaction hash
-       - See if it's confirmed on-chain
-    
-    2. **Refresh Predifi dashboard**
-       - Sometimes UI lags behind blockchain
-       - Hard refresh (Ctrl+Shift+R)
-    
-    3. **Verify gas paid**
-       - Transaction might have failed due to low gas
-       - Check wallet for failed transaction
-    
-    4. **Contact support**
-       - Provide transaction hash
-       - Screenshot of claim attempt
+
+  <Accordion title="Can winnings expire?" icon="hourglass">
+    No. Your winnings never expire. You can claim anytime after settlement.
+  </Accordion>
+
+  <Accordion title="What if I lost my wallet access?" icon="key">
+    If using Predifi's Smart AA Wallet, you can recover access via social recovery. See [Security Guide](/support/security).
   </Accordion>
 </AccordionGroup>
-
----
-
-## Tax Reporting
-
-### Claiming and Taxes
-
-<Warning>
-**Tax Implications:** Prediction market winnings may be taxable in your jurisdiction. Consult a tax professional for guidance.
-</Warning>
-
-Predifi provides tools to help with tax reporting:
-
-<CardGroup cols={2}>
-  <Card title="Transaction History" icon="file-lines">
-    Export complete history:
-    - All trades (entries and exits)
-    - Claim transactions
-    - Timestamps and amounts
-    - P&L per position
-    
-    Format: CSV, Excel, PDF
-  </Card>
-  
-  <Card title="Annual Summary" icon="calendar">
-    Year-end tax summary:
-    - Total winnings claimed
-    - Total losses
-    - Net profit/loss
-    - Fee breakdown
-    - Capital gains report
-    
-    Compatible with TurboTax, etc.
-  </Card>
-</CardGroup>
-
-### Downloading Reports
-
-<Steps>
-  <Step title="Go to Settings">
-    Navigate to **Account → Tax Reports**
-  </Step>
-  
-  <Step title="Select Date Range">
-    Choose tax year (e.g., Jan 1 - Dec 31, 2025)
-  </Step>
-  
-  <Step title="Generate Report">
-    Click **Generate Tax Report**
-  </Step>
-  
-  <Step title="Download">
-    Download CSV/PDF of all transactions
-  </Step>
-  
-  <Step title="Share with Accountant">
-    Provide to your tax professional
-  </Step>
-</Steps>
 
 ---
 
 ## Best Practices
 
-<AccordionGroup>
-  <Accordion title="Claim Promptly" icon="clock">
-    **Don't delay claiming:**
-    - Winnings don't earn interest while unclaimed
-    - Gas fees may increase over time
-    - Avoid forgetting about claimable positions
-    - Keep track of all resolved markets
-    
-    💡 Set reminders to check claimable positions weekly
-  </Accordion>
-  
-  <Accordion title="Use Bulk Claims" icon="layer-group">
-    **Optimize gas costs:**
-    - Wait until you have 5-10 claimable positions
-    - Claim all at once with one transaction
-    - Save 70-80% on gas fees
-    - More efficient than individual claims
-    
-    ⚠️ Don't wait too long (claim at least monthly)
-  </Accordion>
-  
-  <Accordion title="Check Settlement Status" icon="list-check">
-    **Monitor resolution progress:**
-    - Track settlement periods
-    - Know when positions become claimable
-    - Set calendar reminders for resolution dates
-    - Check for any disputes or delays
-  </Accordion>
-  
-  <Accordion title="Verify Amounts" icon="calculator">
-    **Double-check before claiming:**
-    - Confirm share count matches expectation
-    - Verify winning outcome
-    - Check gas fee is reasonable
-    - Review claim amount calculation
-  </Accordion>
-  
-  <Accordion title="Keep Records" icon="folder">
-    **Document everything:**
-    - Save transaction hashes
-    - Screenshot claim confirmations
-    - Export tax reports annually
-    - Keep trade history for 7+ years
-  </Accordion>
-</AccordionGroup>
-
----
-
-## Automated Claiming (Coming Soon)
-
-<Info>
-**Future Feature:** Auto-claim functionality is in development. When enabled, winnings will automatically be claimed to your wallet after settlement, saving you time and gas!
-
-**Opt-in Settings:**
-- Auto-claim threshold (min amount)
-- Max gas price willing to pay
-- Preferred claiming frequency
-- Bulk vs. individual preferences
-</Info>
+<CardGroup cols={2}>
+  <Card title="Batch Claim" icon="layer-group">
+    Claim multiple positions together to save 80% on gas fees
+  </Card>
+  <Card title="Time Your Claims" icon="clock">
+    Claim during off-peak hours for lower gas costs
+  </Card>
+  <Card title="Verify Amounts" icon="magnifying-glass">
+    Always review claim amount before confirming transaction
+  </Card>
+  <Card title="Track for Taxes" icon="file-invoice">
+    Export transaction history for tax reporting
+  </Card>
+</CardGroup>
 
 ---
 
 ## Next Steps
 
 <CardGroup cols={2}>
-  <Card title="Managing Positions" icon="sliders" href="/traders/managing-positions">
-    Learn to manage open positions effectively
+  <Card title="Portfolio Tracker" icon="chart-line" href="/products/portfolio-tracker">
+    Track all your positions
   </Card>
-  
-  <Card title="Risk Management" icon="shield-halved" href="/traders/risk-management">
-    Advanced risk management strategies
+  <Card title="Trading Guide" icon="book" href="/getting-started/trading-guide">
+    Learn trading strategies
   </Card>
-  
-  <Card title="Portfolio API" icon="code" href="/api-reference/portfolio">
-    Programmatic claiming via API
+  <Card title="Risk Management" icon="shield" href="/traders/risk-management">
+    Protect your capital
   </Card>
-  
-  <Card title="Tax Guide" icon="file-invoice-dollar" href="/support/faq">
-    Tax reporting FAQ
+  <Card title="Browse Markets" icon="grid" href="/markets">
+    Find new opportunities
   </Card>
 </CardGroup>
-
-<Note>
-**Questions about claiming?** Contact support at [support@predifi.com](mailto:support@predifi.com) or join our [Discord](https://discord.gg/predifi) for real-time help.
-</Note>

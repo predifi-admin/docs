@@ -5,7 +5,7 @@ description: "Protect your capital and maximize long-term success with proven ri
 
 ## Risk Management Fundamentals
 
-Successful prediction market trading isn't just about picking winners—it's about **managing risk** to survive losing streaks and compound gains over time.
+Successful prediction market trading requires **managing risk** to survive losing streaks and compound gains over time.
 
 <Warning>
 ⚠️ **Golden Rule:** Never risk more than you can afford to lose. Prediction markets involve real financial risk.
@@ -15,41 +15,49 @@ Successful prediction market trading isn't just about picking winners—it's abo
 
 ## Core Risk Principles
 
-### The 4 Pillars of Risk Management
-
 <CardGroup cols={2}>
   <Card title="1. Position Sizing" icon="ruler">
-    Never put too much capital in one trade
+    **Max 5-10% per position**
     
-    **Rule:** Max 5-10% per position
+    Never put too much capital in one trade
   </Card>
   
   <Card title="2. Diversification" icon="chart-scatter">
-    Spread risk across multiple markets
+    **8-15 uncorrelated positions**
     
-    **Rule:** 8-15 uncorrelated positions
+    Spread risk across multiple markets
   </Card>
   
   <Card title="3. Loss Limits" icon="ban">
-    Define maximum acceptable loss
+    **Stop if down 20-30%**
     
-    **Rule:** Stop trading if down 20-30%
+    Define maximum acceptable loss
   </Card>
   
   <Card title="4. Capital Preservation" icon="shield-check">
-    Protect your principal at all costs
+    **Keep 30-40% in reserve**
     
-    **Rule:** Keep 30-40% in reserve
+    Protect your principal at all costs
   </Card>
 </CardGroup>
 
 ---
 
-## Position Sizing Strategies
+## Position Sizing
+
+### Fixed Percentage Method
+
+Risk same % of capital per trade:
+
+| Approach | Risk per Position | Best For | Example ($10K bankroll) |
+|----------|-------------------|----------|-------------------------|
+| **Conservative** | 2-5% | Beginners, uncertain markets | $300 per position (10 positions = 30% deployed) |
+| **Moderate** | 5-10% | Experienced traders | $700 per position (10 positions = 70% deployed) |
+| **Aggressive** | 10-20% | Very experienced, high conviction | $1,500 per position (5 positions = 75% deployed) |
 
 ### Kelly Criterion
 
-Mathematically optimal position sizing based on edge and probability:
+Mathematically optimal position sizing:
 
 $$
 f^* = \frac{bp - q}{b}
@@ -64,78 +72,11 @@ Where:
 **Example:**
 - Market offers 2:1 odds ($0.33 price)
 - You estimate 50% win probability
-- Kelly = $(2 \times 0.5 - 0.5) / 2 = 0.25$
-- **Bet 25% of capital** (full Kelly)
+- Kelly = $(2 \times 0.5 - 0.5) / 2 = 0.25$ (25% of capital)
 
 <Warning>
-**Half-Kelly Recommended:** Most professionals use **half-Kelly** (12.5% in example above) to reduce volatility while capturing most gains.
+**Half-Kelly Recommended:** Most professionals use **half-Kelly** to reduce volatility while capturing most gains.
 </Warning>
-
-### Fixed Percentage Method
-
-Simpler approach: risk same % of capital per trade.
-
-<Tabs>
-  <Tab title="Conservative (2-5%)">
-    **Best for:**
-    - Beginners
-    - Uncertain markets
-    - High volatility
-    
-    **Example:**
-    - $10,000 bankroll
-    - 3% per position = $300 max
-    - 10 positions = $3,000 deployed (30%)
-    
-    ✅ Very safe  
-    ❌ Slower growth
-  </Tab>
-  
-  <Tab title="Moderate (5-10%)">
-    **Best for:**
-    - Experienced traders
-    - Medium conviction
-    - Balanced approach
-    
-    **Example:**
-    - $10,000 bankroll
-    - 7% per position = $700 max
-    - 10 positions = $7,000 deployed (70%)
-    
-    ✅ Good balance  
-    ⚖️ Moderate risk
-  </Tab>
-  
-  <Tab title="Aggressive (10-20%)">
-    **Best for:**
-    - Very experienced traders
-    - High-conviction plays only
-    - High risk tolerance
-    
-    **Example:**
-    - $10,000 bankroll
-    - 15% per position = $1,500 max
-    - 5 positions = $7,500 deployed (75%)
-    
-    ⚠️ High risk  
-    ✅ Maximum growth potential
-  </Tab>
-</Tabs>
-
-### Fixed Dollar Amount
-
-Risk same $ amount per trade regardless of capital:
-
-**Pros:**
-- Simple to execute
-- Easy to track
-- Consistent risk per trade
-
-**Cons:**
-- Doesn't adjust to gains/losses
-- Can become too conservative (with gains) or aggressive (with losses)
-
-**Recommendation:** Adjust fixed amount every month based on current bankroll.
 
 ---
 
@@ -143,76 +84,45 @@ Risk same $ amount per trade regardless of capital:
 
 ### Portfolio Construction
 
-Build a balanced portfolio across multiple dimensions:
+Diversify across multiple dimensions:
 
-<Tabs>
-  <Tab title="Market Category">
-    **Diversify by event type:**
-    
-    | Category | Allocation | Example |
-    |----------|------------|---------|
-    | Politics | 30% | Elections, policy |
-    | Sports | 20% | NFL, NBA games |
-    | Crypto | 25% | BTC price, launches |
-    | Finance | 15% | Fed decisions, stocks |
-    | Entertainment | 10% | Awards, box office |
-    
-    **Why:** Different categories have uncorrelated outcomes
-  </Tab>
-  
-  <Tab title="Time Horizon">
-    **Diversify by resolution date:**
-    
-    - **Short-term (< 1 week):** 30%
-    - **Medium-term (1 week - 1 month):** 40%
-    - **Long-term (> 1 month):** 30%
-    
-    **Why:** Manage liquidity needs and reduce timing risk
-  </Tab>
-  
-  <Tab title="Probability Range">
-    **Diversify by market odds:**
-    
-    - **High probability (70-90%):** 40% - Lower risk, lower return
-    - **Medium probability (40-60%):** 35% - Balanced
-    - **Low probability (10-30%):** 25% - Higher risk, higher return
-    
-    **Why:** Blend steady gains with asymmetric upside
-  </Tab>
-  
-  <Tab title="Venue">
-    **Diversify across platforms:**
-    
-    - **Predifi CLOB:** 40%
-    - **Polymarket (via aggregator):** 35%
-    - **Limitless (via aggregator):** 25%
-    
-    **Why:** Reduce venue-specific risks (oracle failures, smart contract bugs)
-  </Tab>
-</Tabs>
+**By Category:**
+- Politics: 30%
+- Crypto: 25%
+- Sports: 20%
+- Finance: 15%
+- Entertainment: 10%
+
+**By Time Horizon:**
+- Short-term (< 1 week): 30%
+- Medium-term (1 week - 1 month): 40%
+- Long-term (> 1 month): 30%
+
+**By Probability:**
+- High (70-90%): 40% - Lower risk, lower return
+- Medium (40-60%): 35% - Balanced
+- Low (10-30%): 25% - Higher risk, higher return
 
 ### Correlation Risk
 
 Avoid positions that move together:
 
 <Warning>
-**Bad Diversification Example:**
+**Bad Diversification:**
 - BTC > $100K
 - ETH > $4K
 - Crypto market cap > $3T
-- Coinbase stock > $300
 
-All these move together! If crypto crashes, **all positions lose.**
+All move together! If crypto crashes, **all positions lose.**
 </Warning>
 
 <Info>
-**Good Diversification Example:**
+**Good Diversification:**
 - BTC > $100K (crypto)
-- Trump wins 2024 election (politics)
+- Trump wins 2024 (politics)
 - Lakers win NBA championship (sports)
-- Apple stock > $200 (tech stocks)
 
-These are **uncorrelated**—winning/losing independently.
+These are **uncorrelated**—win/lose independently.
 </Info>
 
 ---
@@ -220,8 +130,6 @@ These are **uncorrelated**—winning/losing independently.
 ## Stop-Loss Strategies
 
 ### Manual Stop-Losses
-
-Predifi doesn't support automatic stop-losses yet. Use manual approach:
 
 <Steps>
   <Step title="Set Stop Price">
@@ -231,11 +139,11 @@ Predifi doesn't support automatic stop-losses yet. Use manual approach:
   </Step>
   
   <Step title="Create Price Alert">
-    Set alert in Predifi when position hits stop level
+    Set alert when position hits stop level
   </Step>
   
   <Step title="Execute Stop">
-    When alert triggers, manually close position immediately
+    When alert triggers, close position immediately
   </Step>
   
   <Step title="No Exceptions">
@@ -243,49 +151,16 @@ Predifi doesn't support automatic stop-losses yet. Use manual approach:
   </Step>
 </Steps>
 
-### Time-Based Stops
-
-Exit positions based on time, not price:
-
-**Strategy:** If market hasn't moved in your favor after X days, exit.
-
-**Example:**
-- Enter position on Monday
-- Set 7-day time stop
-- If not profitable by next Monday, close regardless of price
-- Redeploy capital to better opportunities
-
-**Why:** Avoid dead money sitting in stagnant positions
-
 ### Trailing Stops
 
 Lock in profits as position moves in your favor:
 
-<Tabs>
-  <Tab title="Fixed Trailing Stop">
-    **Move stop-loss up as price rises:**
-    
-    - Buy at $0.40
-    - Price rises to $0.60 (+50%)
-    - Set trailing stop at $0.55 (locking in +37.5% profit)
-    - If price drops to $0.55, exit
-    - If price rises to $0.70, move stop to $0.65
-    
-    **Rule:** Keep stop 10-15% below current price
-  </Tab>
-  
-  <Tab title="Percentage Trailing Stop">
-    **Trail by percentage:**
-    
-    - Buy at $0.50
-    - Set 20% trailing stop
-    - Price peaks at $0.80
-    - Stop level: $0.64 (80% of peak)
-    - Exit if price drops to $0.64
-    
-    **Captures:** 80% of max profit
-  </Tab>
-</Tabs>
+**Fixed Trailing Stop:**
+- Buy at $0.40
+- Price rises to $0.60 (+50%)
+- Set trailing stop at $0.55 (locking in +37.5% profit)
+- If price rises to $0.70, move stop to $0.65
+- **Rule:** Keep stop 10-15% below current price
 
 ---
 
@@ -293,39 +168,11 @@ Lock in profits as position moves in your favor:
 
 ### The 3-Tier System
 
-Structure your capital for optimal risk management:
-
-<Tabs>
-  <Tab title="Tier 1: Active (50-60%)">
-    **Deployed in current positions**
-    
-    - 10-15 open positions
-    - Actively managed
-    - Regular trading
-    
-    **$10K Example:** $5,000-6,000 active
-  </Tab>
-  
-  <Tab title="Tier 2: Reserve (30-40%)">
-    **Ready to deploy for opportunities**
-    
-    - Add to winning positions
-    - Average down on high-conviction losers
-    - Jump on mispriced markets
-    
-    **$10K Example:** $3,000-4,000 reserve
-  </Tab>
-  
-  <Tab title="Tier 3: Emergency (10%)">
-    **Never touch except for rare opportunities**
-    
-    - Massive mispricings
-    - Black swan events
-    - Recovery from drawdowns
-    
-    **$10K Example:** $1,000 emergency only
-  </Tab>
-</Tabs>
+| Tier | % of Capital | Purpose | Example ($10K) |
+|------|-------------|---------|----------------|
+| **Active** | 50-60% | Deployed in current positions (10-15 open) | $5,000-6,000 |
+| **Reserve** | 30-40% | Add to winners, jump on opportunities | $3,000-4,000 |
+| **Emergency** | 10% | Rare opportunities, recovery from drawdowns | $1,000 |
 
 ### Drawdown Management
 
@@ -344,104 +191,50 @@ What to do when losing:
   
   <Step title="Tighten Criteria">
     Only take highest-conviction trades
-    
-    Skip marginal opportunities
   </Step>
   
   <Step title="Review Strategy">
-    Analyze what went wrong
-    
-    Adjust if needed
+    Analyze what went wrong, adjust if needed
   </Step>
   
   <Step title="Grind Back Slowly">
     Small, consistent wins rebuild capital
-    
-    Don't try to win it all back at once
   </Step>
 </Steps>
 
 <Warning>
-**Stop-Loss Rule:** If down 30% from peak, **stop trading for 1 week**. Take a break, reassess, and return with fresh perspective.
+**Circuit Breaker:** If down 30% from peak, **stop trading for 1 week**. Take a break, reassess, and return with fresh perspective.
 </Warning>
 
 ---
 
 ## Risk Metrics to Track
 
-### Key Performance Indicators
-
-<CardGroup cols={2}>
-  <Card title="Win Rate" icon="trophy">
-    **% of positions that profit**
-    
-    Target: >55% for sustainable edge
-    
-    Formula: Wins / Total Trades × 100
-  </Card>
-  
-  <Card title="Average Win/Loss Ratio" icon="balance-scale">
-    **Size of wins vs. losses**
-    
-    Target: >1.5:1 (wins 50% bigger than losses)
-    
-    Formula: Avg Win Size / Avg Loss Size
-  </Card>
-  
-  <Card title="Max Drawdown" icon="chart-line-down">
-    **Largest peak-to-trough decline**
-    
-    Target: &lt;25% of peak capital
-    
-    Track: Monthly
-  </Card>
-  
-  <Card title="Sharpe Ratio" icon="chart-simple">
-    **Risk-adjusted returns**
-    
-    Target: >1.0 (returns exceed risk)
-    
-    Higher is better
-  </Card>
-  
-  <Card title="ROI" icon="percent">
-    **Total return on investment**
-    
-    Target: >20% annually
-    
-    Track: Quarterly, annually
-  </Card>
-  
-  <Card title="Capital at Risk" icon="gauge-high">
-    **% of bankroll in open positions**
-    
-    Target: 50-70%
-    
-    Adjust based on market conditions
-  </Card>
-</CardGroup>
+| Metric | Target | What It Measures |
+|--------|--------|------------------|
+| **Win Rate** | >55% | % of positions that profit |
+| **Win/Loss Ratio** | >1.5:1 | Avg win size / Avg loss size |
+| **Max Drawdown** | &lt;25% | Largest peak-to-trough decline |
+| **Sharpe Ratio** | >1.0 | Risk-adjusted returns |
+| **ROI** | >20% annually | Total return on investment |
+| **Capital at Risk** | 50-70% | % of bankroll in open positions |
 
 ---
 
 ## Psychological Risk Management
 
-### Emotional Control
+### Common Pitfalls
 
 <AccordionGroup>
   <Accordion title="Avoid Tilt" icon="face-angry">
     **Tilt:** Making irrational trades after losses.
     
-    **Signs you're tilting:**
-    - Increasing position sizes after losses (revenge trading)
+    **Signs:**
+    - Increasing position sizes after losses
     - Entering positions without analysis
     - Ignoring your rules
-    - Trading out of frustration
     
-    **Solution:**
-    - Step away for 24 hours
-    - Review losing trades objectively
-    - Stick to position size limits
-    - Don't chase losses
+    **Solution:** Step away for 24 hours, stick to position size limits
   </Accordion>
   
   <Accordion title="FOMO Management" icon="chart-line">
@@ -449,47 +242,29 @@ What to do when losing:
     
     **Symptoms:**
     - Entering trades late (after big move)
-    - Oversizing positions on "sure things"
-    - Abandoning strategy for hot markets
+    - Oversizing "sure things"
     
-    **Solution:**
-    - Stick to your plan
-    - There's always another opportunity
-    - Late entries often lose
-    - Review what you missed, learn, move on
+    **Solution:** Stick to your plan, there's always another opportunity
   </Accordion>
   
   <Accordion title="Confirmation Bias" icon="magnifying-glass">
     **Risk:** Only seeking information that confirms your position.
     
-    **Danger:**
-    - Ignoring contrary evidence
-    - Holding losers too long
-    - Averaging down on bad positions
+    **Danger:** Ignoring contrary evidence, holding losers too long
     
-    **Solution:**
-    - Actively seek opposite viewpoints
-    - Play devil's advocate with own positions
-    - Set time-based reviews of thesis
-    - Exit if thesis invalidated
+    **Solution:** Actively seek opposite viewpoints, set time-based reviews
   </Accordion>
   
   <Accordion title="Overconfidence" icon="head-side-brain">
     **Risk:** Thinking you're smarter than the market.
     
-    **Signs:**
-    - Increasing position sizes after wins
-    - Ignoring stop-losses ("this time is different")
-    - Trading outside expertise
+    **Signs:** Increasing position sizes after wins, ignoring stop-losses
     
-    **Solution:**
-    - Track actual win rate (probably lower than you think)
-    - Stick to position size limits always
-    - Stay humble—market humbles everyone eventually
+    **Solution:** Track actual win rate, stick to position size limits
   </Accordion>
 </AccordionGroup>
 
-### Trading Rules Checklist
+### Pre-Trade Checklist
 
 Before every trade, check:
 
@@ -500,108 +275,16 @@ Before every trade, check:
 - [ ] Not trading on tilt or emotion
 - [ ] Thesis written down and clear
 - [ ] Exit criteria defined before entry
-- [ ] Not exceeding daily/weekly trade limit
 
 ---
 
-## Advanced Risk Techniques
+## Risk Management by Experience Level
 
-### Hedging
-
-Protect positions with offsetting bets:
-
-**Example:**
-- You're long BTC > $100K at $0.55 (545 shares, $300 cost)
-- BTC pumps to $98K, odds now $0.75
-- Concerned about volatility before expiry
-- **Hedge:** Buy $0.15 worth of NO ($150 cost, 1000 shares)
-
-**Outcomes:**
-- BTC > $100K: YES wins ($545 profit - $300 cost - $150 hedge = **+$95**)
-- BTC < $100K: NO wins ($1000 profit - $300 cost - $150 hedge = **+$550**)
-
-**Why hedge:** Lock in profits, reduce stress, protect against volatility
-
-### Options-Style Strategies
-
-Use prediction markets like options:
-
-<Tabs>
-  <Tab title="Long Straddle">
-    **Buy both YES and NO when expecting big move:**
-    
-    - Market: BTC between $95K-$105K
-    - Price: $0.50 YES, $0.50 NO
-    - Buy 500 shares each ($250 + $250 = $500 cost)
-    
-    **If huge volatility:**
-    - YES shoots to $0.90 → Sell for $450 profit
-    - NO crashes to $0.10
-    - Net: $450 - $500 = -$50 loss (but captured massive move)
-    
-    **Use:** High volatility expected, direction uncertain
-  </Tab>
-  
-  <Tab title="Spread Trading">
-    **Buy low prob, sell high prob on same underlying:**
-    
-    - Buy: BTC > $110K at $0.20 (500 shares, $100 cost)
-    - Sell: BTC > $95K at $0.80 (500 shares, $400 proceeds)
-    - Net: $300 credit received
-    
-    **Outcomes:**
-    - BTC < $95K: Keep $300 (max profit)
-    - BTC $95K-$110K: Lose on one, win on other
-    - BTC > $110K: Lose $200 (max loss)
-    
-    **Use:** Defined risk/reward, range-bound expectations
-  </Tab>
-</Tabs>
-
----
-
-## Risk Management for Different Trader Types
-
-<Tabs>
-  <Tab title="Beginner (< 6 months)">
-    **Ultra-conservative approach:**
-    
-    - **Position size:** 2-3% max
-    - **Max positions:** 5-8
-    - **Capital deployed:** 20-30%
-    - **Stop-loss:** 15-20%
-    - **Markets:** High-liquidity only
-    - **Strategy:** Focus on learning, not profits
-    
-    **Goal:** Survive, learn, avoid big losses
-  </Tab>
-  
-  <Tab title="Intermediate (6-18 months)">
-    **Balanced risk approach:**
-    
-    - **Position size:** 5-7% typical, 10% max
-    - **Max positions:** 10-15
-    - **Capital deployed:** 50-60%
-    - **Stop-loss:** 15-25%
-    - **Markets:** Mix of liquid and niche
-    - **Strategy:** Build edge, compound gains
-    
-    **Goal:** Consistent profitability, refine strategy
-  </Tab>
-  
-  <Tab title="Advanced (18+ months)">
-    **Optimized risk approach:**
-    
-    - **Position size:** 5-10% typical, 20% max on best setups
-    - **Max positions:** 15-20
-    - **Capital deployed:** 60-75%
-    - **Stop-loss:** Variable by setup
-    - **Markets:** All types, specialist edge
-    - **Strategy:** Maximize edge, asymmetric bets
-    
-    **Goal:** Maximize risk-adjusted returns
-  </Tab>
-</Tabs>
+| Level | Position Size | Capital Deployed | Stop-Loss | Strategy |
+|-------|---------------|------------------|-----------|----------|
+| **Beginner** (< 6 months) | 2-3% max | 20-30% | 15-20% | Focus on learning, avoid big losses |
+| **Intermediate** (6-18 months) | 5-7% typical, 10% max | 50-60% | 15-25% | Build edge, compound gains |
+| **Advanced** (18+ months) | 5-10% typical, 20% max | 60-75% | Variable | Maximize risk-adjusted returns |
 
 ---
 
@@ -617,38 +300,27 @@ Automatic trading pauses when things go wrong:
 4. **Peak Drawdown:** Down 30% from peak → Stop trading 2-4 weeks
 
 <Warning>
-**Honor your circuit breakers!** These prevent small losses from becoming catastrophic. The market will be there tomorrow.
+**Honor your circuit breakers!** These prevent small losses from becoming catastrophic.
 </Warning>
 
 ---
 
-## Risk Management Checklist
+## Advanced Techniques
 
-<Steps>
-  <Step title="Before Trading">
-    - [ ] Define risk per position (2-10%)
-    - [ ] Determine max total capital at risk (50-70%)
-    - [ ] Set stop-loss levels for existing positions
-    - [ ] Review current portfolio correlation
-    - [ ] Check emotional state (not tilting?)
-  </Step>
-  
-  <Step title="During Trading">
-    - [ ] Enter stop-loss price immediately
-    - [ ] Set price alerts
-    - [ ] Update position tracking spreadsheet
-    - [ ] Verify position size within limits
-    - [ ] Document trade thesis
-  </Step>
-  
-  <Step title="After Trading">
-    - [ ] Review all positions daily
-    - [ ] Calculate total capital at risk
-    - [ ] Update risk metrics (win rate, P&L, drawdown)
-    - [ ] Check for positions hitting stops
-    - [ ] Plan next week's targets and limits
-  </Step>
-</Steps>
+### Hedging
+
+Protect positions with offsetting bets:
+
+**Example:**
+- Long BTC > $100K at $0.55 (545 shares, $300 cost)
+- BTC pumps, odds now $0.75
+- **Hedge:** Buy $150 of NO (1000 shares)
+
+**Outcomes:**
+- BTC > $100K: YES wins (+$95 profit)
+- BTC < $100K: NO wins (+$550 profit)
+
+**Why hedge:** Lock in profits, reduce stress, protect against volatility
 
 ---
 
@@ -656,19 +328,19 @@ Automatic trading pauses when things go wrong:
 
 <CardGroup cols={2}>
   <Card title="Position Size Calculator" icon="calculator">
-    Use Kelly Criterion calculator to determine optimal bet sizing
+    Kelly Criterion calculator for optimal bet sizing
     
-    [Calculate Position Size →](https://app.predifi.com/tools/kelly)
+    [Calculate →](https://app.predifi.com/tools/kelly)
   </Card>
   
   <Card title="Portfolio Analytics" icon="chart-mixed">
     Track risk metrics: Sharpe ratio, drawdown, correlation
     
-    [View Analytics →](/api-reference/portfolio)
+    [View Analytics →](/products/portfolio-tracker)
   </Card>
   
   <Card title="Risk Spreadsheet Template" icon="table">
-    Download our position tracking template
+    Download position tracking template
     
     [Get Template →](https://predifi.com/risk-template)
   </Card>
@@ -686,19 +358,19 @@ Automatic trading pauses when things go wrong:
 
 <CardGroup cols={2}>
   <Card title="Managing Positions" icon="sliders" href="/traders/managing-positions">
-    Learn to monitor and adjust positions
+    Monitor and adjust positions
   </Card>
   
-  <Card title="Trading Guide" icon="graduation-cap" href="/getting-started/trading-guide">
+  <Card title="Portfolio Tracker" icon="chart-mixed" href="/products/portfolio-tracker">
+    Track all positions
+  </Card>
+  
+  <Card title="Trading Guide" icon="graduation-cap" href="/getting-started/quickstart">
     Complete trading guide
   </Card>
   
-  <Card title="Portfolio API" icon="code" href="/api-reference/portfolio">
-    Automate risk monitoring
-  </Card>
-  
   <Card title="Join Community" icon="discord" href="https://discord.gg/predifi">
-    Discuss strategies with other traders
+    Discuss strategies
   </Card>
 </CardGroup>
 

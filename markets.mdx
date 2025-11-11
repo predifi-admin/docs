@@ -5,19 +5,19 @@ description: "Explore prediction markets across crypto and sports categories"
 
 ## Available Market Categories
 
-Predifi launches with two core categories, each offering high-frequency trading opportunities with deep liquidity.
+Predifi offers high-frequency prediction markets with deep liquidity across two categories:
 
 <CardGroup cols={2}>
   <Card title="Crypto Markets" icon="bitcoin">
-    **BTC, ETH, SOL, BNB, DOGE, XRP**
+    **Live Now**
     
-    15-minute, 30-minute, and 1-hour time frames
+    BTC, ETH, SOL, BNB, DOGE, XRP in 15m, 30m, 1h timeframes
   </Card>
   
   <Card title="Sports Markets" icon="futbol">
     **Coming Soon**
     
-    Major leagues and events
+    Major leagues and live betting
   </Card>
 </CardGroup>
 
@@ -27,272 +27,80 @@ Predifi launches with two core categories, each offering high-frequency trading 
 
 ### Supported Assets
 
-We offer prediction markets on the **top 6 cryptocurrencies** by market cap and trading volume:
+**Top 6 cryptocurrencies by market cap:**
 
-<Tabs>
-  <Tab title="Bitcoin (BTC)">
-    **Market Leader - $1T+ Market Cap**
+| Asset | Market Cap | Timeframes | Typical Spread |
+|-------|------------|------------|----------------|
+| **Bitcoin (BTC)** | $1T+ | 15m, 30m, 1h | 45-55% |
+| **Ethereum (ETH)** | $400B+ | 15m, 30m, 1h | 45-55% |
+| **Solana (SOL)** | $80B+ | 15m, 30m, 1h | 44-56% |
+| **BNB** | $70B+ | 15m, 30m, 1h | 43-57% |
+| **Dogecoin (DOGE)** | $30B+ | 15m, 30m, 1h | 42-58% |
+| **XRP** | $60B+ | 15m, 30m, 1h | 44-56% |
+
+### Market Format
+
+**Question:** "Will [ASSET] close higher in [TIMEFRAME]?"
+
+**Outcomes:**
+- **YES** - Price goes up
+- **NO** - Price goes down or stays same
+
+**Example:** "Will BTC close higher in 30 minutes?"
+- Current price: $98,450
+- Market expires in 30 minutes
+- YES wins if BTC > $98,450 at expiration
+- NO wins if BTC ≤ $98,450 at expiration
+
+### Timeframes
+
+<CardGroup cols={3}>
+  <Card title="15 Minutes" icon="clock">
+    **High frequency**
     
-    **Available Markets:**
-    - Will BTC close higher in 15 minutes?
-    - Will BTC close higher in 30 minutes?
-    - Will BTC close higher in 1 hour?
-    
-    **Why Trade BTC Markets:**
-    - Highest liquidity
-    - 24/7 trading
-    - Most predictable volatility patterns
-    - Global price consensus
-    
-    **Typical Odds Range:** 45-55% (tight spreads)
-  </Tab>
+    Perfect for scalping and quick trades
+  </Card>
   
-  <Tab title="Ethereum (ETH)">
-    **Smart Contract Platform - $400B+ Market Cap**
+  <Card title="30 Minutes" icon="clock">
+    **Balanced**
     
-    **Available Markets:**
-    - Will ETH close higher in 15 minutes?
-    - Will ETH close higher in 30 minutes?
-    - Will ETH close higher in 1 hour?
-    
-    **Why Trade ETH Markets:**
-    - Second-most liquid crypto
-    - Correlates with but sometimes diverges from BTC
-    - High volatility = better opportunities
-    - DeFi ecosystem driver
-    
-    **Typical Odds Range:** 43-57% (moderate spreads)
-  </Tab>
+    Most popular timeframe
+  </Card>
   
-  <Tab title="Solana (SOL)">
-    **High-Performance Blockchain - $80B+ Market Cap**
+  <Card title="1 Hour" icon="clock">
+    **Trend following**
     
-    **Available Markets:**
-    - Will SOL close higher in 15 minutes?
-    - Will SOL close higher in 30 minutes?
-    - Will SOL close higher in 1 hour?
-    
-    **Why Trade SOL Markets:**
-    - High volatility (10-20% daily swings)
-    - Fast-growing ecosystem
-    - Strong community sentiment
-    - Memecoin correlation
-    
-    **Typical Odds Range:** 40-60% (wider spreads)
-  </Tab>
-  
-  <Tab title="BNB">
-    **Binance Ecosystem - $90B+ Market Cap**
-    
-    **Available Markets:**
-    - Will BNB close higher in 15 minutes?
-    - Will BNB close higher in 30 minutes?
-    - Will BNB close higher in 1 hour?
-    
-    **Why Trade BNB Markets:**
-    - Exchange token dynamics
-    - Asian market hours advantage
-    - Binance Smart Chain adoption
-    - Lower volatility than SOL
-    
-    **Typical Odds Range:** 44-56% (tight spreads)
-  </Tab>
-  
-  <Tab title="Dogecoin (DOGE)">
-    **Meme Coin King - $25B+ Market Cap**
-    
-    **Available Markets:**
-    - Will DOGE close higher in 15 minutes?
-    - Will DOGE close higher in 30 minutes?
-    - Will DOGE close higher in 1 hour?
-    
-    **Why Trade DOGE Markets:**
-    - Extreme volatility
-    - News/social media driven
-    - Elon Musk tweet sensitivity
-    - High-risk, high-reward
-    
-    **Typical Odds Range:** 35-65% (widest spreads)
-  </Tab>
-  
-  <Tab title="XRP">
-    **Payments Focused - $110B+ Market Cap**
-    
-    **Available Markets:**
-    - Will XRP close higher in 15 minutes?
-    - Will XRP close higher in 30 minutes?
-    - Will XRP close higher in 1 hour?
-    
-    **Why Trade XRP Markets:**
-    - Legal clarity advantage
-    - Banking partnerships
-    - Regulatory news sensitivity
-    - Unique price action
-    
-    **Typical Odds Range:** 42-58% (moderate spreads)
-  </Tab>
-</Tabs>
+    Lower volatility, clearer patterns
+  </Card>
+</CardGroup>
 
-### Time Frames Explained
+### Why These Assets?
 
-<AccordionGroup>
-  <Accordion title="15-Minute Markets (15M)" icon="clock">
-    **Fastest-paced trading**
-    
-    **Market Question:** "Will [ASSET] price be higher at [TIME + 15min] than current price?"
-    
-    **Example:**
-    ```
-    Current Time: 2:00 PM
-    Current BTC Price: $98,450
-    Market: "Will BTC be above $98,450 at 2:15 PM?"
-    ```
-    
-    **Characteristics:**
-    - New market every 15 minutes
-    - 24/7 availability
-    - Highest frequency trading
-    - Best for scalpers
-    - Lower average win size
-    
-    **Best For:**
-    - Active traders
-    - Technical analysis experts
-    - Quick profit opportunities
-    - Day traders
-  </Accordion>
+- **High liquidity** - Deep 24/7 markets on exchanges
+- **Price consensus** - Clear, manipulation-resistant pricing
+- **Volatility** - Frequent trading opportunities
+- **Familiar** - Most traded crypto assets globally
 
-  <Accordion title="30-Minute Markets (30M)" icon="clock">
-    **Balanced timeframe**
-    
-    **Market Question:** "Will [ASSET] price be higher at [TIME + 30min] than current price?"
-    
-    **Example:**
-    ```
-    Current Time: 2:00 PM
-    Current ETH Price: $3,825
-    Market: "Will ETH be above $3,825 at 2:30 PM?"
-    ```
-    
-    **Characteristics:**
-    - New market every 30 minutes
-    - 24/7 availability
-    - Moderate trading frequency
-    - Balanced risk/reward
-    - Mid-range volatility
-    
-    **Best For:**
-    - Most traders
-    - Swing traders
-    - Pattern recognition
-    - Risk-managed strategies
-  </Accordion>
+---
 
-  <Accordion title="1-Hour Markets (1H)" icon="clock">
-    **Longer-term prediction**
-    
-    **Market Question:** "Will [ASSET] price be higher at [TIME + 1hr] than current price?"
-    
-    **Example:**
-    ```
-    Current Time: 2:00 PM
-    Current SOL Price: $215.50
-    Market: "Will SOL be above $215.50 at 3:00 PM?"
-    ```
-    
-    **Characteristics:**
-    - New market every hour
-    - 24/7 availability
-    - Lower frequency
-    - Larger price movements
-    - Better for trend following
-    
-    **Best For:**
-    - Patient traders
-    - Trend followers
-    - Macro traders
-    - Lower-stress trading
-  </Accordion>
-</AccordionGroup>
+## Market Liquidity
 
-### Market Schedule
+### Average Market Depth
 
-**All crypto markets operate 24/7:**
+| Asset | Average Liquidity | Max Position Size |
+|-------|-------------------|-------------------|
+| BTC | $50,000+ | $10,000 |
+| ETH | $40,000+ | $8,000 |
+| SOL | $30,000+ | $5,000 |
+| BNB | $25,000+ | $5,000 |
+| DOGE | $20,000+ | $4,000 |
+| XRP | $25,000+ | $5,000 |
 
-```
-12:00 AM - 15M market opens
-12:15 AM - Previous 15M resolves, new 15M opens
-12:30 AM - Previous 30M resolves, new 30M opens
-1:00 AM  - Previous 1H resolves, new 1H opens
+**Liquidity grows with adoption.** Early markets may have lower depth.
 
-... continues every day, all day
-```
+---
 
-**That's:**
-- **96** new 15M markets per day per asset
-- **48** new 30M markets per day per asset
-- **24** new 1H markets per day per asset
-
-**With 6 assets:**
-- **1,008 markets per day** across all time frames
-- **~42 markets per hour**
-- New opportunity every ~90 seconds
-
-### How Markets Work
-
-<Steps>
-  <Step title="Market Opens">
-    New market created with current price as reference
-    
-    ```
-    Time: 2:00:00 PM
-    BTC Price: $98,450 (reference price)
-    Market: "BTC above $98,450 at 2:15 PM?"
-    Initial Odds: YES 50% / NO 50%
-    ```
-  </Step>
-  
-  <Step title="Trading Period">
-    Users trade based on predictions (15 min in this example)
-    
-    ```
-    2:00-2:15 PM: Active trading
-    - Price movements affect odds
-    - Order book depth changes
-    - Users can buy/sell anytime
-    ```
-  </Step>
-  
-  <Step title="Market Closes">
-    No new trades allowed 30 seconds before resolution
-    
-    ```
-    2:14:30 PM: Trading stops
-    2:15:00 PM: Resolution time
-    ```
-  </Step>
-  
-  <Step title="Resolution">
-    Oracle price feed determines outcome
-    
-    ```
-    Resolution Price: $98,520
-    Reference Price: $98,450
-    Result: YES wins (price went up)
-    ```
-  </Step>
-  
-  <Step title="Settlement">
-    Winners receive payouts automatically
-    
-    ```
-    YES holders: Receive $1.00 per share
-    NO holders: Shares become worthless
-    ```
-  </Step>
-</Steps>
-
-### Price Data Source
+## Price Data Source
 
 **All crypto prices sourced from Stork Network:**
 
@@ -306,139 +114,88 @@ We offer prediction markets on the **top 6 cryptocurrencies** by market cap and 
 
 ---
 
-## Sports Markets
+## Trading Hours
 
-<Info>
-  **Coming Soon**
-  
-  Sports prediction markets are under development. Subscribe to our newsletter or join our Discord for launch updates.
-</Info>
+**Crypto markets:** 24/7/365
 
-### Planned Sports Coverage
+- No market closures
+- No weekends or holidays
+- Trade anytime, anywhere
+- Global market access
 
-<Tabs>
-  <Tab title="NFL">
-    **American Football**
-    
-    **Planned Markets:**
-    - Game winners (moneyline)
-    - Point spreads
-    - Over/under totals
-    - Quarter/half outcomes
-    - Player props (TDs, yards, etc.)
-    
-    **Season:** September - February
-  </Tab>
-  
-  <Tab title="NBA">
-    **Basketball**
-    
-    **Planned Markets:**
-    - Game winners
-    - Point spreads
-    - Over/under totals
-    - Quarter outcomes
-    - Player props (points, rebounds, assists)
-    
-    **Season:** October - June
-  </Tab>
-  
-  <Tab title="MLB">
-    **Baseball**
-    
-    **Planned Markets:**
-    - Game winners
-    - Run lines
-    - Over/under runs
-    - Inning outcomes
-    - Player props (hits, home runs)
-    
-    **Season:** March - October
-  </Tab>
-  
-  <Tab title="Soccer">
-    **Football (International)**
-    
-    **Planned Markets:**
-    - Match winners
-    - Goal lines
-    - Both teams to score
-    - Correct score
-    - Player props (goals, assists)
-    
-    **Coverage:** Premier League, La Liga, Champions League, World Cup
-  </Tab>
-  
-  <Tab title="UFC/MMA">
-    **Mixed Martial Arts**
-    
-    **Planned Markets:**
-    - Fight winners
-    - Method of victory
-    - Round betting
-    - Over/under rounds
-    - Fighter props
-    
-    **Events:** All major UFC cards
-  </Tab>
-</Tabs>
-
-### Request a Market
-
-Want to see specific sports or assets added?
-
-<Card
-  title="Submit Market Request"
-  icon="plus"
-  href="https://forms.gle/predifi-market-request"
->
-  Tell us what markets you want to trade →
-</Card>
+**Peak trading times:**
+- US market hours: 9am-4pm EST (highest volume)
+- Asian market hours: 8pm-4am EST (moderate volume)
+- European market hours: 3am-11am EST (moderate volume)
 
 ---
 
-## Market Statistics
+## Market Fees
 
-### Volume & Liquidity
+**Standard fees:**
+- **Maker (liquidity provider):** 0.3% rebate
+- **Taker (liquidity taker):** 0.5% fee
 
-**Current crypto markets (live data):**
+**Volume discounts available** - See [Fee Schedule](/traders/fees-and-pricing)
 
-| Asset | 24h Volume | Avg Liquidity | Active Traders |
-|-------|-----------|---------------|----------------|
-| **BTC** | $XXX,XXX | $XX,XXX | XXX |
-| **ETH** | $XXX,XXX | $XX,XXX | XXX |
-| **SOL** | $XXX,XXX | $XX,XXX | XXX |
-| **BNB** | $XX,XXX | $X,XXX | XX |
-| **DOGE** | $XX,XXX | $X,XXX | XX |
-| **XRP** | $XX,XXX | $X,XXX | XX |
+---
 
-<Note>
-  Statistics update in real-time. Visit [app.predifi.com/markets](https://app.predifi.com/markets) for live data.
-</Note>
+## Sports Markets (Coming Soon)
 
-### Win Rates
+### Planned Launch
 
-**Historical accuracy by asset (sample data):**
+**Q1 2025:** Major sports leagues
 
-```
-BTC 15M Markets:
-├─ Total Markets: 1,500+
-├─ YES Wins: 748 (49.9%)
-├─ NO Wins: 752 (50.1%)
-└─ Efficient market ✓
+<CardGroup cols={3}>
+  <Card title="NFL" icon="football">
+    Game outcomes, player props
+  </Card>
+  
+  <Card title="NBA" icon="basketball">
+    Live betting, quarter outcomes
+  </Card>
+  
+  <Card title="Soccer" icon="futbol">
+    EPL, La Liga, Champions League
+  </Card>
+</CardGroup>
 
-ETH 15M Markets:
-├─ Total Markets: 1,500+
-├─ YES Wins: 735 (49.0%)
-├─ NO Wins: 765 (51.0%)
-└─ Slight bearish bias
+### What to Expect
 
-SOL 15M Markets:
-├─ Total Markets: 1,000+
-├─ YES Wins: 520 (52.0%)
-├─ NO Wins: 480 (48.0%)
-└─ Bullish trend
-```
+- **Live betting** - Trade during games
+- **Player props** - Individual performance markets
+- **Game outcomes** - Winner, point spreads, totals
+- **Deep liquidity** - Major markets only
+
+**Want to be notified?** [Join waitlist →](https://predifi.com/sports-waitlist)
+
+---
+
+## Market Discovery
+
+### Find Markets
+
+**Browse by:**
+- Asset (BTC, ETH, SOL, etc.)
+- Timeframe (15m, 30m, 1h)
+- Expiration (soonest first)
+- Volume (most active)
+- Your positions (filter what you own)
+
+**Search:**
+- Search by asset name
+- Filter by time remaining
+- Sort by odds or volume
+
+### Market Details
+
+**Each market shows:**
+- Current YES/NO odds
+- Time until expiration
+- Total volume traded
+- Your position (if any)
+- Price chart
+- Recent trades
 
 ---
 
@@ -446,144 +203,70 @@ SOL 15M Markets:
 
 ### Popular Approaches
 
+**Momentum Trading:**
+- RSI oversold → Buy YES
+- MACD crossover → Buy YES
+- Breaking resistance → Buy YES
+- Below support → Buy NO
+
+**Event-Based Trading:**
+- Fed announcement → Trade BTC 1H
+- Elon tweet → Trade DOGE 15M
+- Exchange listing → Trade asset 30M
+- Hack news → Buy NO on affected asset
+
+**Statistical Arbitrage:**
+- Compare implied probability to technical indicators
+- Fade extremes (>65% YES or >65% NO)
+- Capitalize on overreactions
+
+**Risk Management:**
+- Never risk more than 5% per trade
+- Use stop-losses
+- Diversify across timeframes
+- Track win rate and ROI
+
+[Learn more risk management →](/traders/risk-management)
+
+---
+
+## FAQ
+
 <AccordionGroup>
-  <Accordion title="Trend Following" icon="arrow-trend-up">
-    **Follow the momentum**
-    
-    If BTC has been going up for last 3 x 15M periods:
-    - Buy YES on next 15M market
-    - Ride the trend
-    - Exit at first reversal
-    
-    **Best for:** 1H markets during strong trends
+  <Accordion title="When do markets expire?" icon="clock">
+    Markets expire at fixed intervals:
+    - 15-minute: Every 15 minutes (:00, :15, :30, :45)
+    - 30-minute: Every 30 minutes (:00, :30)
+    - 1-hour: Every hour (:00)
   </Accordion>
 
-  <Accordion title="Mean Reversion" icon="repeat">
-    **Bet on reversals**
-    
-    If ETH dropped 2% in last hour:
-    - Buy YES (expecting bounce)
-    - Probability of continuation decreases
-    - Quick scalp profits
-    
-    **Best for:** 15M markets after sharp moves
+  <Accordion title="What price is used for settlement?" icon="dollar-sign">
+    Stork Network oracle price at exact expiration timestamp. Aggregated from 5+ major exchanges for accuracy.
   </Accordion>
 
-  <Accordion title="Technical Indicators" icon="chart-line">
-    **Use TA signals**
-    
-    - RSI oversold → Buy YES
-    - MACD crossover → Buy YES
-    - Breaking resistance → Buy YES
-    - Below support → Buy NO
-    
-    **Best for:** 30M and 1H markets
+  <Accordion title="Can I exit before expiration?" icon="right-from-bracket">
+    Yes! Sell your position anytime before expiration. Price depends on current market odds.
   </Accordion>
 
-  <Accordion title="News Trading" icon="newspaper">
-    **React to catalysts**
-    
-    - Fed announcement → Trade BTC 1H
-    - Elon tweet → Trade DOGE 15M
-    - Exchange listing → Trade asset 30M
-    - Hack news → Buy NO on affected asset
-    
-    **Best for:** All time frames depending on news
+  <Accordion title="What if the price doesn't change?" icon="equals">
+    If price stays exactly the same, NO wins. The question is "Will price go UP?" - unchanged means NO.
   </Accordion>
 
-  <Accordion title="Arbitrage" icon="scale-balanced">
-    **Compare vs spot**
-    
-    If market shows 60% YES but spot price flat:
-    - Market overpricing upside
-    - Buy NO (value play)
-    - Collect when market corrects
-    
-    **Best for:** Advanced traders, all markets
+  <Accordion title="Are there position limits?" icon="gauge-max">
+    Yes. Max position size varies by asset (see table above). Contact support for higher limits.
   </Accordion>
 </AccordionGroup>
 
 ---
 
-## Market Rules
-
-### Resolution Criteria
-
-**Crypto Markets:**
-
-1. **Price Source:** Stork Network oracle (Binance, Coinbase, Kraken median)
-2. **Resolution Time:** Exact time stated in market (e.g., 2:15:00 PM)
-3. **Reference Price:** Price when market opened
-4. **Resolution Price:** Price at resolution time
-5. **Outcome:** YES if resolution > reference, NO if resolution ≤ reference
-
-### Dispute Process
-
-If you believe a market resolved incorrectly:
-
-<Steps>
-  <Step title="Review Resolution">
-    Check oracle price data and resolution logic
-  </Step>
-  
-  <Step title="Submit Dispute">
-    File dispute within 24 hours of resolution
-  </Step>
-  
-  <Step title="Investigation">
-    Team reviews oracle data and market logic
-  </Step>
-  
-  <Step title="Verdict">
-    Decision made within 48 hours
-  </Step>
-  
-  <Step title="Re-resolution">
-    If dispute valid, market re-resolved and affected users compensated
-  </Step>
-</Steps>
-
-### Market Integrity
-
-**How we ensure fair markets:**
-
-- ✅ **Decentralized oracles** (Stork Network)
-- ✅ **Transparent resolution** (on-chain verification)
-- ✅ **Manipulation resistant** (40+ independent data sources)
-- ✅ **Instant settlement** (automated smart contracts)
-- ✅ **Audited code** (multiple security audits)
-
----
-
-## Start Trading
+## Next Steps
 
 <CardGroup cols={2}>
-  <Card
-    title="Browse Markets"
-    icon="grid"
-    href="https://app.predifi.com/markets"
-  >
-    See all active markets
+  <Card title="Start Trading" icon="rocket" href="/getting-started/quickstart">
+    Get started in 5 minutes
   </Card>
-  <Card
-    title="Quickstart Guide"
-    icon="rocket"
-    href="/getting-started/quickstart"
-  >
-    Learn how to trade
-  </Card>
-  <Card
-    title="Trading Strategies"
-    icon="chess"
-    href="/getting-started/trading-guide"
-  >
-    Proven strategies
-  </Card>
-  <Card
-    title="Portfolio Tracker"
-    icon="wallet"
-    href="/products/portfolio-tracker"
-  >
-    Track your trades
+  
+  <Card title="Learn Strategy" icon="brain" href="/traders/risk-management">
+    Develop winning strategies
   </Card>
 </CardGroup>

@@ -5,7 +5,7 @@ description: "Create your account and start trading in minutes with EOA or Socia
 
 ## Welcome to Predifi
 
-Getting started is **simple and fast**. Choose your preferred login method and start trading prediction markets in under 2 minutes.
+Getting started is **simple and fast**. Choose your preferred login method and start trading in under 2 minutes.
 
 > ✨ **Connect Wallet or Social Login → Smart AA Wallet Created → Fund Account → Start Trading**
 
@@ -31,139 +31,41 @@ Getting started is **simple and fast**. Choose your preferred login method and s
 
 ## Smart Account Abstraction
 
-### What Happens When You Sign Up
-
-Behind the scenes, Predifi creates a **Smart Account (AA Wallet)** for you powered by **Alchemy Account Kit**:
-
-```mermaid
-graph TB
-    USER{Choose Login}
-    
-    subgraph "Login Methods"
-        EOA[EOA Wallet<br/>MetaMask/Coinbase]
-        SOCIAL[Social Login<br/>Google/Twitter]
-    end
-    
-    subgraph "Alchemy Account Kit"
-        CREATE[Create Smart AA Wallet]
-        SECURE[Secure Key Management]
-        FUND[Fund Wallet]
-    end
-    
-    subgraph "Your Accounts"
-        MAIN[Main Wallet<br/>Your control]
-        AA[Smart AA Wallet<br/>Protocol executes trades]
-    end
-    
-    USER --> EOA
-    USER --> SOCIAL
-    
-    EOA --> CREATE
-    SOCIAL --> CREATE
-    
-    CREATE --> SECURE
-    SECURE --> FUND
-    
-    FUND --> MAIN
-    FUND --> AA
-    
-    style EOA fill:#3B82F6
-    style SOCIAL fill:#EC4899
-    style AA fill:#F59E0B
-    style MAIN fill:#10B981
-```
+Behind the scenes, Predifi creates a **Smart Account (AA Wallet)** for you powered by **Alchemy Account Kit**.
 
 ### Why Smart Accounts?
 
-<Tabs>
-  <Tab title="Gas Abstraction">
+<CardGroup cols={2}>
+  <Card title="Gas Abstraction" icon="gas-pump">
     **No gas tokens needed**
     
-    Traditional crypto:
-    ```
-    ❌ Need ETH/MATIC/BNB for gas
-    ❌ Different gas token per chain
-    ❌ Run out of gas mid-transaction
-    ❌ Complex for newcomers
-    ```
-    
-    With Smart AA Wallet:
-    ```
-    ✅ Pay gas in USDC (or we sponsor it)
-    ✅ Same experience on all chains
-    ✅ Never worry about gas
-    ✅ Simple for everyone
-    ```
-  </Tab>
+    Pay gas in USDC or we sponsor it. Same experience on all chains.
+  </Card>
   
-  <Tab title="Social Recovery">
+  <Card title="Social Recovery" icon="life-ring">
     **Never lose access**
     
-    Traditional wallet:
-    ```
-    ❌ Lose seed phrase = lose funds forever
-    ❌ No backup option
-    ❌ High stress
-    ```
-    
-    Smart AA Wallet:
-    ```
-    ✅ Multiple recovery methods
-    ✅ Guardian system (email, phone)
-    ✅ Account recovery without seed phrase
-    ✅ Peace of mind
-    ```
-  </Tab>
+    Multiple recovery methods (email, phone, guardians). No seed phrase stress.
+  </Card>
   
-  <Tab title="Batch Transactions">
+  <Card title="Batch Transactions" icon="layer-group">
     **One-click complex operations**
     
-    Traditional:
-    ```
-    ❌ Approve USDC (tx 1)
-    ❌ Wait for confirmation
-    ❌ Deposit to vault (tx 2)
-    ❌ Wait again
-    ❌ Place trade (tx 3)
-    → 3 transactions, 5 minutes
-    ```
-    
-    Smart AA Wallet:
-    ```
-    ✅ All 3 actions in one transaction
-    ✅ One confirmation
-    ✅ 30 seconds total
-    → Better UX
-    ```
-  </Tab>
+    Approve + deposit + trade in one transaction (vs 3 separate).
+  </Card>
   
-  <Tab title="Session Keys">
+  <Card title="Session Keys" icon="clock">
     **Trade without constant approvals**
     
-    Traditional:
-    ```
-    ❌ Every trade needs wallet approval
-    ❌ Pop-up for every action
-    ❌ Interrupts flow
-    ```
-    
-    Smart AA Wallet:
-    ```
-    ✅ Approve session once
-    ✅ Trade freely for X hours
-    ✅ No interruptions
-    ✅ Like Web2 UX
-    ```
-  </Tab>
-</Tabs>
+    Approve session once, trade freely for X hours. No pop-ups.
+  </Card>
+</CardGroup>
 
 ---
 
 ## Option 1: Connect EOA Wallet
 
 ### For Existing Crypto Users
-
-If you already have a crypto wallet:
 
 <Steps>
   <Step title="Visit Predifi">
@@ -175,22 +77,15 @@ If you already have a crypto wallet:
     - **MetaMask** (most popular)
     - **Coinbase Wallet**
     - **WalletConnect** (mobile wallets)
-    - **Rabby**
-    - **Rainbow**
-    - Others
+    - **Rabby**, **Rainbow**, and others
   </Step>
   
   <Step title="Approve Connection">
-    Your wallet will prompt you to connect
-    - No transaction, no gas required
-    - Just grants read access
+    Your wallet prompts you to connect (no transaction, no gas)
   </Step>
   
   <Step title="Smart AA Wallet Created">
-    Alchemy creates your Smart Account automatically
-    - Linked to your EOA
-    - You remain in control
-    - Non-custodial
+    Alchemy creates your Smart Account automatically (linked to your EOA, non-custodial)
   </Step>
   
   <Step title="You're Ready">
@@ -198,36 +93,11 @@ If you already have a crypto wallet:
   </Step>
 </Steps>
 
-### Supported Wallets
-
-<CardGroup cols={3}>
-  <Card title="MetaMask" icon="fox">
-    Most popular Ethereum wallet
-  </Card>
-  <Card title="Coinbase Wallet" icon="wallet">
-    Easy onramp from Coinbase
-  </Card>
-  <Card title="WalletConnect" icon="mobile">
-    Connect any mobile wallet
-  </Card>
-  <Card title="Rabby" icon="rabbit">
-    Multi-chain DeFi wallet
-  </Card>
-  <Card title="Rainbow" icon="rainbow">
-    Beautiful, simple wallet
-  </Card>
-  <Card title="Others" icon="ellipsis">
-    Any WalletConnect-compatible wallet
-  </Card>
-</CardGroup>
-
 ---
 
 ## Option 2: Social Login
 
 ### For Everyone (No Wallet Needed)
-
-Never used crypto before? No problem:
 
 <Steps>
   <Step title="Visit Predifi">
@@ -243,23 +113,19 @@ Never used crypto before? No problem:
   </Step>
   
   <Step title="Authorize">
-    Allow Predifi to verify your identity
-    - No password to remember
-    - Secure OAuth flow
-    - No personal data stored
+    Allow Predifi to verify your identity (secure OAuth flow)
   </Step>
   
   <Step title="Smart Wallet Created">
-    Alchemy creates a Smart Account for you:
+    Alchemy creates a Smart Account:
     - Backed by your social login
     - Recoverable if you lose access
     - Fully functional crypto wallet
   </Step>
   
   <Step title="Fund with Card or Crypto">
-    Choose funding method:
     - **Credit/Debit Card** (fiat onramp)
-    - **Transfer USDC** (from exchange or another wallet)
+    - **Transfer USDC** (from exchange or wallet)
   </Step>
   
   <Step title="Start Trading">
@@ -267,73 +133,25 @@ Never used crypto before? No problem:
   </Step>
 </Steps>
 
-### Social Login Providers
-
-<Tabs>
-  <Tab title="Google">
-    **Sign in with Google**
-    
-    - Use your Gmail account
-    - Most convenient for most users
-    - Instant verification
-    - Can link multiple Google accounts
-    
-    **Security:** OAuth 2.0 + Alchemy key management
-  </Tab>
-  
-  <Tab title="Twitter/X">
-    **Sign in with Twitter**
-    
-    - Use your Twitter/X account
-    - Popular in crypto community
-    - Share trades easily
-    - Built-in social features
-    
-    **Security:** OAuth 2.0 + Alchemy key management
-  </Tab>
-  
-  <Tab title="Discord">
-    **Sign in with Discord**
-    
-    - Use your Discord account
-    - Join our trading community
-    - Direct access to support
-    - Gamer-friendly
-    
-    **Security:** OAuth 2.0 + Alchemy key management
-  </Tab>
-  
-  <Tab title="Email">
-    **Passwordless Email**
-    
-    - Use any email address
-    - No password to remember
-    - Magic link sent to inbox
-    - Universal option
-    
-    **Security:** Email verification + Alchemy key management
-  </Tab>
-</Tabs>
-
 ---
 
 ## Alchemy Account Kit
 
 ### Our Wallet Infrastructure Partner
 
-Predifi uses **Alchemy Account Kit** to power Smart Account creation and management:
+Predifi uses **Alchemy Account Kit** to power Smart Account creation:
 
 <CardGroup cols={2}>
   <Card title="Battle-Tested" icon="shield-check">
     **Trusted by 1000+ apps**
     
-    Alchemy powers top Web3 apps with billions in assets secured
+    Billions in assets secured
   </Card>
   
   <Card title="ERC-4337 Compliant" icon="file-contract">
     **Standard Smart Accounts**
     
-    Industry-standard account abstraction, not proprietary
+    Industry-standard account abstraction
   </Card>
   
   <Card title="Recovery Options" icon="life-ring">
@@ -349,94 +167,34 @@ Predifi uses **Alchemy Account Kit** to power Smart Account creation and managem
   </Card>
 </CardGroup>
 
-### How Alchemy Works
+### Key Features
 
 <AccordionGroup>
   <Accordion title="Key Management" icon="key">
-    **Secure, distributed key storage:**
-    
-    - Private keys never leave Alchemy's secure enclave
-    - Multi-party computation (MPC) for signatures
-    - No single point of failure
+    - Private keys in Alchemy's secure enclave (multi-party computation)
     - You maintain ultimate control
     - Keys can be exported if needed
   </Accordion>
 
   <Accordion title="Gas Sponsorship" icon="gas-pump">
-    **We pay gas fees for you:**
-    
     - Predifi sponsors gas for core actions
     - Users pay in USDC (converted automatically)
     - No need to hold native tokens (ETH, MATIC, etc.)
-    - Seamless cross-chain experience
   </Accordion>
 
   <Accordion title="Session Keys" icon="clock">
-    **Trade without constant pop-ups:**
-    
     - Approve a "session" (e.g., 24 hours)
-    - Trade freely within session
-    - Set spending limits
+    - Trade freely within session with spending limits
     - Revoke anytime
-    - Better UX than traditional wallets
   </Accordion>
 
   <Accordion title="Account Recovery" icon="user-shield">
     **Multiple recovery methods:**
-    
-    **Option 1: Guardian Recovery**
-    - Set up trusted guardians (email, phone, other wallet)
-    - 2 of 3 guardians can recover account
-    
-    **Option 2: Social Recovery**
-    - Re-authenticate with social login
-    - Alchemy restores access
-    
-    **Option 3: Backup Key**
-    - Optional backup key you control
-    - Last resort recovery method
+    - Guardian recovery (2 of 3 guardians)
+    - Social recovery (re-authenticate with social login)
+    - Backup key (optional last resort)
   </Accordion>
 </AccordionGroup>
-
-### Security Features
-
-<Tabs>
-  <Tab title="Non-Custodial">
-    **You own your funds**
-    
-    - Keys managed by Alchemy, but YOU control
-    - We can't access your funds
-    - No centralized custodian
-    - Withdraw anytime to any wallet
-  </Tab>
-  
-  <Tab title="Multi-Factor Auth">
-    **Extra security layers**
-    
-    - Biometric authentication (Face ID, Touch ID)
-    - 2FA for sensitive actions
-    - Device authorization
-    - Suspicious activity detection
-  </Tab>
-  
-  <Tab title="Spending Limits">
-    **Control your risk**
-    
-    - Set daily/weekly spending limits
-    - Require 2FA for large trades
-    - Whitelist trusted addresses
-    - Automatic fraud detection
-  </Tab>
-  
-  <Tab title="Audited & Insured">
-    **Institutional-grade security**
-    
-    - SOC 2 Type II certified
-    - Regular security audits
-    - Bug bounty program
-    - Insurance for covered events
-  </Tab>
-</Tabs>
 
 ---
 
@@ -452,32 +210,23 @@ Predifi uses **Alchemy Account Kit** to power Smart Account creation and managem
   </Step>
   
   <Step title="Enter Amount">
-    Choose how much USD to convert to USDC
-    - Minimum: $10
-    - Maximum: $10,000 per transaction
+    Choose amount ($10 minimum, $10,000 maximum per transaction)
   </Step>
   
   <Step title="Enter Card Details">
-    Securely enter credit/debit card information
-    - Processed by licensed onramp provider
-    - Never stored by Predifi
+    Securely enter credit/debit card (processed by licensed onramp, never stored)
   </Step>
   
   <Step title="Verify Identity">
-    First-time users: KYC verification
-    - Upload ID
-    - Selfie verification
-    - One-time process (5 minutes)
+    First-time: KYC verification (upload ID, selfie, 5 minutes)
   </Step>
   
   <Step title="Receive USDC">
-    USDC delivered to your wallet in ~5 minutes
+    USDC delivered in ~5 minutes
   </Step>
 </Steps>
 
-**Fees:**
-- Card processing: ~3-5%
-- Network fees: Covered by Predifi
+**Fees:** Card processing ~3-5%, network fees covered by Predifi
 
 ### Option B: Transfer USDC
 
@@ -491,15 +240,13 @@ Predifi uses **Alchemy Account Kit** to power Smart Account creation and managem
   <Step title="Select Chain">
     Choose which chain to receive on:
     - Arbitrum (recommended - cheapest)
-    - Base
-    - Optimism
-    - BSC
+    - Base, Optimism, BSC, Polygon
   </Step>
   
   <Step title="Send USDC">
     From your exchange or wallet:
     - Send USDC to displayed address
-    - Make sure you select the correct chain!
+    - **Make sure you select the correct chain!**
     - **USDC only** (not USDT, DAI, or other stablecoins)
   </Step>
   
@@ -512,15 +259,8 @@ Predifi uses **Alchemy Account Kit** to power Smart Account creation and managem
   </Step>
 </Steps>
 
-**Supported Chains for Deposits:**
-- ✅ Arbitrum (lowest fees)
-- ✅ Base
-- ✅ Optimism
-- ✅ BSC
-- ✅ Polygon
-
 <Warning>
-  **Always double-check the chain!** Sending USDC on the wrong chain will result in lost funds.
+**Always double-check the chain!** Sending USDC on the wrong chain will result in lost funds.
 </Warning>
 
 ---
@@ -529,81 +269,55 @@ Predifi uses **Alchemy Account Kit** to power Smart Account creation and managem
 
 ### Managing Your Account
 
-Once logged in, customize your account:
-
 <AccordionGroup>
   <Accordion title="Profile Settings" icon="user">
-    - Username (public)
-    - Display name
-    - Avatar
-    - Bio
-    - Privacy settings
+    Username, display name, avatar, bio, privacy settings
   </Accordion>
 
   <Accordion title="Security Settings" icon="lock">
-    - Enable 2FA
-    - Biometric authentication
-    - Session management
-    - Connected devices
-    - Activity log
+    2FA, biometric authentication, session management, activity log
   </Accordion>
 
   <Accordion title="Wallet Settings" icon="wallet">
-    - View wallet address
-    - Export private key (advanced)
-    - Spending limits
-    - Recovery guardians
-    - Backup options
+    View address, export private key, spending limits, recovery guardians
   </Accordion>
 
   <Accordion title="Notification Settings" icon="bell">
-    - Email notifications
-    - Push notifications
-    - Discord/Telegram alerts
-    - Price alerts
-    - Position alerts
+    Email, push, Discord/Telegram alerts, price/position alerts
   </Accordion>
 
   <Accordion title="Trading Preferences" icon="sliders">
-    - Default slippage tolerance
-    - Auto-claim winnings
-    - Reinvest profits
-    - Chart preferences
-    - Hotkeys
+    Default slippage, auto-claim, reinvest profits, chart preferences
   </Accordion>
 </AccordionGroup>
 
 ---
 
-## Frequently Asked Questions
+## FAQ
 
 <AccordionGroup>
   <Accordion title="Is Predifi custodial or non-custodial?" icon="question">
-    **Non-custodial.** Your funds are always in your control. Smart AA Wallets are your wallets, managed by Alchemy's secure infrastructure but owned by you.
+    **Non-custodial.** Your funds are in your control. Smart AA Wallets are owned by you.
   </Accordion>
 
   <Accordion title="Can I use my existing wallet?" icon="wallet">
-    **Yes!** Connect any EOA wallet (MetaMask, Coinbase Wallet, etc.). A Smart AA Wallet will be created and linked to your EOA for enhanced functionality.
+    **Yes!** Connect any EOA wallet. A Smart AA Wallet will be created and linked to your EOA.
   </Accordion>
 
   <Accordion title="What if I lose access to my social login?" icon="key">
-    **You can recover your account** through Alchemy's guardian system or backup methods. Contact support for assistance.
+    **You can recover your account** through Alchemy's guardian system or backup methods. Contact support.
   </Accordion>
 
   <Accordion title="Do I need native gas tokens?" icon="gas-pump">
-    **No.** Gas fees are abstracted away. You pay in USDC or Predifi sponsors the gas.
+    **No.** Gas fees are abstracted. You pay in USDC or Predifi sponsors the gas.
   </Accordion>
 
   <Accordion title="Can I withdraw my funds anytime?" icon="arrow-right-from-bracket">
-    **Yes.** Withdraw USDC to any wallet address on supported chains anytime. No lock-ups or restrictions.
-  </Accordion>
-
-  <Accordion title="Is my data private?" icon="shield">
-    **Yes.** We don't sell data. Social logins use OAuth (we never see your passwords). Wallet addresses are public (blockchain), but trading activity is private.
+    **Yes.** Withdraw USDC to any wallet address on supported chains anytime. No lock-ups.
   </Accordion>
 
   <Accordion title="What countries are supported?" icon="globe">
-    Most countries are supported except those under sanctions (OFAC list). KYC required for fiat onramp in some jurisdictions.
+    Most countries supported except those under sanctions (OFAC list). KYC required for fiat onramp in some jurisdictions.
   </Accordion>
 </AccordionGroup>
 
@@ -612,32 +326,16 @@ Once logged in, customize your account:
 ## Next Steps
 
 <CardGroup cols={2}>
-  <Card
-    title="Browse Markets"
-    icon="grid"
-    href="/markets"
-  >
+  <Card title="Browse Markets" icon="grid" href="/markets">
     See available crypto and sports markets
   </Card>
-  <Card
-    title="Quickstart Guide"
-    icon="rocket"
-    href="/getting-started/quickstart"
-  >
+  <Card title="Quickstart Guide" icon="rocket" href="/getting-started/quickstart">
     Learn how to place your first trade
   </Card>
-  <Card
-    title="Portfolio Tracker"
-    icon="chart-line"
-    href="/products/portfolio-tracker"
-  >
+  <Card title="Portfolio Tracker" icon="chart-line" href="/products/portfolio-tracker">
     Track your positions and P&L
   </Card>
-  <Card
-    title="Join Community"
-    icon="discord"
-    href="https://discord.gg/predifi"
-  >
+  <Card title="Join Community" icon="discord" href="https://discord.gg/predifi">
     Connect with other traders
   </Card>
 </CardGroup>
@@ -646,12 +344,6 @@ Once logged in, customize your account:
 
 ## Get Started Now
 
-<Card
-  title="Create Your Account"
-  icon="user-plus"
-  href="https://app.predifi.com"
->
+<Card title="Create Your Account" icon="user-plus" href="https://app.predifi.com">
   Sign up with wallet or social login in under 2 minutes →
 </Card>
-
-**Powered by Alchemy Account Kit** - Trusted by 1000+ Web3 applications

@@ -11,31 +11,19 @@ The **Predifi Native CLOB** is Predifi's own prediction market platform powered 
 
 ---
 
-## What is a CLOB?
-
-### Central Limit Order Book Explained
-
-A **CLOB (Central Limit Order Book)** is a transparent ledger that matches buy and sell orders:
-
-- **Buy orders (bids)** - Traders willing to buy at specific prices
-- **Sell orders (asks)** - Traders willing to sell at specific prices
-- **Order matching** - When bid price ≥ ask price, orders execute automatically
-
-This is how traditional stock exchanges, crypto exchanges (Coinbase, Binance), and professional trading venues work.
-
-### CLOB vs AMM
+## CLOB vs AMM
 
 | Feature | CLOB (Predifi Native) | AMM (Most Prediction Markets) |
 |---------|----------------------|-------------------------------|
 | **Order Types** | Market & Limit orders | Market orders only |
 | **Price Control** | Set exact price | Take current price |
 | **Liquidity** | From other traders | From liquidity pool |
-| **Slippage** | Minimal (order book depth) | Can be high on illiquid pools |
+| **Slippage** | Minimal (orderbook depth) | Can be high on illiquid pools |
 | **Price Discovery** | Efficient (many price levels) | Less efficient |
 | **Transparency** | Full orderbook visibility | Pool reserves only |
 
 <Note>
-  **Think of it this way**: AMM is like a vending machine (fixed prices, take it or leave it). CLOB is like eBay (you can bid/ask at any price, trades happen when prices match).
+**Think of it this way**: AMM is like a vending machine (fixed prices). CLOB is like eBay (you can bid/ask at any price, trades happen when prices match).
 </Note>
 
 ---
@@ -44,15 +32,13 @@ This is how traditional stock exchanges, crypto exchanges (Coinbase, Binance), a
 
 ### Off-Chain Matching, On-Chain Settlement
 
-Predifi Native CLOB uses a **hybrid model** for maximum efficiency:
-
 <Steps>
   <Step title="Place Order (Off-Chain)">
-    Submit a signed order (EIP-712 signature). No gas fees to place orders.
+    Submit signed order (EIP-712 signature). No gas fees to place orders.
   </Step>
   
   <Step title="Order Matching (Off-Chain)">
-    Predifi's matching engine finds counterparties and matches orders instantly.
+    Matching engine finds counterparties and matches orders instantly.
   </Step>
   
   <Step title="Settlement (On-Chain)">
@@ -64,13 +50,12 @@ Predifi Native CLOB uses a **hybrid model** for maximum efficiency:
   </Step>
   
   <Step title="Market Resolution (On-Chain)">
-    Oracle resolves the market. Winners claim $1.00 per share.
+    Oracle resolves market. Winners claim $1.00 per share.
   </Step>
 </Steps>
 
 ### Why This Design?
 
-**Benefits of hybrid off-chain/on-chain**:
 - ✅ **Gas efficient** - Only settlement and claims cost gas
 - ✅ **Instant matching** - No waiting for blocks
 - ✅ **Better UX** - Place and cancel orders for free
@@ -90,7 +75,6 @@ BIDS (Buy YES)          |  ASKS (Sell YES)
 $0.67  |  2,500 shares  |  $0.68  |  1,800 shares
 $0.66  |  5,000 shares  |  $0.69  |  3,200 shares
 $0.65  |  8,500 shares  |  $0.70  |  6,000 shares
-$0.64  |  12,000 shares |  $0.71  |  8,500 shares
 ```
 
 This transparency lets you:
@@ -105,20 +89,12 @@ This transparency lets you:
 
 **Example Buy Limit Order**:
 - Current price: $0.70
-- You think it'll drop
 - Set limit buy at $0.65
 - Order executes IF price touches $0.65
 - Saves money vs buying at $0.70
 
-**Example Sell Limit Order**:
-- Bought at $0.50
-- Want to take profit at $0.80
-- Set limit sell at $0.80
-- Order executes automatically when price hits target
-- No need to monitor constantly
-
 <Tip>
-  Limit orders are perfect for traders who have a target price and patience. You often get better execution than market orders.
+Limit orders are perfect for traders who have a target price and patience. You often get better execution than market orders.
 </Tip>
 
 ### ⚡ Instant Execution
@@ -136,7 +112,6 @@ Professional trading tools:
 - Historical price data
 - Technical indicators
 - P&L tracking
-- Portfolio analytics
 
 ---
 
@@ -145,11 +120,6 @@ Professional trading tools:
 ### Market Orders
 
 **Execute immediately at best available price**
-
-**When to use:**
-- You want to enter/exit immediately
-- Willing to pay current market price
-- Market is liquid enough for your size
 
 **Example:**
 ```
@@ -162,11 +132,6 @@ Execution: Instant
 ### Limit Orders
 
 **Set your price and wait for a match**
-
-**When to use:**
-- You have a specific target price
-- Not urgent to execute
-- Want better price than current market
 
 **Example:**
 ```
@@ -188,7 +153,7 @@ Available at $0.66: 2,000 shares
 Result:
 - 2,000 shares filled immediately @ $0.66
 - 3,000 shares remain open as limit order
-- You can cancel the remaining 3,000 anytime
+- You can cancel remaining 3,000 anytime
 ```
 
 ---
@@ -197,7 +162,7 @@ Result:
 
 ### Curated Markets
 
-Unlike venues where anyone can create markets, Predifi Native markets are **curated** for quality:
+Predifi Native markets are **curated** for quality:
 
 - ✅ Clear, unambiguous outcomes
 - ✅ Reliable resolution sources
@@ -209,23 +174,15 @@ Unlike venues where anyone can create markets, Predifi Native markets are **cura
 
 Markets resolve using **Stork Network**, a decentralized oracle:
 
-1. Event outcome is observed in real world
+1. Event outcome observed in real world
 2. Multiple Stork validators submit outcome data
 3. Consensus mechanism determines final result
 4. Result posts on-chain
 5. Smart contract enables claims for winners
 
 <Info>
-  **Stork Network** is a decentralized oracle network providing tamper-proof data feeds. Learn more at [stork.network](https://stork.network)
+**Stork Network** is a decentralized oracle network providing tamper-proof data feeds. Learn more at [stork.network](https://stork.network)
 </Info>
-
-### Resolution Disputes
-
-If users disagree with resolution:
-- Dispute period allows challenges
-- Additional validators review
-- Escalation to dispute resolution
-- Community governance (future)
 
 ---
 
@@ -233,7 +190,7 @@ If users disagree with resolution:
 
 ### Pay Only When You Win
 
-Unlike most trading platforms that charge fees on every trade, Predifi Native CLOB charges **only when you claim winning positions**.
+Unlike most platforms that charge fees on every trade, Predifi Native CLOB charges **only when you claim winning positions**.
 
 | Action | Fee |
 |--------|-----|
@@ -244,19 +201,6 @@ Unlike most trading platforms that charge fees on every trade, Predifi Native CL
 | **Losing trades** | $0 (no fee) |
 
 ### Fee Example
-
-**Scenario**: You win a trade
-
-```
-Initial investment: $1,000
-Winning shares: 1,000 × $1.00 = $1,000 payout
-Protocol fee: 2% of $1,000 = $20
-Net payout: $980
-
-Your profit: $980 - $1,000 initial = $0 (break even after fees)
-```
-
-**Wait, that's break even?** - Yes! That's because in this example your shares cost $1.00 each (100% probability), so there was no profit margin. In reality, you'd buy at a discount.
 
 **Realistic Example**:
 
@@ -270,7 +214,7 @@ Your profit: $980 - $600 = $380 profit (63% return)
 ```
 
 <Tip>
-  The "pay on winnings" model aligns incentives. Predifi only makes money when you make money!
+The "pay on winnings" model aligns incentives. Predifi only makes money when you make money!
 </Tip>
 
 [View complete fee breakdown →](/traders/fees-and-pricing)
@@ -278,8 +222,6 @@ Your profit: $980 - $600 = $380 profit (63% return)
 ---
 
 ## Position Tokens (ERC1155)
-
-### What Are Position Tokens?
 
 When you trade on Native CLOB, you receive **ERC1155 tokens** representing your position:
 
@@ -292,21 +234,12 @@ These are real blockchain tokens you can:
 - Trade on secondary markets (future)
 - Redeem after market resolves
 
-### Token Metadata
-
-Each position token includes:
-- Market identifier
-- Outcome (YES/NO)
-- Quantity (shares)
-- Purchase price (for P&L calc)
-
 ---
 
 ## Trading Strategies
 
 ### Scalping
 
-Take advantage of small price movements:
 - Buy at $0.65, sell at $0.67
 - Small profits, many trades
 - Requires liquid markets
@@ -314,7 +247,6 @@ Take advantage of small price movements:
 
 ### Swing Trading
 
-Hold positions for days/weeks:
 - Buy based on research
 - Wait for market sentiment to shift
 - Sell when target price reached
@@ -322,7 +254,6 @@ Hold positions for days/weeks:
 
 ### Buy & Hold
 
-Take a position and hold to resolution:
 - Deepest conviction trades
 - No need to time exit
 - Claim full $1.00 payout if correct
@@ -330,14 +261,13 @@ Take a position and hold to resolution:
 
 ### Market Making
 
-Provide liquidity on both sides:
 - Place bids below market
 - Place asks above market
 - Earn spread when both fill
 - Advanced strategy, requires capital
 
 <Warning>
-  Market making involves holding positions on both sides, which carries risk if the market moves significantly in one direction.
+Market making involves holding positions on both sides, which carries risk if market moves significantly.
 </Warning>
 
 ---
@@ -346,11 +276,11 @@ Provide liquidity on both sides:
 
 <AccordionGroup>
   <Accordion title="Use Limit Orders for Better Prices" icon="bullseye">
-    Unless urgency is critical, limit orders often result in better execution than market orders.
+    Unless urgency is critical, limit orders often result in better execution.
   </Accordion>
 
   <Accordion title="Check Orderbook Depth" icon="layer-group">
-    Before placing large orders, review orderbook depth to understand available liquidity.
+    Before placing large orders, review orderbook depth to understand liquidity.
   </Accordion>
 
   <Accordion title="Set Realistic Limits" icon="gauge-circle-plus">
@@ -358,11 +288,7 @@ Provide liquidity on both sides:
   </Accordion>
 
   <Accordion title="Monitor Open Orders" icon="list-check">
-    Check your open orders regularly. Cancel and adjust if market conditions change.
-  </Accordion>
-
-  <Accordion title="Understand Fee Timing" icon="clock">
-    Remember: fees are charged on claim, not on trade. Factor this into profit calculations.
+    Check open orders regularly. Cancel and adjust if conditions change.
   </Accordion>
 
   <Accordion title="Use Charts for Analysis" icon="chart-line">
@@ -383,8 +309,6 @@ Provide liquidity on both sides:
 | **Best For** | Frequent traders, technical traders | Occasional traders, specific markets |
 | **Liquidity** | Predifi orderbook | Aggregated from venues |
 | **Gas Costs** | Minimal (batch settlement) | Higher (bridging) |
-
-[Compare products in detail →](/products/overview)
 
 ---
 
@@ -411,7 +335,7 @@ Provide liquidity on both sides:
 
 <AccordionGroup>
   <Accordion title="What happens if my limit order never fills?">
-    It stays open until you cancel it or the market resolves. No cost to keep orders open.
+    It stays open until you cancel it or market resolves. No cost to keep orders open.
   </Accordion>
 
   <Accordion title="Can I cancel orders after placing them?">
@@ -431,7 +355,7 @@ Provide liquidity on both sides:
   </Accordion>
 
   <Accordion title="Can I transfer position tokens to another wallet?">
-    Yes! They're standard ERC1155 tokens. You can transfer them like any other token.
+    Yes! They're standard ERC1155 tokens. Transfer them like any other token.
   </Accordion>
 </AccordionGroup>
 

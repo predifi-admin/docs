@@ -5,18 +5,16 @@ description: "How prediction market odds work and how to interpret them"
 
 ## What Are Odds?
 
-In prediction markets, **odds represent the probability** of an event happening. Understanding how to read and calculate odds is essential for profitable trading.
+In prediction markets, **odds represent the probability** of an event happening. Understanding odds is essential for profitable trading.
 
 ---
 
 ## Price = Probability
 
-The fundamental concept:
-
 <Tip>
 **Market Price = Market's Estimated Probability**
 
-A \$0.70 YES price means the market thinks there's a **70% chance** the event occurs.
+A $0.70 YES price means the market thinks there's a **70% chance** the event occurs.
 </Tip>
 
 ---
@@ -25,14 +23,14 @@ A \$0.70 YES price means the market thinks there's a **70% chance** the event oc
 
 | YES Price | NO Price | Probability | Interpretation |
 |-----------|----------|-------------|----------------|
-| $0.90 | $0.10 | 90% | Almost certain to happen |
-| $0.75 | $0.25 | 75% | Likely to happen |
-| $0.50 | $0.50 | 50% | Toss-up (even odds) |
-| $0.25 | $0.75 | 25% | Unlikely to happen |
+| $0.90 | $0.10 | 90% | Almost certain |
+| $0.75 | $0.25 | 75% | Likely |
+| $0.50 | $0.50 | 50% | Toss-up (even) |
+| $0.25 | $0.75 | 25% | Unlikely |
 | $0.10 | $0.90 | 10% | Very unlikely |
 
 <Info>
-**Important:** YES price + NO price should equal ~$1.00 (minus fees and bid-ask spread)
+**Important:** YES price + NO price should equal ~$1.00 (minus fees and spread)
 </Info>
 
 ---
@@ -45,10 +43,7 @@ $$
 \text{Decimal Odds} = \frac{1}{\text{Price}}
 $$
 
-**Examples:**
-- Price $0.50 → 2.0 decimal odds (even money)
-- Price $0.33 → 3.0 decimal odds (2:1 against)
-- Price $0.25 → 4.0 decimal odds (3:1 against)
+**Examples:** Price $0.50 → 2.0 (even) | Price $0.33 → 3.0 (2:1) | Price $0.25 → 4.0 (3:1)
 
 ### Fractional Odds (British)
 
@@ -56,29 +51,23 @@ $$
 \text{Fractional Odds} = \frac{1 - \text{Price}}{\text{Price}}
 $$
 
-**Examples:**
-- Price $0.50 → 1/1 odds ("evens")
-- Price $0.67 → 1/2 odds ("2 to 1 on")
-- Price $0.33 → 2/1 odds ("2 to 1 against")
+**Examples:** $0.50 → 1/1 ("evens") | $0.67 → 1/2 ("2 to 1 on") | $0.33 → 2/1 ("2 to 1 against")
 
 ### American Odds
 
-**For favorites (price > $0.50):**
+**Favorites (>$0.50):**
 
 $$
 \text{American Odds} = -\frac{\text{Price}}{1 - \text{Price}} \times 100
 $$
 
-**For underdogs (price < $0.50):**
+**Underdogs (<$0.50):**
 
 $$
 \text{American Odds} = \frac{1 - \text{Price}}{\text{Price}} \times 100
 $$
 
-**Examples:**
-- Price $0.67 → -200 (favorite)
-- Price $0.50 → +100 (even)
-- Price $0.33 → +200 (underdog)
+**Examples:** $0.67 → -200 (favorite) | $0.50 → +100 (even) | $0.33 → +200 (underdog)
 
 ---
 
@@ -86,38 +75,29 @@ $$
 
 ### Finding Value
 
-**The key to profitable trading:**
+**Key to profitability:**
 
-1. **Implied probability** = What market price suggests (e.g., $0.60 = 60%)
-2. **True probability** = Your analysis of actual likelihood (e.g., you think 70%)
-3. **Edge** = True probability - Implied probability (70% - 60% = **10% edge**)
+1. **Implied probability** = Market price suggests (e.g., $0.60 = 60%)
+2. **True probability** = Your analysis (e.g., 70%)
+3. **Edge** = True - Implied (70% - 60% = **10% edge**)
 
 <Tabs>
   <Tab title="Positive Edge (BET)">
-    **Your analysis > Market price**
+    **Your analysis > Market**
     
-    - Market: $0.60 (60% implied)
-    - Your analysis: 70% actual chance
-    - **Action:** BUY YES (market undervaluing)
-    - **Edge:** +10%
+    Market: $0.60 (60%) | Your analysis: 70% | **Action:** BUY YES | **Edge:** +10%
   </Tab>
   
   <Tab title="Negative Edge (PASS)">
-    **Your analysis < Market price**
+    **Your analysis < Market**
     
-    - Market: $0.60 (60% implied)
-    - Your analysis: 50% actual chance
-    - **Action:** DON'T BUY (market overvaluing)
-    - **Edge:** -10%
+    Market: $0.60 (60%) | Your analysis: 50% | **Action:** DON'T BUY | **Edge:** -10%
   </Tab>
   
   <Tab title="No Edge (PASS)">
-    **Your analysis = Market price**
+    **Your analysis = Market**
     
-    - Market: $0.60 (60% implied)
-    - Your analysis: 60% actual chance
-    - **Action:** DON'T BUY (no advantage)
-    - **Edge:** 0%
+    Market: $0.60 (60%) | Your analysis: 60% | **Action:** DON'T BUY | **Edge:** 0%
   </Tab>
 </Tabs>
 
@@ -131,23 +111,19 @@ $$
 EV = (P_{\text{win}} \times \text{Profit}) - (P_{\text{lose}} \times \text{Loss})
 $$
 
-### Example Calculation
+### Example
 
-**Market:** BTC > $100K by Jan 15 at $0.60
+**Market:** BTC > $100K at $0.60 | **Your bet:** $100 (166.67 shares) | **Your analysis:** 70% chance
 
-**Your bet:** $100 (166.67 shares)
-
-**Your analysis:** 70% chance of occurring
-
-**Calculate EV:**
-- **If win:** Profit = ($1.00 × 166.67) - $100 = $66.67
-- **If lose:** Loss = $100
+**Calculate:**
+- **If win:** ($1.00 × 166.67) - $100 = $66.67
+- **If lose:** -$100
 
 $$
 EV = (0.70 \times \$66.67) - (0.30 \times \$100) = \$46.67 - \$30 = +\$16.67
 $$
 
-**Interpretation:** This bet has a **positive expected value of $16.67**. Over many similar bets, you'd average $16.67 profit per $100 wagered.
+**Interpretation:** Positive EV of $16.67. Over many similar bets, you'd average $16.67 profit per $100.
 
 <Info>
 **Rule:** Only make bets with positive EV. Over time, positive EV bets are profitable even if individual bets lose.
@@ -155,145 +131,51 @@ $$
 
 ---
 
-## Calculating Your Break-Even
-
-**What price do you need to profit?**
-
-### If Buying YES
-
-$$
-\text{Break-Even Price} = \text{Your Entry Price}
-$$
-
-**Example:**
-- You buy YES at $0.65
-- Break-even: Market must resolve YES (final price = $1.00)
-- **Profit if market > $0.65 and resolves YES**
-
-### If Selling Before Resolution
-
-$$
-\text{Break-Even Sell Price} = \text{Entry Price} + \text{Fees}
-$$
-
-**Example:**
-- Buy at $0.60, fees $0.01
-- Break-even sell: $0.61
-- **Profit if you can sell above $0.61**
-
----
-
 ## The Bid-Ask Spread
-
-Markets have two prices:
 
 <CardGroup cols={2}>
   <Card title="Bid Price" icon="arrow-down">
-    **Price buyers are willing to pay**
-    
-    Example: $0.58
-    
-    (You sell at bid price)
+    **Price buyers pay**: $0.58 (You sell at bid)
   </Card>
   
   <Card title="Ask Price" icon="arrow-up">
-    **Price sellers are asking**
-    
-    Example: $0.62
-    
-    (You buy at ask price)
+    **Price sellers ask**: $0.62 (You buy at ask)
   </Card>
 </CardGroup>
 
-**Spread = Ask - Bid = $0.62 - $0.58 = $0.04 (4 cents)**
+**Spread = $0.62 - $0.58 = $0.04 (4 cents)**
 
 <Warning>
-**Wider spreads = Higher cost** to enter and exit positions. Prefer markets with tight spreads (1-3 cents).
+**Wider spreads = Higher cost**. Prefer markets with tight spreads (1-3 cents).
 </Warning>
-
----
-
-## Probability Basics
-
-### How to Estimate Probabilities
-
-<Tabs>
-  <Tab title="Historical Data">
-    **Use past outcomes**
-    
-    - NFL team wins 70% of home games
-    - Estimate 70% chance they win next home game
-    - Adjust for opponent, injuries, weather, etc.
-  </Tab>
-  
-  <Tab title="Statistical Models">
-    **Quantitative analysis**
-    
-    - Polling data (elections)
-    - Price models (crypto predictions)
-    - Weather models (temperature markets)
-    - Machine learning predictions
-  </Tab>
-  
-  <Tab title="Expert Opinions">
-    **Aggregate expert forecasts**
-    
-    - Analyst predictions
-    - Consensus estimates
-    - Prediction markets themselves
-    - Combine multiple sources
-  </Tab>
-  
-  <Tab title="Subjective Judgment">
-    **Your own analysis**
-    
-    - Domain expertise
-    - Qualitative factors
-    - Gut feeling (calibrated over time)
-    - Most traders use some subjectivity
-  </Tab>
-</Tabs>
 
 ---
 
 ## Common Probability Mistakes
 
 <AccordionGroup>
-  <Accordion title="Overconfidence" icon="head-side-brain">
-    **Mistake:** Thinking you know more than the market
+  <Accordion title="Overconfidence">
+    **Mistake:** Thinking you know more than market. Believing 90% when market says 60%.
     
-    - Believing 90% probability when market says 60%
-    - Ignoring market wisdom
-    - Not adjusting for uncertainty
-    
-    **Fix:** Be humble. If your estimate differs significantly from the market, re-examine your analysis.
+    **Fix:** Be humble. Re-examine if you differ significantly from market.
   </Accordion>
   
-  <Accordion title="Gambler's Fallacy" icon="dice">
-    **Mistake:** Thinking past outcomes affect future probabilities
+  <Accordion title="Gambler's Fallacy">
+    **Mistake:** Past outcomes affect future probabilities. "Coin landed heads 5 times, tails is due."
     
-    - "Coin landed heads 5 times, tails is 'due'"
-    - "Team lost last 3 games, must win next one"
-    
-    **Fix:** Each event is independent. Past doesn't predict future unless there's causation.
+    **Fix:** Each event is independent. Past doesn't predict future unless causation.
   </Accordion>
   
-  <Accordion title="Confirmation Bias" icon="magnifying-glass">
-    **Mistake:** Only seeking information that confirms your view
+  <Accordion title="Confirmation Bias">
+    **Mistake:** Only seeking confirming information. Ignoring bearish news when long.
     
-    - Ignoring bearish news when you're long
-    - Dismissing bullish data when you're short
-    
-    **Fix:** Actively seek disconfirming evidence. Play devil's advocate with yourself.
+    **Fix:** Actively seek disconfirming evidence. Play devil's advocate.
   </Accordion>
   
-  <Accordion title="Recency Bias" icon="clock-rotate-left">
-    **Mistake:** Overweighting recent events
+  <Accordion title="Recency Bias">
+    **Mistake:** Overweighting recent events. "BTC pumps 20% → going to $200K!"
     
-    - BTC pumps 20% → "It's going to $200K!"
-    - Team wins big → "They're unbeatable!"
-    
-    **Fix:** Consider full history, not just recent data. Zoom out.
+    **Fix:** Consider full history, not just recent. Zoom out.
   </Accordion>
 </AccordionGroup>
 
@@ -301,50 +183,39 @@ Markets have two prices:
 
 ## Implied Odds Example
 
-**Market:** "Will it rain tomorrow?"
+**Market:** "Will it rain tomorrow?" | **Weather forecast:** 60% rain
 
-**Weather forecast:** 60% chance of rain
-
-**Market prices:**
-- YES (rain): $0.70
-- NO (no rain): $0.30
+**Market prices:** YES (rain) $0.70, NO $0.30
 
 **Analysis:**
-- Market implies 70% chance of rain
-- Weather forecast says 60%
-- **Market is overvaluing rain by 10%**
+- Market implies 70% rain
+- Weather forecast: 60%
+- **Market overvaluing rain by 10%**
 
 **Action:** Buy NO at $0.30
 
-**Expected value:**
-- If correct (40% chance): Win $0.70/share
-- If wrong (60% chance): Lose $0.30/share
-- EV = (0.40 × $0.70) - (0.60 × $0.30) = $0.28 - $0.18 = **+$0.10/share**
+**EV:** (0.40 × $0.70) - (0.60 × $0.30) = $0.28 - $0.18 = **+$0.10/share**
 
 ---
 
 ## Kelly Criterion for Position Sizing
 
-**Optimal bet sizing formula:**
+**Optimal bet sizing:**
 
 $$
 f^* = \frac{bp - q}{b}
 $$
 
-Where:
-- $f^*$ = Fraction of bankroll to bet
-- $b$ = Odds received (net return)
-- $p$ = Win probability
-- $q$ = Lose probability
+Where: $f^*$ = Fraction to bet | $b$ = Odds received | $p$ = Win probability | $q$ = Lose probability
 
 **Example:**
-- Buy YES at $0.60 (potential return: $0.40 per $0.60 bet = 0.667 odds)
-- You estimate 70% win probability
+- Buy YES at $0.60 (0.667 odds)
+- Estimate 70% win probability
 - Kelly = $(0.667 \times 0.70 - 0.30) / 0.667 = 0.316$
 - **Bet 31.6% of bankroll** (full Kelly)
 
 <Info>
-**Half-Kelly:** Most professionals use half-Kelly (15.8% in example) to reduce volatility.
+**Half-Kelly:** Most pros use half-Kelly (15.8% in example) to reduce volatility.
 </Info>
 
 [Learn more about position sizing →](/traders/risk-management)
@@ -355,7 +226,7 @@ Where:
 
 <CardGroup cols={2}>
   <Card title="Trading Guide" icon="book" href="/getting-started/trading-guide">
-    Apply odds knowledge to trading
+    Apply odds knowledge
   </Card>
   
   <Card title="Risk Management" icon="shield" href="/traders/risk-management">
@@ -372,5 +243,5 @@ Where:
 </CardGroup>
 
 <Note>
-**Remember:** The market price is the **crowd's estimate**. Your job is to find where the crowd is wrong and bet accordingly. But be humble—the crowd is right more often than you'd think!
+**Remember:** The market price is the **crowd's estimate**. Your job is to find where the crowd is wrong. But be humble—the crowd is right more often than you'd think!
 </Note>

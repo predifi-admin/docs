@@ -5,7 +5,7 @@ description: "Detailed analysis of liquidity provider earnings, risks, and perfo
 
 ## Understanding LP Returns
 
-Liquidity providers earn **8-15% APY** on average, but returns vary based on market conditions, trading volume, and vault strategy.
+LPs earn **8-15% APY** on average, but returns vary based on market conditions, trading volume, and vault strategy.
 
 ---
 
@@ -13,21 +13,11 @@ Liquidity providers earn **8-15% APY** on average, but returns vary based on mar
 
 <CardGroup cols={2}>
   <Card title="Trading Fees" icon="coins">
-    **Primary income source**
-    
-    - 60% of all trading fees
-    - Earned on every trade
-    - Compounds automatically
-    - Scales with volume
+    **Primary income**: 60% of all trading fees, earned on every trade, compounds automatically, scales with volume
   </Card>
   
   <Card title="Spread Capture" icon="chart-line">
-    **Bid-ask spread profits**
-    
-    - Market making spreads
-    - Price improvement
-    - Inventory rebalancing gains
-    - Arbitrage opportunities
+    **Market making**: Bid-ask spread profits, price improvement, rebalancing gains, arbitrage opportunities
   </Card>
 </CardGroup>
 
@@ -37,126 +27,61 @@ Liquidity providers earn **8-15% APY** on average, but returns vary based on mar
 
 ### Best Case (20-30% APY)
 
-**When:**
-- High trading volume (election season, major events)
-- Volatile markets with frequent repricing
-- Efficient vault strategy capturing spreads
-
-**Example:** Presidential election week—massive trading volume generates 25% APY.
+**When:** High volume (elections, major events), volatile markets, efficient strategy. **Example:** Presidential election week—massive volume generates 25% APY.
 
 ### Average Case (10-15% APY)
 
-**When:**
-- Normal market conditions
-- Steady trading activity across multiple markets
-- Balanced wins and losses on outcomes
-
-**Example:** Typical month with mix of sports, crypto, and political markets.
+**When:** Normal conditions, steady activity, balanced wins/losses. **Example:** Typical month with mix of sports, crypto, political markets.
 
 ### Worst Case (0-5% APY or negative)
 
-**When:**
-- Low trading volume (off-season)
-- Informed traders consistently beat vault positioning
-- Major adverse outcomes
-
-**Example:** Slow summer month with few major events, vault loses on several large positions.
+**When:** Low volume (off-season), informed traders win consistently, major adverse outcomes. **Example:** Slow summer with few events, vault loses on several positions.
 
 ---
 
 ## Risk Factors
 
 <AccordionGroup>
-  <Accordion title="1. Outcome Risk (Medium)" icon="dice">
-    **Risk:** Vault liquidity is on wrong side of market outcomes
+  <Accordion title="1. Outcome Risk (Medium)">
+    **Risk:** Vault on wrong side of outcomes
     
-    **Impact:** Can lead to 2-5% monthly losses during bad streaks
+    **Impact:** 2-5% monthly losses during bad streaks
     
-    **Mitigation:**
-    - Automated rebalancing to neutral positions
-    - Diversification across 100+ markets
-    - Dynamic hedging strategies
-    - Max 5% exposure per market
-    
-    **Your Protection:** Vaults aim for market-neutral positioning
+    **Mitigation:** Auto-rebalancing to neutral, diversification across 100+ markets, dynamic hedging, max 5% per market
   </Accordion>
   
-  <Accordion title="2. Smart Money Risk (Medium-High)" icon="brain">
-    **Risk:** Informed traders with edge betting against LP liquidity
+  <Accordion title="2. Smart Money Risk (Medium-High)">
+    **Risk:** Informed traders betting against LP liquidity
     
-    **Impact:** LPs can lose 5-10% if consistently providing liquidity to sharp traders
+    **Impact:** 5-10% losses if consistently providing to sharp traders
     
-    **Mitigation:**
-    - Machine learning models detect informed flow
-    - Dynamic spreads widen when smart money identified
-    - Reduced liquidity provision to suspicious markets
-    - Stake-weighted reputation systems (coming soon)
-    
-    **Your Protection:** Predifi's risk engine actively manages adverse selection
+    **Mitigation:** ML models detect informed flow, dynamic spreads, reduced liquidity to suspicious markets, stake-weighted reputation (coming)
   </Accordion>
   
-  <Accordion title="3. Smart Contract Risk (Low)" icon="shield-halved">
-    **Risk:** Bugs, exploits, or vulnerabilities in vault contracts
+  <Accordion title="3. Smart Contract Risk (Low)">
+    **Risk:** Bugs or exploits
     
-    **Impact:** Could result in partial or total loss of funds
+    **Impact:** Partial or total loss
     
-    **Mitigation:**
-    - 90%+ test coverage on all contracts
-    - Multiple security audits (Quantstamp, OpenZeppelin)
-    - $100K+ bug bounty program
-    - Time-locked upgrades (48-hour notice)
-    - Emergency pause functionality
-    - Insurance fund for contract failures (coming soon)
-    
-    **Your Protection:** Industry-leading security practices
+    **Mitigation:** 90%+ test coverage, multiple audits (Quantstamp, OpenZeppelin), $100K+ bug bounty, time-locked upgrades, emergency pause, insurance fund (coming)
   </Accordion>
   
-  <Accordion title="4. Liquidity Risk (Low)" icon="droplet">
-    **Risk:** Inability to withdraw immediately due to high vault utilization
+  <Accordion title="4. Liquidity Risk (Low)">
+    **Risk:** Delayed withdrawals during high utilization
     
-    **Impact:** Delayed withdrawals (1-7 days in queue)
+    **Impact:** 1-7 days in queue
     
-    **Mitigation:**
-    - Vaults maintain 10-20% liquidity buffer
-    - Withdrawal queue system ensures fairness
-    - Markets resolve regularly, freeing capital
-    - Emergency withdrawal mechanism for urgent needs
-    
-    **Your Protection:** Most withdrawals are instant; queues rare and short
+    **Mitigation:** 10-20% liquidity buffer, withdrawal queue, regular resolutions, emergency mechanism
   </Accordion>
   
-  <Accordion title="5. Oracle Risk (Low)" icon="tower-broadcast">
-    **Risk:** Incorrect market resolution due to oracle failure
+  <Accordion title="5. Oracle Risk (Low)">
+    **Risk:** Incorrect resolution
     
-    **Impact:** Vault could be on losing side of incorrect resolution
+    **Impact:** Wrong outcome losses
     
-    **Mitigation:**
-    - Multiple oracle providers (Stork Network + backups)
-    - Dispute resolution period (24-48 hours)
-    - Community challenges for incorrect resolutions
-    - Oracle insurance fund (coming soon)
-    
-    **Your Protection:** Decentralized oracles with challenge mechanisms
+    **Mitigation:** Multiple oracle providers (Stork + backups), dispute periods (24-48h), community challenges, insurance fund (coming)
   </Accordion>
 </AccordionGroup>
-
----
-
-## Historical Performance
-
-### Universal Vault (Example)
-
-| Month | APY | Total Fees | Win Rate | Utilization |
-|-------|-----|------------|----------|-------------|
-| Jan 2025 | 14.2% | $12,450 | 58% | 72% |
-| Dec 2024 | 11.8% | $9,870 | 54% | 68% |
-| Nov 2024 | 18.5% | $18,200 | 62% | 85% |
-| Oct 2024 | 9.3% | $7,100 | 51% | 61% |
-| **6-Month Avg** | **12.7%** | - | **56%** | **70%** |
-
-<Info>
-**Note:** Past performance does not guarantee future results. These are example figures for illustration.
-</Info>
 
 ---
 
@@ -164,30 +89,9 @@ Liquidity providers earn **8-15% APY** on average, but returns vary based on mar
 
 | Strategy | Expected APY | Risk Level | Best For |
 |----------|--------------|------------|----------|
-| **Conservative** | 6-8% | Low | Risk-averse LPs, steady income |
-| **Moderate** | 10-15% | Medium | Balanced approach, most LPs |
+| **Conservative** | 6-8% | Low | Risk-averse, steady income |
+| **Moderate** | 10-15% | Medium | Balanced approach |
 | **Aggressive** | 15-25% | High | Risk-tolerant, high conviction |
-
----
-
-## Fee Breakdown
-
-**Example:** $10,000 deposited in Universal Vault
-
-### Monthly Earnings (12% APY)
-
-```
-Total Trading Volume: $5,000,000/month
-Average Trading Fee: 0.5%
-Total Fees Generated: $25,000
-
-LP Share (60%): $15,000
-Your Vault Share (e.g., 1% of vault): $150/month
-Annualized: $1,800/year = 18% APY on $10,000
-
-After accounting for losses on outcomes:
-Net APY: 12% = $1,200/year = $100/month
-```
 
 ---
 
@@ -195,44 +99,27 @@ Net APY: 12% = $1,200/year = $100/month
 
 <Tabs>
   <Tab title="Diversify Vaults">
-    **Split capital across multiple vault types:**
-    
-    - 40% Universal Vault (diversified)
-    - 30% Crypto Vault (higher APY, higher risk)
-    - 30% Sports Vault (seasonal performance)
+    Split capital: 40% Universal (diversified), 30% Crypto (higher APY), 30% Sports (seasonal)
     
     **Benefit:** Reduce correlation, smooth returns
   </Tab>
   
   <Tab title="Dollar-Cost Average">
-    **Add liquidity gradually:**
+    Add gradually: Start 25%, add 25% monthly over 4 months
     
-    - Start with 25% of intended capital
-    - Add 25% each month over 4 months
-    - Average into different market conditions
-    
-    **Benefit:** Avoid entering at market peak
+    **Benefit:** Avoid entering at peak
   </Tab>
   
   <Tab title="Set Stop-Loss">
-    **Define exit criteria:**
+    Define exits: -10% from peak = withdraw 50%, -20% = exit completely
     
-    - If vault down 10% from peak, withdraw 50%
-    - If vault down 20%, exit completely
-    - Re-enter when conditions improve
-    
-    **Benefit:** Protect against extended drawdowns
+    **Benefit:** Protect against drawdowns
   </Tab>
   
   <Tab title="Monitor Performance">
-    **Review weekly:**
+    Review weekly: APY trending? Win rate? Strategy changes? Better alternatives?
     
-    - APY trending up or down?
-    - Win rate vs. historical average?
-    - Vault strategy changes?
-    - Better alternatives available?
-    
-    **Benefit:** Make data-driven decisions
+    **Benefit:** Data-driven decisions
   </Tab>
 </Tabs>
 
@@ -241,66 +128,12 @@ Net APY: 12% = $1,200/year = $100/month
 ## When to Provide Liquidity
 
 <CardGroup cols={2}>
-  <Card title="✅ Good Times to LP" icon="check">
-    - High trading volume expected (elections, sports playoffs)
-    - New vault launch with incentives
-    - APY above historical average
-    - Low vault utilization (instant withdrawals)
-    - Bullish on prediction market growth
+  <Card title="✅ Good Times" icon="check">
+    High volume expected, new vault incentives, APY above average, low utilization, bullish on prediction markets
   </Card>
   
-  <Card title="❌ Bad Times to LP" icon="xmark">
-    - Very low trading volume (off-season)
-    - Vault underperforming for 2-3 months
-    - High smart money activity (adverse selection)
-    - Better opportunities elsewhere
-    - Need immediate liquidity (high utilization)
-  </Card>
-</CardGroup>
-
----
-
-## Tax Implications
-
-<Warning>
-**Consult a tax professional.** LP earnings are likely taxable in your jurisdiction.
-</Warning>
-
-**Potential tax treatment:**
-
-- **Fee income:** Ordinary income (taxed annually)
-- **Vault appreciation:** Capital gains (taxed on withdrawal)
-- **Token swaps:** May be taxable events
-- **International:** Varies by country
-
-**Predifi provides:**
-- Transaction history exports (CSV, Excel)
-- Annual LP earnings summary
-- 1099 forms (US users, if applicable)
-
----
-
-## Insurance and Safety Nets (Coming Soon)
-
-Predifi is launching additional LP protections:
-
-<CardGroup cols={2}>
-  <Card title="Insurance Fund" icon="umbrella">
-    Protocol-owned insurance pool to cover:
-    - Smart contract exploits
-    - Oracle failures
-    - Emergency losses
-    
-    Target: 5% of TVL
-  </Card>
-  
-  <Card title="Slashing Protections" icon="shield-check">
-    Limits on maximum LP loss per period:
-    - Daily loss cap: 2%
-    - Monthly loss cap: 10%
-    - Emergency circuit breakers
-    
-    Launch: Q2 2025
+  <Card title="❌ Bad Times" icon="xmark">
+    Low volume (off-season), underperforming 2-3 months, high smart money activity, better opportunities elsewhere, need immediate liquidity
   </Card>
 </CardGroup>
 
@@ -310,57 +143,23 @@ Predifi is launching additional LP protections:
 
 | Yield Source | APY | Risk | Liquidity | IL Risk |
 |--------------|-----|------|-----------|---------|
-| **Predifi LP Vaults** | 8-15% | Medium | Hours to days | Yes (outcome risk) |
-| **Aave USDC Lending** | 2-4% | Low | Instant | No |
-| **Uniswap V3 LP** | 10-30% | High | Instant | Yes (price divergence) |
-| **Polymarket LP** | 5-12% | Medium | Instant | Yes (outcome risk) |
-| **Stablecoin Farming** | 5-10% | Low-Medium | Days | No |
+| **Predifi LP** | 8-15% | Medium | Hours-days | Yes (outcome) |
+| **Aave USDC** | 2-4% | Low | Instant | No |
+| **Uniswap V3** | 10-30% | High | Instant | Yes (price) |
+| **Polymarket LP** | 5-12% | Medium | Instant | Yes (outcome) |
+| **Stablecoin Farming** | 5-10% | Low-Med | Days | No |
 
-**Key Differences:**
-- Predifi LP risk is **outcome-based** (event results), not price-based (like Uniswap)
-- Higher yields than pure lending, lower than volatile DEX LPing
-- Risk-managed with automated strategies
+**Key:** Predifi LP risk is **outcome-based** (event results), not price-based (like Uniswap). Higher than lending, lower than volatile DEX LPing.
 
 ---
 
 ## Best Practices for LPs
 
-<AccordionGroup>
-  <Accordion title="Understand What You're Investing In" icon="book">
-    - Read vault strategy documentation
-    - Review historical performance
-    - Understand market types covered
-    - Know the risks (this page!)
-  </Accordion>
-  
-  <Accordion title="Start Small, Scale Up" icon="seedling">
-    - Begin with $100-500 to learn
-    - Monitor performance for 30 days
-    - Increase if meeting expectations
-    - Cap at 5-10% of net worth
-  </Accordion>
-  
-  <Accordion title="Diversify, Don't Concentrate" icon="chart-scatter">
-    - Use 2-3 different vault strategies
-    - Split across chains if possible
-    - Don't put all crypto holdings in one place
-    - Maintain diversified portfolio (stocks, bonds, crypto, etc.)
-  </Accordion>
-  
-  <Accordion title="Monitor Regularly" icon="magnifying-glass-chart">
-    - Check performance weekly
-    - Review APY trends monthly
-    - Adjust allocation quarterly
-    - Stay informed on vault updates
-  </Accordion>
-  
-  <Accordion title="Have an Exit Plan" icon="door-open">
-    - Define acceptable return thresholds
-    - Set stop-loss rules
-    - Know how to withdraw (this guide!)
-    - Don't panic during temporary drawdowns
-  </Accordion>
-</AccordionGroup>
+- **Understand Investment**: Read vault docs, review performance, understand markets, know risks.
+- **Start Small**: Begin $100-500, monitor 30 days, increase if meeting expectations, cap at 5-10% net worth.
+- **Diversify**: Use 2-3 vault strategies, split across chains, maintain portfolio diversification.
+- **Monitor Regularly**: Check weekly, review APY trends monthly, adjust quarterly, stay informed.
+- **Have Exit Plan**: Define return thresholds, set stop-loss rules, know withdrawal process, don't panic on temporary drawdowns.
 
 ---
 
@@ -371,19 +170,19 @@ Predifi is launching additional LP protections:
     Step-by-step deposit guide
   </Card>
   
-  <Card title="View Vault Contracts" icon="code" href="https://github.com/predifi-com/contracts">
-    Audited smart contracts on GitHub
+  <Card title="Vault Contracts" icon="code" href="https://github.com/predifi-com/contracts">
+    Audited smart contracts
   </Card>
   
-  <Card title="Join LP Community" icon="discord" href="https://discord.gg/predifi">
-    Discuss with other liquidity providers
+  <Card title="LP Community" icon="discord" href="https://discord.gg/predifi">
+    Discuss with other LPs
   </Card>
   
   <Card title="FAQ" icon="circle-question" href="/support/faq">
-    Common LP questions answered
+    Common LP questions
   </Card>
 </CardGroup>
 
 <Note>
-**Questions about risks?** Contact our LP team at [lp@predifi.com](mailto:lp@predifi.com) for personalized guidance.
+**Questions about risks?** Contact lp@predifi.com for personalized guidance.
 </Note>
